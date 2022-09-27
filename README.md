@@ -1,6 +1,6 @@
 <h1 align="center">cub3d 🧟🔫</h1>
 <p align="center">
-<img src="img/wolfeinstein.gif" width="200px" alt="elmo hell gif"><br />
+<img src="img/wolfeinstein.gif" width="200px" alt="wolfenstein gif"><br />
 Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 </p>
 
