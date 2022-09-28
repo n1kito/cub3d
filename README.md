@@ -8,6 +8,13 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 [![mjallada's 42 minishell Score](https://badge42.vercel.app/api/v2/cl4dwkra3004009maahzpjn6g/project/2635687)](https://github.com/JaeSeoKim/badge42)
 
+# Research
+
+## Parsing
+
+**How to check that the map is closed**
+- For each charcter of the map, we check if it's on the edge (if one of its neigbors is NULL) and if so that it's a `1`. `P` or `0` should never neighbor an empty char.
+
 # Resources
 
 - [Pikuma's course: Raycasting Engine Programming](https://pikuma.com/courses/raycasting-engine-tutorial-algorithm-javascript) ⭐⭐ 
