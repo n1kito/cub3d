@@ -22,4 +22,31 @@
 # define ESC 65307
 # define WALL 1
 
+typedef struct s_map
+{
+	char				**tmp_map;
+	char				**map;
+	char				*map_name;
+	int					sprite_size;
+	int					map_fd;
+	int					column_count;
+	int					player_position[1];
+	int					start_pos_count;
+	int					win_width;
+	int					win_height;
+	struct s_sprites	*sprites;
+	struct s_mlx		*graphics;
+}				t_map;
+
+typedef struct s_sprites
+{
+	//void	*p;
+}				t_sprites;
+
+typedef struct s_mlx
+{
+	void	*mlx_ptr;
+	void	*window_ptr;
+}				t_mlx;
+
 #endif
