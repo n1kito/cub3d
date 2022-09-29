@@ -43,6 +43,8 @@ Variables that we will need to store:
 **How to check that the map is closed**
 - For each charcter of the map, we check if it's on the edge (if one of its neigbors is NULL) and if so that it's a `1`. `P` or `0` should never neighbor an empty char.
 
+## Error Handling
+
 <details><summary><i>(+ click to open)</i></summary>
 
 > Check for leaks for every one of these possible errors.
