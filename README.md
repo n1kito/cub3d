@@ -43,6 +43,27 @@ Variables that we will need to store:
 **How to check that the map is closed**
 - For each charcter of the map, we check if it's on the edge (if one of its neigbors is NULL) and if so that it's a `1`. `P` or `0` should never neighbor an empty char.
 
+<details><summary><i>(+ click to open)</i></summary>
+
+> Check for leaks for every one of these possible errors.
+
+---
+- **General checks**
+  - [x] The program should not crash if launched with no environment using `env -i` or `env --unset=PATH`
+    - `env -i` is handled when I check the return value of `mlx_init()`
+    - `env --unset=PATH`, turns out the `PATH` variable is never used by the MinilibX.
+---
+- **Map file checking**
+  - [x] The map filename has the .ber extension.
+  - [x] The map filename starts with a `.` (wrong for me, according to the subject that states maps should be named `*.ber`) 
+  - [x] The "map" argument is a folder not a file.
+  - [x] The map filename has several extensions (`map.coucou.ber`) (I accept this)
+  - [x] The map file is empty.
+  - [x] The map file does not exist.
+  - [x] No access to map file (`chmod 0`).
+---
+</details>
+
 # Resources
 
 - [Pikuma's course: Raycasting Engine Programming](https://pikuma.com/courses/raycasting-engine-tutorial-algorithm-javascript) ⭐⭐ 
