@@ -38,7 +38,13 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES		:= 	main	
+SRC_FILES		:= 	main\
+					map_structure\
+					error\
+					free\
+					map_checker\
+					map_parsing\
+					map_structure
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))

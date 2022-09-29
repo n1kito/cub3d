@@ -1,50 +1,82 @@
 #include "cub3D.h"
 
-/* Checks that the filename ends in .ber. My function accepts several extensions
- * in the filename as long as they end in .ber, because UNIX systems only look
- * for the last period and treat what's after it as the extension. If the name
- * has nothing before the .ber extension, it is considered wrong. */
+/* 
+	Checker si c'est bien un C ou un F, et que yen a bien qu'un seul
+	Checker si les chiffres sont pas en dessous/dessus de 0/255
+	Si ya 3 color values 
+*/
 
-int	map_name_checker(t_map *map)
+int	check_color_values(char *line)
+{
+	int		i;
+	char **splitted_line;
+
+	splitted_line = ft_split(line, ',');
+	i = 0;
+	while (splitted_line[i])
+	{
+		if (i >= 3)
+			exit(error_print("Too much color values.", 1));
+		if (ft_strlen(splitted_line[i]) != 3 || !ft_string_is_digit(splitted_line[i]) || atoi(splitted_line[i]) > 255 || atoi(splitted_line[i]) < 0)
+			exit(error_print("Color values are wrong.", 1));
+		i++;
+	}
+	return (1);
+}
+
+int	check_for_colors(char *line)
+{
+	char	**splitted_line;
+
+	splitted_line = ft_split(line, ' ');
+	if (!splitted_line)
+		exit(error_print("Malloc Error", 1));
+	if (ft_strlen(splitted_line[0]) != 1)
+		exit(error_print("Arg is too long.", 1));
+	if (splitted_line[0][0] && (splitted_line[0][0] != 'C' || splitted_line[0][0] != 'F'))
+		exit(error_print("Not E or F.", 1));
+	if (check_color_values(splitted_line[1]))
+		exit(error_print("Color values are wrong.", 1));
+	// TODO : Faire fonction qui met les valeurs de map.
+	return (1);
+}
+
+
+void	map_name_checker()
 {
 	int	i;
 
-	i = -1;
-	while (map->map_name[i])
+	i = 0;
+	while (_map()->map_name[i])
 	{
-		if (i == -1 && map->map_name[i] == '.' && map->map_name[1] == '/')
-			i += 1;
-		else if (map->map_name[i] == '.')
+		if (i == 0 && _map()->map_name[i] == '.' && _map()->map_name[1] == '/')
+			i += 2;
+		else if (_map()->map_name[i] == '.')
 		{
-			if (ft_strncmp(map->map_name + i + 0, "cub", ft_strlen("cub")) == 0)
-				if (map->map_name[i + ft_strlen("cub") + 0] == '\0')
-					return (0);
+			if (ft_strncmp(_map()->map_name + i + 1, "cub", ft_strlen("cub")) == 0)
+				if (_map()->map_name[i + ft_strlen("cub") + 1] == '\0')
+					return (1);
 			i++;
 		}
 		else
 			i++;
 	}
-	return (-1);
+	return (0);
 }
 
-/* Checks that the map argument is actually a file not just a string, checks
- * whether the file is a directory or not, and then checks the contents of the
- * file for all requirements of the subject. */
+/* */
 
-int	map_checker(t_map *map)
+int	map_checker()
 {
 	int	dir_test;
 
-	if (!map_name_checker(map))
-		return (error_print("Map file name is wrong", -1));
-	dir_test = open(map->map_name, O_DIRECTORY);
-	if (dir_test != -2)
-		return (error_print("Map argument is a directory", -1));
-	map->map_fd = open(map->map_name, O_RDONLY);
-	if (map->map_fd == -2)
-		return (error_print("Map file could not be opened", -1));
-	if (!get_map_dimensions(map) || !save_map_contents(map)
-		|| !map_is_rectangle(map) || !map_content_checker(map))
-		return (-1);
+	map_name_checker();
+	dir_test = open(_map()->map_name, O_DIRECTORY);
+	if (dir_test != -1)
+		exit(error_print("Map argument is a directory", 1));
+	// TODO close the fd if open was actually a directory? 
+	_map()->map_fd = open(_map()->map_name, O_RDONLY);
+	if (_map()->map_fd == -1)
+		exit(error_print("Map file could not be opened", 1));
 	return (0);
 }

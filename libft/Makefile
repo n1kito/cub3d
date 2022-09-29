@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mjallada <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/04 09:49:28 by mjallada          #+#    #+#              #
-#    Updated: 2022/09/13 13:57:44 by mjallada         ###   ########.fr        #
+#    Updated: 2022/09/29 16:32:06 by mjallada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_FILES		:=	ft_isalpha \
 					ft_isalnum \
 					ft_isascii \
 					ft_isprint \
+					ft_string_is_digit \
 					ft_strlen \
 					ft_memset \
 					ft_bzero \
@@ -83,6 +84,8 @@ SRC_FILES		:=	ft_isalpha \
 					ft_lstclear \
 					ft_lstiter \
 					ft_lstmap \
+					ft_tabsize \
+					ft_freetab \
 					ft_printf_fd \
 					get_next_line \
 					get_next_line_utils
