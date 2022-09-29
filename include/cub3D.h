@@ -27,12 +27,13 @@
 
 typedef struct s_map
 {
-	char				**full_map_file;
+	char				**full_map_file; // TODO rename this variable to file_contents
 	char				**map;
 	char				*map_name;
 	int					sprite_size;
 	int					map_fd;
-	int					line_count;
+	int					map_line_count;
+	int					file_line_count;
 	int					column_count;
 	int					player_position[1];
 	int					start_pos_count;
@@ -68,6 +69,18 @@ void		free_all();
 int			map_checker();
 void		map_name_checker();
 void		map_struct_init();
+
+// map_texture_checking.c
+int			check_for_texture(char *line);
+void		check_and_store_path(char **args);
+void		check_for_double_textures(char **args);
+int			is_path_directory(char *path);
+
+// map_parsing.c
+void		map_parsing();
+void		get_map_dimensions();
+void		extract_map_file();
+void		process_map_file_contents();
 
 // map_structure.c
 t_map		*_map();
