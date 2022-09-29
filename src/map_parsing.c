@@ -1,5 +1,6 @@
 #include "cub3D.h"
 
+/* Analyses map file and exits in case of error, or if all parameters are not correct. */
 void	map_parsing()
 {
 	// Create and init params structure
@@ -19,7 +20,6 @@ void	map_parsing()
 
 /* Measures the number of lines and columns in the map and saves them in the
  * map structure. */
-
 void	get_map_dimensions()
 {
 	char	*line;
@@ -45,7 +45,6 @@ void	get_map_dimensions()
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one
  * last time to clear the buffer and avoid leaks. */
-
 void	extract_map_file()
 {
 	int	i;
