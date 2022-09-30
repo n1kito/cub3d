@@ -66,9 +66,10 @@ int			error_print(char *error, int return_value);
 void		free_all();
 
 // map_checker.c
-int			map_checker();
+int			check_color_values(char *line);
+int			check_for_colors(char *line);
 void		map_name_checker();
-void		map_struct_init();
+int			map_checker();
 
 // map_texture_checking.c
 int			check_for_texture(char *line);

@@ -10,6 +10,7 @@ void	map_parsing()
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
+	printf("OK\n");
 	// 3. for each line call process_line() and store/test each argument in the structure
 	// 4. when we get to a line that is part of the map, check that all map parameter pointers have been allocated
 			// If not, free & exit
@@ -30,7 +31,7 @@ void	get_map_dimensions()
 		line = get_next_line(_map()->map_fd);
 		if (!line)
 			exit(error_print("gnl fail", 1)) ;
-		_map()->line_count++;
+		_map()->file_line_count++;
 		if (line[0] != '\n')
 			_map()->file_line_count++;
 		if (_map()->file_line_count && line[0] == '\n')
@@ -49,16 +50,16 @@ void	extract_map_file()
 {
 	int	i;
 
-	_map()->full_map_file = malloc(sizeof(char *) * _map()->line_count);
+	_map()->full_map_file = malloc(sizeof(char *) * _map()->file_line_count);
 	if (!_map()->full_map_file)
 	{
 		get_next_line(-1);
 		exit(error_print("malloc fail [extract_map_file()]", 0));
 	}
-	close(_map()->full_map_file_fd);
+	close(_map()->map_fd);
 	_map()->map_fd = open(_map()->map_name, O_RDONLY);
 	i = 0;
-	while (i < _map()->line_count)
+	while (i < _map()->file_line_count)
 		_map()->full_map_file[i++] = get_next_line(_map()->map_fd);
 	get_next_line(-1);
 }
@@ -97,7 +98,7 @@ int	line_is_in_map(char *line)
 	i = -1;
 	while (line[++i])
 		if (!is_map_character(line[i]))
-			if (!(line[i] == '\n' && line[i + 1] == NULL))
+			if (!(line[i] == '\n' && line[i + 1] == '\0'))
 				return (0);
 	return (1);
 }
@@ -117,11 +118,13 @@ void	process_map_file_contents()
 	{
 		// if line is part of map
 		if (line_is_in_map(_map()->full_map_file[i]))
+		{
 			// if it's the first line found and all parameters have been found
 			// all_map_params_are_set() exits if a parameter is missing
 			if (!started_reading_map++ && all_map_params_are_set())
 				// store pointer to that first line
-				_map()->map = _map()->full_map_file[i];
+				_map()->map = _map()->full_map_file + i;
+		}
 		else if (started_reading_map && _map()->full_map_file[i][0] == '\n')
 		{
 			free(_map()->full_map_file[i]);
