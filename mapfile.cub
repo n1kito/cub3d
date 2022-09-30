@@ -1,9 +1,10 @@
-NO path
-SO path
+NO path 3
 EA path
 WE path
+SO path
 
-F 252,253,254
+F 252,253,255 3
+
 C 1,2,3
 
 1111111011111

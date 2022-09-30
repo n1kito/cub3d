@@ -73,9 +73,12 @@ int	all_map_params_are_set()
 	t_params	*p;
 
 	p = _map()->params;
-	if (!p->n_texture || !p->s_texture || !p->e_texture || !p->w_texture
-		|| !p->f_color || !p->c_color)
-		exit(error_print("missing parameters in map file", 1));
+	if (!p->n_texture || !p->s_texture || !p->e_texture || !p->w_texture)
+		exit(error_print("missing texture parameter(s) in map file", 1));
+	if (_map()->params->c_color[0] == -1)
+		exit(error_print("missing ceiling color parameter in map file", 1));
+	if (_map()->params->f_color[0] == -1)
+		exit(error_print("missing floor color parameter in map file", 1));
 	return (1);
 }
 
@@ -109,6 +112,11 @@ int	correct_parameter_type(char *line)
 	char	**splitted_line;
 
 	splitted_line = ft_split(line, ' ');
+	if (ft_tabsize(splitted_line) != 2)
+	{
+		ft_freetab(splitted_line);
+		exit(error_print("map parameter line has too few/many elements", 1));
+	}
 	if (ft_strlen(splitted_line[0]) == 1
 		&& (splitted_line[0][0] == '\n'
 			|| splitted_line[0][0] == 'C'

@@ -1,3 +1,5 @@
+#include "libft.h"
+
 int	ft_tabsize(char **tab)
 {
 	int	i;

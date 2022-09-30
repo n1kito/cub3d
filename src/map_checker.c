@@ -24,10 +24,7 @@ void	check_color_values(char *line)
 			|| !ft_string_is_digit(splitted_line[i])
 			|| atoi(splitted_line[i]) > 255
 			|| atoi(splitted_line[i]) < 0)
-			{
-				printf("value: %s\n", splitted_line[i]);
 				exit(error_print("Color values are wrong.", 1));
-			}
 		i++;
 	}
 	// TODO freetab
@@ -40,12 +37,16 @@ void	init_map_colors(char **line)
 	numbers = ft_split(line[1], ',');
 	if (line[0][0] == 'F')
 	{
+		if (_map()->params->f_color[0] != -1)
+			exit(error_print("floor color set twice", 1));
 		_map()->params->f_color[0] = ft_atoi(numbers[0]);
 		_map()->params->f_color[1] = ft_atoi(numbers[1]);
 		_map()->params->f_color[2] = ft_atoi(numbers[2]);
 	}
 	else
 	{
+		if (_map()->params->c_color[0] != -1)
+			exit(error_print("ceiling color set twice", 1));
 		_map()->params->c_color[0] = ft_atoi(numbers[0]);
 		_map()->params->c_color[1] = ft_atoi(numbers[1]);
 		_map()->params->c_color[2] = ft_atoi(numbers[2]);

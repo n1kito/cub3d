@@ -27,4 +27,6 @@ void	map_struct_init(t_map *map)
 	map->params->s_texture = NULL;
 	map->params->e_texture = NULL;
 	map->params->w_texture = NULL;
+	map->params->c_color[0] = -1;
+	map->params->f_color[0] = -1;
 }

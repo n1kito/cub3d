@@ -12,11 +12,6 @@ void	check_for_texture(char *line)
 	split_line = ft_split(line, ' ');
 	if (!split_line)
 		exit(error_print("malloc error in check_for_texture()", 1));
-	if (!split_line[1] || split_line[2])
-	{
-		ft_freetab(split_line);
-		exit(error_print("map parameter line has too few/many elements", 1));
-	}
 	if (ft_strcmp(split_line[0], "NO") == 0
 		|| ft_strcmp(split_line[0], "SO") == 0
 		|| ft_strcmp(split_line[0], "EA") == 0
