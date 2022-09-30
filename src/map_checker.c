@@ -34,7 +34,7 @@ int	check_for_colors(char *line)
 	if (ft_strlen(splitted_line[0]) != 1)
 		exit(error_print("Arg is too long.", 1));
 	if (splitted_line[0][0] && (splitted_line[0][0] != 'C' || splitted_line[0][0] != 'F'))
-		exit(error_print("Not E or F.", 1));
+		exit(error_print("Not C or F.", 1));
 	if (check_color_values(splitted_line[1]))
 		exit(error_print("Color values are wrong.", 1));
 	// TODO : Faire fonction qui met les valeurs de map.
@@ -55,13 +55,14 @@ void	map_name_checker()
 		{
 			if (ft_strncmp(_map()->map_name + i + 1, "cub", ft_strlen("cub")) == 0)
 				if (_map()->map_name[i + ft_strlen("cub") + 1] == '\0')
-					return (1);
+					return ;
+					//return (1);
 			i++;
 		}
 		else
 			i++;
 	}
-	return (0);
+	exit(error_print("wrong map name", 1));
 }
 
 /* */
@@ -73,10 +74,10 @@ int	map_checker()
 	map_name_checker();
 	dir_test = open(_map()->map_name, O_DIRECTORY);
 	if (dir_test != -1)
-		exit(error_print("Map argument is a directory", 1));
+		exit(error_print("map argument is a directory", 1));
 	// TODO close the fd if open was actually a directory? 
 	_map()->map_fd = open(_map()->map_name, O_RDONLY);
 	if (_map()->map_fd == -1)
-		exit(error_print("Map file could not be opened", 1));
+		exit(error_print("map file could not be opened", 1));
 	return (0);
 }
