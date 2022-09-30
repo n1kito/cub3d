@@ -4,6 +4,8 @@
 
 // INCLUDES
 
+# include <mlx.h>
+# include "mlx.h"
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -55,8 +57,8 @@ typedef struct s_params
 	void	*s_texture;
 	void	*e_texture;
 	void	*w_texture;
-	int		*f_color;
-	int		*c_color;
+	int		f_color[3];
+	int		c_color[3];
 }				t_params;
 
 // error.c
@@ -66,13 +68,13 @@ int			error_print(char *error, int return_value);
 void		free_all();
 
 // map_checker.c
-int			check_color_values(char *line);
+void		check_color_values(char *line);
 int			check_for_colors(char *line);
 void		map_name_checker();
-int			map_checker();
+int			map_file_checker();
 
 // map_texture_checking.c
-int			check_for_texture(char *line);
+void		check_for_texture(char *line);
 void		check_and_store_path(char **args);
 void		check_for_double_textures(char **args);
 int			is_path_directory(char *path);

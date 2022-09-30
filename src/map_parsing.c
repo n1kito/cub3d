@@ -10,7 +10,6 @@ void	map_parsing()
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
-	printf("OK\n");
 	// 3. for each line call process_line() and store/test each argument in the structure
 	// 4. when we get to a line that is part of the map, check that all map parameter pointers have been allocated
 			// If not, free & exit
@@ -30,12 +29,13 @@ void	get_map_dimensions()
 	{
 		line = get_next_line(_map()->map_fd);
 		if (!line)
-			exit(error_print("gnl fail", 1)) ;
-		_map()->file_line_count++;
-		if (line[0] != '\n')
-			_map()->file_line_count++;
-		if (_map()->file_line_count && line[0] == '\n')
 			break ;
+			// exit(error_print("gnl fail", 1)) ;
+		_map()->file_line_count++;
+		// if (line[0] != '\n')
+		// 	_map()->file_line_count++;
+		// if (_map()->file_line_count && line[0] == '\n')
+		// 	break ;
 		free(line);
 	}
 	free(line);
@@ -61,6 +61,7 @@ void	extract_map_file()
 	i = 0;
 	while (i < _map()->file_line_count)
 		_map()->full_map_file[i++] = get_next_line(_map()->map_fd);
+	_map()->full_map_file[i] = NULL;
 	get_next_line(-1);
 }
 
@@ -93,7 +94,7 @@ int	line_is_in_map(char *line)
 {
 	int	i;
 
-	if (line[0] == '\n')
+	if (!line || line[0] == '\n')
 		return (0);
 	i = -1;
 	while (line[++i])
@@ -101,6 +102,25 @@ int	line_is_in_map(char *line)
 			if (!(line[i] == '\n' && line[i + 1] == '\0'))
 				return (0);
 	return (1);
+}
+
+int	correct_parameter_type(char *line)
+{
+	char	**splitted_line;
+
+	splitted_line = ft_split(line, ' ');
+	if (ft_strlen(splitted_line[0]) == 1
+		&& (splitted_line[0][0] == '\n'
+			|| splitted_line[0][0] == 'C'
+			|| splitted_line[0][0] == 'F'))
+		return (1);
+	if (ft_strlen(splitted_line[0]) == 2
+		&& (ft_strcmp(splitted_line[0], "NO") == 0
+			|| ft_strcmp(splitted_line[0], "SO") == 0
+			|| ft_strcmp(splitted_line[0], "EA") == 0
+			|| ft_strcmp(splitted_line[0], "WE") == 0))
+		return (1);
+	exit(error_print("wrong argument type", 1));
 }
 
 /* Analyse each line int the map file. If we get to a line that is part of the map,
@@ -115,6 +135,7 @@ void	process_map_file_contents()
 	started_reading_map = 0;
 	i = -1;
 	while (_map()->full_map_file[++i])
+	// while (++i < _map()->file_line_count)
 	{
 		// if line is part of map
 		if (line_is_in_map(_map()->full_map_file[i]))
@@ -132,7 +153,8 @@ void	process_map_file_contents()
 			break ;
 		}
 		else
-			if (!check_for_texture(_map()->full_map_file[i]))
-				check_for_colors(_map()->full_map_file[i]);
+			if (correct_parameter_type(_map()->full_map_file[i]))
+				if (!check_for_colors(_map()->full_map_file[i]))
+					check_for_texture(_map()->full_map_file[i]);	
 	}
 }

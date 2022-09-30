@@ -2,13 +2,13 @@
 
 /* Analyses a line extracted from the .cub file and checks if the first cell
  * is a texture identifier. If a texture identifier is found, the corresponding
- * path is tested and stored the texture was successfully opened . */
-int	check_for_texture(char *line)
+ * path is tested and stored if the texture was successfully opened . */
+void	check_for_texture(char *line)
 {
 	char	**split_line;
 
 	if (!line || line[0] == '\n')
-		return (1);
+		return ;
 	split_line = ft_split(line, ' ');
 	if (!split_line)
 		exit(error_print("malloc error in check_for_texture()", 1));
@@ -21,11 +21,8 @@ int	check_for_texture(char *line)
 		|| ft_strcmp(split_line[0], "SO") == 0
 		|| ft_strcmp(split_line[0], "EA") == 0
 		|| ft_strcmp(split_line[0], "WE") == 0)
-	{
 		check_and_store_path(split_line);
-		return (ft_freetab(split_line), 1);
-	}
-	return (ft_freetab(split_line), 0);
+	ft_freetab(split_line);
 }
 
 /* Checks that texture path is not a directory and tries to open it.
@@ -33,15 +30,16 @@ int	check_for_texture(char *line)
  * or texture cannot be opened. */
 void	check_and_store_path(char **args)
 {
-	//int		sprite_size;
+	// int		sprite_size;
 	void	*sprite;
 
-	//sprite_size = _map()->sprite_size;
+	// sprite_size = _map()->sprite_size;
 	if (is_path_directory(args[1]))
 		exit(error_print("one of the textures is a directory", 1));
-	//sprite = mlx_xpm_file_to_image(_map()->graphics->mlx_ptr, args[1],
-	//	sprite_size, sprite_size);
-	sprite = args[0]; // minilibX is not setup yet so I had to set it so something
+	// sprite = mlx_xpm_file_to_image(_map()->graphics->mlx_ptr, args[1],
+		// &sprite_size, &sprite_size);
+	//TODO check error on texture open
+	sprite = args[0]; // minilibX is not setup yet so I had to set it to something
 	if (!sprite)
 		exit(error_print("texture file open failed", 1));
 	check_for_double_textures(args);
