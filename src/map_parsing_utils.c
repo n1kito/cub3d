@@ -17,7 +17,7 @@ void	get_map_dimensions(void)
 	}
 	free(line);
 	if (_map()->file_line_count == 0)
-		exit(error_print("map is empty", 1));
+		ft_exit("map is empty", 1);
 }
 
 /* Checks whether the tested char is an accepted map character or not. */

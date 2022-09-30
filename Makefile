@@ -41,7 +41,7 @@ END_COLOR			:= \033[0;39m
 SRC_FILES		:= 	main\
 					map_structure\
 					error\
-					free\
+					exit\
 					map_checker\
 					map_color_checking\
 					map_parsing_utils\
@@ -60,7 +60,7 @@ bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJ_FILES)
 	@make --no-print-directory -C libft
-	@$(CC) -g -o $(NAME) $(OBJ_FILES) $(LFLAG) -L $(LIB_DIR) -l $(LIB)
+	@$(CC) -g -o $(NAME) $(OBJ_FILES) $(LFLAGS) -L $(LIB_DIR) -l $(LIB)
 	@echo "\n🧟 $(GREEN_BLINK)$(NAME) compiled$(END_COLOR) 🔫\n"
 
 $(BIN_DIR)/%.o: $(SRC_DIR)/%.c Makefile libft/src/*.c | $(BIN_DIR)

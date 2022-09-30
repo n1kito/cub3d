@@ -26,11 +26,11 @@ void	extract_map_file(void)
 	int	*map_fd_tmp;
 
 	map_fd_tmp = &_map()->map_fd;
-	_map()->file_contents = malloc(sizeof(char *) * _map()->file_line_count);
+	_map()->file_contents = malloc(sizeof(char *) * (_map()->file_line_count + 1));
 	if (!_map()->file_contents)
 	{
 		get_next_line(-1);
-		exit(error_print("malloc fail [extract_map_file()]", 0));
+		ft_exit("malloc fail [extract_map_file()]", 0);
 	}
 	close(*map_fd_tmp);
 	*map_fd_tmp = open(_map()->map_name, O_RDONLY);
@@ -39,6 +39,7 @@ void	extract_map_file(void)
 		_map()->file_contents[i++] = get_next_line(*map_fd_tmp);
 	_map()->file_contents[i] = NULL;
 	get_next_line(-1);
+	close(*map_fd_tmp);
 }
 
 /* Returns 1 if all necessary parameters (textures and colors) have been set.
@@ -49,11 +50,11 @@ int	all_map_params_are_set(void)
 
 	p = _map()->params;
 	if (!p->n_texture || !p->s_texture || !p->e_texture || !p->w_texture)
-		exit(error_print("missing texture parameter(s) in map file", 1));
+		ft_exit("missing texture parameter(s) in map file", 1);
 	if (_map()->params->c_color[0] == -1)
-		exit(error_print("missing ceiling color parameter in map file", 1));
+		ft_exit("missing ceiling color parameter in map file", 1);
 	if (_map()->params->f_color[0] == -1)
-		exit(error_print("missing floor color parameter in map file", 1));
+		ft_exit("missing floor color parameter in map file", 1);
 	return (1);
 }
 
@@ -61,30 +62,31 @@ int	all_map_params_are_set(void)
  * not have extra items in the line. */
 int	correct_parameter_type(char *line)
 {
-	char	**splitted_line;
+	char	**split;
 
-	splitted_line = ft_split(line, ' ');
-	if (!splitted_line)
-		exit(error_print("malloc fail [correct_parameter_type()]", 1));
-	if (splitted_line[0] && splitted_line[0][0] == '\n')
-		return (1);
-	if (ft_tabsize(splitted_line) < 2
-		|| (ft_tabsize(splitted_line) > 2
-			&& splitted_line[2][0] != '\n'))
+	split = ft_split(line, ' ');
+	if (!split)
+		ft_exit("malloc fail [correct_parameter_type()]", 1);
+	if (split[0] && split[0][0] == '\n')
+		return (ft_freetab(&split), 1);
+	if (ft_tabsize(split) < 2
+		|| (ft_tabsize(split) > 2
+			&& split[2][0] != '\n'))
 	{
-		ft_freetab(splitted_line);
-		exit(error_print("map parameter line has too few/many elements", 1));
+		ft_freetab(&split);
+		ft_exit("map parameter line has too few/many elements", 1);
 	}
-	if ((ft_strlen(splitted_line[0]) == 1
-			&& (splitted_line[0][0] == 'C'
-			|| splitted_line[0][0] == 'F'))
-		|| (ft_strlen(splitted_line[0]) == 2
-			&& (ft_strcmp(splitted_line[0], "NO") == 0
-				|| ft_strcmp(splitted_line[0], "SO") == 0
-				|| ft_strcmp(splitted_line[0], "EA") == 0
-				|| ft_strcmp(splitted_line[0], "WE") == 0)))
-		return (1);
-	exit(error_print("wrong argument type", 1));
+	if ((ft_strlen(split[0]) == 1
+			&& (split[0][0] == 'C'
+			|| split[0][0] == 'F'))
+		|| (ft_strlen(split[0]) == 2
+			&& (ft_strcmp(split[0], "NO") == 0
+				|| ft_strcmp(split[0], "SO") == 0
+				|| ft_strcmp(split[0], "EA") == 0
+				|| ft_strcmp(split[0], "WE") == 0)))
+					return (ft_freetab(&split), 1);
+	ft_freetab(&split);
+	return (ft_exit("wrong argument type", 1), 0);
 }
 
 /* Analyse each line int the map file.

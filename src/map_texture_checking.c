@@ -5,19 +5,19 @@
  * path is tested and stored if the texture was successfully opened . */
 void	check_for_texture(char *line)
 {
-	char	**split_line;
+	char	**split;
 
 	if (!line || line[0] == '\n')
 		return ;
-	split_line = ft_split(line, ' ');
-	if (!split_line)
-		exit(error_print("malloc error in check_for_texture()", 1));
-	if (ft_strcmp(split_line[0], "NO") == 0
-		|| ft_strcmp(split_line[0], "SO") == 0
-		|| ft_strcmp(split_line[0], "EA") == 0
-		|| ft_strcmp(split_line[0], "WE") == 0)
-		check_and_store_path(split_line);
-	ft_freetab(split_line);
+	split = ft_split(line, ' ');
+	if (!split)
+		ft_exit("malloc error in check_for_texture()", 1);
+	if (ft_strcmp(split[0], "NO") == 0
+		|| ft_strcmp(split[0], "SO") == 0
+		|| ft_strcmp(split[0], "EA") == 0
+		|| ft_strcmp(split[0], "WE") == 0)
+		check_and_store_path(split);
+	ft_freetab(&split);
 }
 
 /* Checks that texture path is not a directory and tries to open it.
@@ -30,13 +30,12 @@ void	check_and_store_path(char **args)
 
 	// sprite_size = _map()->sprite_size;
 	if (is_path_directory(args[1]))
-		exit(error_print("one of the textures is a directory", 1));
+		ft_exit("one of the textures is a directory", 1);
 	// sprite = mlx_xpm_file_to_image(_map()->graphics->mlx_ptr, args[1],
 		// &sprite_size, &sprite_size);
-	//TODO check error on texture open
-	sprite = args[0]; // minilibX is not setup yet so I had to set it to something
+	sprite = args[1]; // remove to work with mlx
 	if (!sprite)
-		exit(error_print("texture file open failed", 1));
+		ft_exit("texture file open failed", 1);
 	check_for_double_textures(args);
 	if (ft_strcmp(args[0], "NO") == 0)
 		_map()->params->n_texture = sprite;
@@ -52,13 +51,13 @@ void	check_and_store_path(char **args)
 void	check_for_double_textures(char **args)
 {
 	if (ft_strcmp(args[0], "NO") == 0 && _map()->params->n_texture)
-		exit(error_print("north wall texture defined twice", 1));
+		ft_exit("north wall texture defined twice", 1);
 	else if (ft_strcmp(args[0], "SO") == 0 && _map()->params->s_texture)
-		exit(error_print("south wall texture defined twice", 1));
+		ft_exit("south wall texture defined twice", 1);
 	else if (ft_strcmp(args[0], "EA") == 0 && _map()->params->e_texture)
-		exit(error_print("east wall texture defined twice", 1));
+		ft_exit("east wall texture defined twice", 1);
 	else if (ft_strcmp(args[0], "WE") == 0 && _map()->params->w_texture)
-		exit(error_print("east wall texture defined twice", 1));
+		ft_exit("east wall texture defined twice", 1);
 }
 
 /* Returns 1 if path tested is a directory. */

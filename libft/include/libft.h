@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikito <nikito@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 13:45:12 by mjallada          #+#    #+#             */
-/*   Updated: 2022/09/30 06:43:21 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/09/30 18:29:17 by nikito           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int				ft_putstr_fd(char *s, int fd);
 void			ft_putendl_fd(char *s, int fd);
 int				ft_putnbr_fd(int n, int fd);
 int				ft_tabsize(char **tab);
-void			ft_freetab(char **tab);
+void			ft_freetab(char ***tab);
 
 typedef struct s_list
 {
