@@ -5,7 +5,7 @@
 // INCLUDES
 
 # include <mlx.h>
-# include "mlx.h"
+# include "mlx.h" // TODO check
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -29,7 +29,7 @@
 
 typedef struct s_map
 {
-	char				**full_map_file; // TODO rename this variable to file_contents
+	char				**file_contents; // TODO rename this variable to file_contents
 	char				**map;
 	char				*map_name;
 	int					sprite_size;
@@ -81,9 +81,15 @@ int			is_path_directory(char *path);
 
 // map_parsing.c
 void		map_parsing();
-void		get_map_dimensions();
 void		extract_map_file();
+int			all_map_params_are_set();
+int			correct_parameter_type(char *line);
 void		process_map_file_contents();
+
+// map_parsing_utils.c
+void		get_map_dimensions();
+int			is_map_character(char c);
+int			line_is_part_of_map(char *line);
 
 // map_structure.c
 t_map		*_map();

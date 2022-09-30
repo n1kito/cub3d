@@ -10,15 +10,7 @@ int	main(int argc, char *argv[], char *env[])
 	_map();
 	_map()->map_name = "mapfile.cub";
 	map_file_checker();
-	// printf("map checking ok\n");
 	map_parsing();
-	int i = -1;
-	while (_map()->full_map_file[++i])
-		printf("%s", _map()->full_map_file[i]);
-	printf("\n\nMAP:\n");
-	i = -1;
-	while (_map()->map[++i])
-		printf("%s", _map()->map[i]);
 	// game process
 	// 	- process player input
 	// 	- update image

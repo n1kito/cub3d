@@ -1,9 +1,8 @@
 #include "cub3D.h"
 
-/* 
-	Checker si c'est bien un C ou un F, et que yen a bien qu'un seul
-	Checker si les chiffres sont pas en dessous/dessus de 0/255
-	Si ya 3 color values 
+/*
+	Checks the given string has actual digits, 3 of them, not over 255 / below 0
+	If any is wrong, will exit with a message on stderr
 */
 
 void	check_color_values(char *line)
@@ -30,6 +29,12 @@ void	check_color_values(char *line)
 	// TODO freetab
 }
 
+
+/*
+	Checks if a F or C is set twice,
+	If not, assigns each values to an int array that will be the RGB value for the floor and ceiling
+*/
+
 void	init_map_colors(char **line)
 {
 	char	**numbers;
@@ -55,6 +60,10 @@ void	init_map_colors(char **line)
 	ft_freetab(line);
 }
 
+/*
+	Beginning of the checking of the color values (full checking in the two functions above)
+*/
+
 int	check_for_colors(char *line)
 {
 	char	**splitted_line;
@@ -74,6 +83,9 @@ int	check_for_colors(char *line)
 	return (1);
 }
 
+/*
+	Checks if the map ends with .ber
+*/
 
 void	map_name_checker()
 {
