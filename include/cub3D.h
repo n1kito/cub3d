@@ -29,7 +29,7 @@
 
 typedef struct s_map
 {
-	char				**file_contents; // TODO rename this variable to file_contents
+	char				**file_contents;
 	char				**map;
 	char				*map_name;
 	int					sprite_size;
@@ -65,13 +65,16 @@ typedef struct s_params
 int			error_print(char *error, int return_value);
 
 // free.c
-void		free_all();
+void		free_all(void);
 
 // map_checker.c
+void		map_name_checker(void);
+int			map_file_checker(void);
+
+// map_color_checking.c
 void		check_color_values(char *line);
+void		init_map_colors(char **line);
 int			check_for_colors(char *line);
-void		map_name_checker();
-int			map_file_checker();
 
 // map_texture_checking.c
 void		check_for_texture(char *line);
@@ -80,19 +83,19 @@ void		check_for_double_textures(char **args);
 int			is_path_directory(char *path);
 
 // map_parsing.c
-void		map_parsing();
-void		extract_map_file();
-int			all_map_params_are_set();
+void		map_parsing(void);
+void		extract_map_file(void);
+int			all_map_params_are_set(void);
 int			correct_parameter_type(char *line);
-void		process_map_file_contents();
+void		process_map_file_contents(void);
 
 // map_parsing_utils.c
-void		get_map_dimensions();
+void		get_map_dimensions(void);
 int			is_map_character(char c);
 int			line_is_part_of_map(char *line);
 
 // map_structure.c
-t_map		*_map();
+t_map		*_map(void);
 void		map_struct_init(t_map *map);
 
 #endif

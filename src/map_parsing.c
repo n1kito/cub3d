@@ -1,7 +1,7 @@
 #include "cub3D.h"
 
 /* Analyses map file and exits in case of error, or if all parameters are not correct. */
-void	map_parsing()
+void	map_parsing(void)
 {
 	// Create and init params structure
 	// 1. count map lines
@@ -20,28 +20,30 @@ void	map_parsing()
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one
  * last time to clear the buffer and avoid leaks. */
-void	extract_map_file()
+void	extract_map_file(void)
 {
 	int	i;
+	int	*map_fd_tmp;
 
+	map_fd_tmp = &_map()->map_fd;
 	_map()->file_contents = malloc(sizeof(char *) * _map()->file_line_count);
 	if (!_map()->file_contents)
 	{
 		get_next_line(-1);
 		exit(error_print("malloc fail [extract_map_file()]", 0));
 	}
-	close(_map()->map_fd);
-	_map()->map_fd = open(_map()->map_name, O_RDONLY);
+	close(*map_fd_tmp);
+	*map_fd_tmp = open(_map()->map_name, O_RDONLY);
 	i = 0;
 	while (i < _map()->file_line_count)
-		_map()->file_contents[i++] = get_next_line(_map()->map_fd);
+		_map()->file_contents[i++] = get_next_line(*map_fd_tmp);
 	_map()->file_contents[i] = NULL;
 	get_next_line(-1);
 }
 
 /* Returns 1 if all necessary parameters (textures and colors) have been set.
  * Exits if one of them is missing. */
-int	all_map_params_are_set()
+int	all_map_params_are_set(void)
 {
 	t_params	*p;
 
@@ -74,7 +76,7 @@ int	correct_parameter_type(char *line)
 		exit(error_print("map parameter line has too few/many elements", 1));
 	}
 	if ((ft_strlen(splitted_line[0]) == 1
-		&& (splitted_line[0][0] == 'C'
+			&& (splitted_line[0][0] == 'C'
 			|| splitted_line[0][0] == 'F'))
 		|| (ft_strlen(splitted_line[0]) == 2
 			&& (ft_strcmp(splitted_line[0], "NO") == 0
@@ -85,11 +87,12 @@ int	correct_parameter_type(char *line)
 	exit(error_print("wrong argument type", 1));
 }
 
-/* Analyse each line int the map file. If we get to a line that is part of the map,
- * we check that all necessary parameters have been set. If so, we store a pointer to
- * the first line of the map and close the map by setting the first line that starts
+/* Analyse each line int the map file.
+ * If we get to a line that is part of the map, we check that all
+ * necessary parameters have been set. If so, we store a pointer to the
+ * first line of the map and close the map by setting the first line that starts
  * with a newline to NULL. */
-void	process_map_file_contents()
+void	process_map_file_contents(void)
 {
 	int	i;
 	int	started_reading_map;
@@ -112,6 +115,6 @@ void	process_map_file_contents()
 		else
 			if (correct_parameter_type(_map()->file_contents[i]))
 				if (!check_for_colors(_map()->file_contents[i]))
-					check_for_texture(_map()->file_contents[i]);	
+					check_for_texture(_map()->file_contents[i]);
 	}
 }

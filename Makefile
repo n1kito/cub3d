@@ -43,6 +43,8 @@ SRC_FILES		:= 	main\
 					error\
 					free\
 					map_checker\
+					map_color_checking\
+					map_parsing_utils\
 					map_parsing\
 					map_texture_checking
 SRC_FILES_BONUS	:=	main
