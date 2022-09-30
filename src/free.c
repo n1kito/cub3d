@@ -1,4 +1,4 @@
-void	free_all()
+void	free_all(void)
 {
-	
+	return ;
 }

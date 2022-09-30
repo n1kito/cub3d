@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-t_map	*_map()
+t_map	*_map(void)
 {
 	static t_map	*map = NULL;
 
