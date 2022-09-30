@@ -4,6 +4,8 @@
 
 // INCLUDES
 
+# include <mlx.h>
+# include "mlx.h" // TODO check
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -27,7 +29,7 @@
 
 typedef struct s_map
 {
-	char				**full_map_file; // TODO rename this variable to file_contents
+	char				**file_contents;
 	char				**map;
 	char				*map_name;
 	int					sprite_size;
@@ -55,36 +57,45 @@ typedef struct s_params
 	void	*s_texture;
 	void	*e_texture;
 	void	*w_texture;
-	int		*f_color;
-	int		*c_color;
+	int		f_color[3];
+	int		c_color[3];
 }				t_params;
 
 // error.c
 int			error_print(char *error, int return_value);
 
 // free.c
-void		free_all();
+void		free_all(void);
 
 // map_checker.c
-int			check_color_values(char *line);
+void		map_name_checker(void);
+int			map_file_checker(void);
+
+// map_color_checking.c
+void		check_color_values(char *line);
+void		init_map_colors(char **line);
 int			check_for_colors(char *line);
-void		map_name_checker();
-int			map_checker();
 
 // map_texture_checking.c
-int			check_for_texture(char *line);
+void		check_for_texture(char *line);
 void		check_and_store_path(char **args);
 void		check_for_double_textures(char **args);
 int			is_path_directory(char *path);
 
 // map_parsing.c
-void		map_parsing();
-void		get_map_dimensions();
-void		extract_map_file();
-void		process_map_file_contents();
+void		map_parsing(void);
+void		extract_map_file(void);
+int			all_map_params_are_set(void);
+int			correct_parameter_type(char *line);
+void		process_map_file_contents(void);
+
+// map_parsing_utils.c
+void		get_map_dimensions(void);
+int			is_map_character(char c);
+int			line_is_part_of_map(char *line);
 
 // map_structure.c
-t_map		*_map();
+t_map		*_map(void);
 void		map_struct_init(t_map *map);
 
 #endif

@@ -2,13 +2,14 @@
 
 int	main(int argc, char *argv[], char *env[])
 {
-	if (argc != 2)
-		return (error_print("wrong argument count", 1));
+	// if (argc != 2)
+		// return (error_print("wrong argument count", 1));
 	(void)argv;
+	(void)argc;
 	(void)env;
 	_map();
-	_map()->map_name = argv[1];
-	map_checker();
+	_map()->map_name = "mapfile.cub";
+	map_file_checker();
 	map_parsing();
 	// game process
 	// 	- process player input
