@@ -63,6 +63,45 @@ void	extract_map_file()
 	get_next_line(-1);
 }
 
+// TODO move this ?
+/* Returns 1 if all necessary parameters (textures and colors) have been set.
+ * Exits if one of them is missing. */
+int	all_map_params_are_set()
+{
+	t_params	*p;
+
+	p = _map()->params;
+	if (!p->n_texture || !p->s_texture || !p->e_texture || !p->w_texture
+		|| !p->f_color || !p->c_color)
+		exit(error_print("missing parameters in map file", 1));
+	return (1);
+}
+
+/* Checks whether the tested char is an accepted map character or not. */
+int	is_map_character(char c)
+{
+	if (c == ' ' || c == '1' || c == '0'
+		|| c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
+}
+
+// TODO move this ?
+/* Checks that line only contains parameters that could be part of the map */
+int	line_is_in_map(char *line)
+{
+	int	i;
+
+	if (line[0] == '\n')
+		return (0);
+	i = -1;
+	while (line[++i])
+		if (!is_map_character(line[i]))
+			if (!(line[i] == '\n' && line[i + 1] == NULL))
+				return (0);
+	return (1);
+}
+
 /* Analyse each line int the map file. If we get to a line that is part of the map,
  * we check that all necessary parameters have been set. If so, we store a pointer to
  * the first line of the map and close the map by setting the first line that starts
@@ -79,6 +118,7 @@ void	process_map_file_contents()
 		// if line is part of map
 		if (line_is_in_map(_map()->full_map_file[i]))
 			// if it's the first line found and all parameters have been found
+			// all_map_params_are_set() exits if a parameter is missing
 			if (!started_reading_map++ && all_map_params_are_set())
 				// store pointer to that first line
 				_map()->map = _map()->full_map_file[i];
