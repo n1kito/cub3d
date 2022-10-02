@@ -33,22 +33,27 @@ void	print_map_unvalid_char(int i, int j)
 
 void	check_around(int i, int j)
 {
-	if (_map()->map[i + 1][j] && !is_valid_map_char(_map()->map[i + 1][j]))
+	if (!_map()->map[i + 1])
 	{
 		print_map_unvalid_char(i, j);
 		exit(error_print("Map not closed", 1));
 	}
-	if (_map()->map[i - 1][j] && !is_valid_map_char(_map()->map[i - 1][j]))
+	if (!is_valid_map_char(_map()->map[i + 1][j]))
 	{
 		print_map_unvalid_char(i, j);
 		exit(error_print("Map not closed", 1));
 	}
-	if (_map()->map[i][j + 1] && !is_valid_map_char(_map()->map[i][j + 1]))
+	if (!is_valid_map_char(_map()->map[i - 1][j]))
 	{
 		print_map_unvalid_char(i, j);
 		exit(error_print("Map not closed", 1));
 	}
-	if (_map()->map[i][j - 1] && !is_valid_map_char(_map()->map[i][j - 1]))
+	if (!is_valid_map_char(_map()->map[i][j + 1]))
+	{
+		print_map_unvalid_char(i, j);
+		exit(error_print("Map not closed", 1));
+	}
+	if (!is_valid_map_char(_map()->map[i][j - 1]))
 	{
 		print_map_unvalid_char(i, j);
 		exit(error_print("Map not closed", 1));
