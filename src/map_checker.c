@@ -23,7 +23,7 @@ void	map_name_checker(void)
 		else
 			i++;
 	}
-	exit(error_print("wrong map name", 1));
+	ft_exit("wrong map name", 1);
 }
 
 /* */
@@ -37,10 +37,12 @@ int	map_file_checker(void)
 	map_name_checker();
 	dir_test = open(_map()->map_name, O_DIRECTORY);
 	if (dir_test != -1)
-		exit(error_print("map argument is a directory", 1));
-	close(dir_test);
+	{
+		close(dir_test);
+		ft_exit("map argument is a directory", 1);
+	}
 	*map_fd_tmp = open(_map()->map_name, O_RDONLY);
 	if (*map_fd_tmp == -1)
-		exit(error_print("map file could not be opened", 1));
+		ft_exit("map file could not be opened", 1);
 	return (0);
 }

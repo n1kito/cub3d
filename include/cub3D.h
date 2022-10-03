@@ -5,7 +5,6 @@
 // INCLUDES
 
 # include <mlx.h>
-# include "mlx.h" // TODO check
 # include <sys/types.h>
 # include <sys/stat.h>
 # include <fcntl.h>
@@ -41,6 +40,7 @@ typedef struct s_map
 	int					start_pos_count;
 	int					win_width;
 	int					win_height;
+	char				**tmp_split_line;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
 }				t_map;
@@ -64,7 +64,8 @@ typedef struct s_params
 // error.c
 int			error_print(char *error, int return_value);
 
-// free.c
+// exit.c
+void		ft_exit(char *error, int exit_code);
 void		free_all(void);
 
 // map_checker.c
@@ -75,7 +76,7 @@ int			map_file_checker(void);
 void		closed_map_check();
 
 // map_color_checking.c
-void		check_color_values(char *line);
+void		check_color_values(char **line);
 void		init_map_colors(char **line);
 int			check_for_colors(char *line);
 
