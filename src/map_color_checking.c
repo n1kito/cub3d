@@ -57,6 +57,7 @@ void	init_map_colors(char **line)
 	{
 		if (_map()->params->c_color[0] != -1)
 		{
+			ft_freetab(&line);
 			ft_freetab(&numbers);
 			ft_exit("ceiling color set twice", 1);
 		}

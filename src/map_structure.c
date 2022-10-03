@@ -29,11 +29,12 @@ void	map_struct_init(t_map *map)
 	map->params->w_texture = NULL;
 	map->params->c_color[0] = -1;
 	map->params->f_color[0] = -1;
+	map->params->pl_start_pos[0] = -1;
+	map->params->pl_start_pos[1] = -1;
 	map->graphics = NULL;
 	map->graphics = malloc(sizeof(t_mlx));
 	if (!map->graphics)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);
 	map->graphics->mlx_ptr = NULL;
 	map->graphics->window_ptr = NULL;
-	map->tmp_split_line = NULL;
 }

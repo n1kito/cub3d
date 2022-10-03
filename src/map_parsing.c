@@ -10,12 +10,8 @@ void	map_parsing(void)
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
-	// 3. for each line call process_line() and store/test each argument in the structure
-	// 4. when we get to a line that is part of the map, check that all map parameter pointers have been allocated
-			// If not, free & exit
-			// Otherwise, store pointer to first map line and call map_checker().
-	// TODO:
-	// check_map_contents();
+	// 4. check that map is closed
+	closed_map_check();
 }
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one
@@ -103,10 +99,12 @@ void	process_map_file_contents(void)
 	i = -1;
 	while (_map()->file_contents[++i])
 	{
-		if (line_is_part_of_map(_map()->file_contents[i]))
+		if (!line_contains_parameter(_map()->file_contents[i])
+			&& _map()->file_contents[i][0] != '\n')
 		{
 			if (!started_reading_map++ && all_map_params_are_set())
 				_map()->map = _map()->file_contents + i;
+			check_map_line(_map()->file_contents[i], started_reading_map);
 		}
 		else if (started_reading_map && _map()->file_contents[i][0] == '\n')
 		{
