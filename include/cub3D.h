@@ -40,7 +40,7 @@ typedef struct s_map
 	int					start_pos_count;
 	int					win_width;
 	int					win_height;
-	char				**tmp_split_line;
+	char				**spltd;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
 }				t_map;
@@ -59,6 +59,7 @@ typedef struct s_params
 	void	*w_texture;
 	int		f_color[3];
 	int		c_color[3];
+	int		pl_start_pos[2];
 }				t_params;
 
 // error.c
@@ -96,7 +97,10 @@ void		process_map_file_contents(void);
 // map_parsing_utils.c
 void		get_map_dimensions(void);
 int			is_map_character(char c);
-int			line_is_part_of_map(char *line);
+// int			line_is_part_of_map(char *line);
+int			line_contains_parameter(char *line);
+void		check_map_line(char *line, int i);
+int			is_start_position(char c);
 
 // map_structure.c
 t_map		*_map(void);
