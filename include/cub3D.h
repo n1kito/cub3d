@@ -71,6 +71,9 @@ void		free_all(void);
 void		map_name_checker(void);
 int			map_file_checker(void);
 
+// closed_map_checker.c
+void		closed_map_check();
+
 // map_color_checking.c
 void		check_color_values(char *line);
 void		init_map_colors(char **line);

@@ -11,6 +11,7 @@ int	main(int argc, char *argv[], char *env[])
 	_map()->map_name = "mapfile.cub";
 	map_file_checker();
 	map_parsing();
+	closed_map_check();
 	// game process
 	// 	- process player input
 	// 	- update image

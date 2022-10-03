@@ -46,6 +46,7 @@ SRC_FILES		:= 	main\
 					map_color_checking\
 					map_parsing_utils\
 					map_parsing\
+					closed_map_check\
 					map_texture_checking
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
