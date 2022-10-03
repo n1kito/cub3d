@@ -19,14 +19,14 @@ void	print_map_unvalid_char(int i, int j)
 	{
 		if (x == i)
 		{
-			printf("%s", _map()->map[x]);
+			ft_printf_fd(2, "%s", _map()->map[x]);
 			while (++y < j)
-				write(1, "-", 1);
-			write(1, "^", 2);
-			printf("    Map not closed on [%d][%d] !\n", i, j);
+				write(2, "-", 1);
+			write(2, "^", 2);
+			ft_printf_fd(2, "    Map not closed on [%d][%d] !\n", i, j);
 		}
 		else
-			printf("%s", _map()->map[x]);
+			ft_printf_fd(2, "%s", _map()->map[x]);
 		x++;
 	}
 }
@@ -36,27 +36,27 @@ void	check_around(int i, int j)
 	if (!_map()->map[i + 1])
 	{
 		print_map_unvalid_char(i, j);
-		exit(error_print("Map not closed", 1));
+		ft_exit("map not closed", 1);
 	}
 	if (!is_valid_map_char(_map()->map[i + 1][j]))
 	{
 		print_map_unvalid_char(i, j);
-		exit(error_print("Map not closed", 1));
+		ft_exit("map not closed", 1);
 	}
 	if (!is_valid_map_char(_map()->map[i - 1][j]))
 	{
 		print_map_unvalid_char(i, j);
-		exit(error_print("Map not closed", 1));
+		ft_exit("map not closed", 1);
 	}
 	if (!is_valid_map_char(_map()->map[i][j + 1]))
 	{
 		print_map_unvalid_char(i, j);
-		exit(error_print("Map not closed", 1));
+		ft_exit("map not closed", 1);
 	}
 	if (!is_valid_map_char(_map()->map[i][j - 1]))
 	{
 		print_map_unvalid_char(i, j);
-		exit(error_print("Map not closed", 1));
+		ft_exit("map not closed", 1);
 	}
 }
 
