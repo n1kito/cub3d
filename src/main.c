@@ -3,7 +3,7 @@
 int	main(int argc, char *argv[], char *env[])
 {
 	if (argc != 2)
-		return (error_print("wrong argument count", 1));
+		return (error_print("map needed to launch ./cub3D", 1));
 	(void)argv;
 	(void)argc;
 	(void)env;

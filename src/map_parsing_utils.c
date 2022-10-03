@@ -66,7 +66,7 @@ void	check_map_line(char *line, int i)
 	int	j;
 
 	j = 0;
-	while (line[j] != '\n')
+	while (line[j] && line[j] != '\n')
 	{
 		if (!is_map_character(line[j]))
 			ft_exit("map has forbidden character", 1);
