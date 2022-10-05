@@ -1,17 +1,45 @@
 #include "cub3D.h"
 
+// TODO move this
+/* Stores the number of lines in the map as well as the length of the longest line. */
+void	get_map_dimensions(void)
+{
+	int	map_height;
+	int	map_width;
+	int	map_width_tmp;
+
+	map_width = 0;
+	map_width_tmp = 0;
+	map_height = 0;
+	while (_map()->map[map_height])
+	{
+		map_width_tmp = 0;
+		while (_map()->map[map_height][map_width_tmp])
+			map_width_tmp++;
+		if (map_width_tmp > map_width)
+			map_width = map_width_tmp;
+		map_height++;
+	}
+	_map()->map_height = map_height;
+	_map()->map_width = map_width - 1;
+}
+
 /* Analyses map file and exits in case of error, or if all parameters are not correct. */
 void	map_parsing(void)
 {
 	// Create and init params structure
 	// 1. count map lines
-	get_map_dimensions();
+	get_file_dimensions();
 	// 2. extract map with GNL
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
 	// 4. check that map is closed
 	closed_map_check();
+	// TODO: as is, we can have several maps in the same file if the first one is correctly closed.
+	// But the parsing will be screwed. Add a check like:
+	// map_is_last_check();
+	get_map_dimensions(); // TODO move this
 }
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one

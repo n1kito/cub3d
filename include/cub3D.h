@@ -33,11 +33,10 @@ typedef struct s_map
 	char				*map_name;
 	int					sprite_size;
 	int					map_fd;
-	int					map_line_count;
+	int					map_height;
+	int					map_width;
 	int					file_line_count;
-	int					column_count;
-	int					player_position[1];
-	int					start_pos_count;
+	int					player_position[2];
 	int					win_width;
 	int					win_height;
 	char				**spltd;
@@ -45,14 +44,26 @@ typedef struct s_map
 	struct s_mlx		*graphics;
 }				t_map;
 
+typedef struct s_img
+{
+	void	*image;
+	char	*addr;
+	int		bpp;
+	int		line_length;
+	int		endian;
+}				t_img;
+
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*window_ptr;
-	void	*game_img;
-	void	*minimap_img;
+	t_img	game_img;
+	t_img	minimap_img;
 	int		window_height;
 	int		window_width;
+	int		minimap_height;
+	int		minimap_width;
+	int		minimap_tile;
 }				t_mlx;
 
 typedef struct s_params
@@ -99,7 +110,7 @@ int			correct_parameter_type(char *line);
 void		process_map_file_contents(void);
 
 // map_parsing_utils.c
-void		get_map_dimensions(void);
+void		get_file_dimensions(void);
 int			is_map_character(char c);
 // int			line_is_part_of_map(char *line);
 int			line_contains_parameter(char *line);
@@ -112,5 +123,6 @@ void		map_struct_init(t_map *map);
 
 // mlx_setup.c
 void		mlx_setup(void);
+void		init_hooks(void);
 
 #endif

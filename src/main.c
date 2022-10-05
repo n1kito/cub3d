@@ -8,11 +8,12 @@ int	main(int argc, char *argv[], char *env[])
 	(void)argc;
 	(void)env;
 	_map();
-	// _map()->map_name = "mapfile.cub";
 	_map()->map_name = argv[1];
 	map_file_checker();
 	map_parsing();
 	mlx_setup();
+	init_hooks();
+	mlx_loop(_map()->graphics->mlx_ptr);
 	// game process
 	// 	- process player input
 	// 	- update image

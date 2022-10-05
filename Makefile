@@ -38,16 +38,17 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES		:= 	main\
-					map_structure\
+SRC_FILES		:= 	closed_map_check\
 					error\
 					exit\
+					main\
 					map_checker\
 					map_color_checking\
 					map_parsing_utils\
 					map_parsing\
-					closed_map_check\
-					map_texture_checking
+					map_structure\
+					map_texture_checking\
+					mlx_setup
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))
