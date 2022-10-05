@@ -12,6 +12,7 @@ int	main(int argc, char *argv[], char *env[])
 	_map()->map_name = argv[1];
 	map_file_checker();
 	map_parsing();
+	mlx_setup();
 	// game process
 	// 	- process player input
 	// 	- update image

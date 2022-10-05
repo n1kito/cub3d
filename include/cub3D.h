@@ -49,6 +49,10 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*window_ptr;
+	void	*game_img;
+	void	*minimap_img;
+	int		window_height;
+	int		window_width;
 }				t_mlx;
 
 typedef struct s_params
@@ -105,5 +109,8 @@ int			is_start_position(char c);
 // map_structure.c
 t_map		*_map(void);
 void		map_struct_init(t_map *map);
+
+// mlx_setup.c
+void		mlx_setup(void);
 
 #endif

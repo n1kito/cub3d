@@ -1,5 +1,7 @@
 #include "cub3D.h"
 
+/* Called everytime a pointer to the main map structure is needed.
+ * Initializes said map structure only on first call. */
 t_map	*_map(void)
 {
 	static t_map	*map = NULL;
@@ -14,6 +16,9 @@ t_map	*_map(void)
 	return (map);
 }
 
+
+/* Allocated memoery for all elements of map structure
+ * and initializes all pointers. */
 void	map_struct_init(t_map *map)
 {
 	map->map_name = NULL;
@@ -37,4 +42,8 @@ void	map_struct_init(t_map *map)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);
 	map->graphics->mlx_ptr = NULL;
 	map->graphics->window_ptr = NULL;
+	map->graphics->game_img = NULL;
+	map->graphics->minimap_img = NULL;
+	map->graphics->window_width = 1920;
+	map->graphics->window_height = 1080;
 }
