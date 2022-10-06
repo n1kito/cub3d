@@ -13,6 +13,7 @@
 # include <stdlib.h>
 # include <errno.h> //TODO check that it is used, remove if not
 # include <string.h>
+# include <math.h>
 # include "libft.h"
 
 // MACROS
@@ -23,6 +24,13 @@
 # define RIGHT 100
 # define ESC 65307
 # define WALL 1
+
+// BASIC COLORS
+
+# define RED 0xFF0000
+# define GREY 0x808080
+# define BLACK 0x1000000
+# define WHITE 0xFFFFFF
 
 // STRUCTURES
 
@@ -121,8 +129,19 @@ int			is_start_position(char c);
 t_map		*_map(void);
 void		map_struct_init(t_map *map);
 
+// mlx_render_utils.c
+int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
+void		ft_pixel_put(t_img *img, int x, int y, int color);
+void		ft_put_rectangle(t_img *img, int x, int y, int height, int width, int color);
+void		ft_put_circle(t_img *img, int x, int y, int radius, int color);
+
 // mlx_setup.c
 void		mlx_setup(void);
 void		init_hooks(void);
+
+// render_minimap.c
+void    	render_minimap(t_mlx *g, char **map);
+void   		render_player_dot_on_minimap(int *draw_end);
+void    	init_minimap_values(int *draw_pos, int *draw_end);
 
 #endif
