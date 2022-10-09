@@ -50,6 +50,7 @@ SRC_FILES		:= 	closed_map_check\
 					map_texture_checking\
 					mlx_render_utils\
 					mlx_setup\
+					map_coords_init\
 					render_minimap
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))

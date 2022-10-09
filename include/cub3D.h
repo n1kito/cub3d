@@ -50,6 +50,7 @@ typedef struct s_map
 	char				**spltd;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
+	struct s_coord		*coord;
 }				t_map;
 
 typedef struct s_img
@@ -60,6 +61,14 @@ typedef struct s_img
 	int		line_length;
 	int		endian;
 }				t_img;
+
+typedef struct s_coord
+{
+	int		x0;
+	int		y0;
+	int		x1; // also used for height
+	int		y1; // also used for width
+}				t_coord;
 
 typedef struct s_mlx
 {
@@ -128,12 +137,15 @@ int			is_start_position(char c);
 // map_structure.c
 t_map		*_map(void);
 void		map_struct_init(t_map *map);
+void        params_struct_init(t_map *map);
+void        graphics_struct_init(t_map *map);
 
 // mlx_render_utils.c
 int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
-void		ft_put_rectangle(t_img *img, int x, int y, int height, int width, int color);
+void		ft_put_rectangle(t_img *img, int color);
 void		ft_put_circle(t_img *img, int x, int y, int radius, int color);
+void        ft_draw_line(t_img *img, int color);
 
 // mlx_setup.c
 void		mlx_setup(void);
@@ -143,5 +155,9 @@ void		init_hooks(void);
 void    	render_minimap(t_mlx *g, char **map);
 void   		render_player_dot_on_minimap(int *draw_end);
 void    	init_minimap_values(int *draw_pos, int *draw_end);
+
+// map_coord_init.c
+void 	   coords_init(int x0, int y0, int x1, int y1);
+void		free_coords();
 
 #endif

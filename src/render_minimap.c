@@ -6,7 +6,8 @@ void    render_minimap(t_mlx *g, char **map)
     int      lim[2];
     int      minimap[2];
 
-    ft_put_rectangle(&g->minimap_img, 0, 0, g->minimap_height, g->minimap_width, BLACK);
+    coords_init(0, 0, g->minimap_height, g->minimap_width);
+    ft_put_rectangle(&g->minimap_img, BLACK);
     init_minimap_values(pos, lim);
     minimap[1] = 0;
     while (pos[1] < lim[1] && _map()->map[pos[1]])
@@ -16,11 +17,17 @@ void    render_minimap(t_mlx *g, char **map)
         while (pos[0] < lim[0] && map[pos[1]][pos[0]])
         {
             if (map[pos[1]][pos[0]] == '0' || is_start_position(map[pos[1]][pos[0]]))
-                ft_put_rectangle(&g->minimap_img, minimap[0] * g->minimap_tile + 0.5,
-                    minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1, WHITE);
+            {
+                coords_init(minimap[0] * g->minimap_tile + 0.5,
+                    minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1);
+                ft_put_rectangle(&g->minimap_img, WHITE);
+            }
             else if (map[pos[1]][pos[0]] == '1')
-                ft_put_rectangle(&g->minimap_img, minimap[0] * g->minimap_tile + 0.5,
-                    minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1, GREY);    
+            {
+                coords_init(minimap[0] * g->minimap_tile + 0.5,
+                    minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1);
+                ft_put_rectangle(&g->minimap_img, GREY);    
+            }
             pos[0]++;
             minimap[0]++;
         }

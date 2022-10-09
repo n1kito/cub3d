@@ -25,7 +25,14 @@ void	map_struct_init(t_map *map)
 	map->file_contents = NULL;
 	map->map = NULL;
 	map->params = NULL;
-	map->params = malloc(sizeof(t_params));
+    map->graphics = NULL;
+	params_struct_init(map);
+    graphics_struct_init(map);
+}
+
+void    params_struct_init(t_map *map)
+{
+    map->params = malloc(sizeof(t_params));
 	if (!map->params)
 		ft_exit("malloc fail [map_struct_init()][1]", 1);
 	map->params->n_texture = NULL;
@@ -36,7 +43,10 @@ void	map_struct_init(t_map *map)
 	map->params->f_color[0] = -1;
 	map->params->pl_start_pos[0] = -1;
 	map->params->pl_start_pos[1] = -1;
-	map->graphics = NULL;
+}
+
+void    graphics_struct_init(t_map *map)
+{
 	map->graphics = malloc(sizeof(t_mlx));
 	if (!map->graphics)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);

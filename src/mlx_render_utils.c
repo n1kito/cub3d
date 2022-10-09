@@ -15,19 +15,20 @@ void    ft_pixel_put(t_img *img, int x, int y, int color)
     *(int *)pixel = color;
 }
 
-void     ft_put_rectangle(t_img *img, int x, int y, int height, int width, int color)
+void     ft_put_rectangle(t_img *img, int color)
 {
     int i;
     int j;
 
-    i = y;
-    while (i < y + height)
+    i = _map()->coord->y0;
+    while (i < _map()->coord->y0 + _map()->coord->x1)
     {
-        j = x;
-        while (j < x + width)
+        j = _map()->coord->x0;
+        while (j < _map()->coord->x0 + _map()->coord->y1)
             ft_pixel_put(img, j++, i, color);
         i++;
     }
+    free_coords();
 }
 
 /* Displays a filled in ellipse on image. */
@@ -42,12 +43,37 @@ void    ft_put_circle(t_img *img, int x, int y, int radius, int color)
         angle = 0;
         while (angle < 360)
         {
-         dot_x = cos(angle) * (double)radius;
-         dot_y = sin(angle) * (double)radius;
-        //  ft_draw_line(img, x, y, x + dot_x, y + dot_y, color); // TODO ecrire cette fonction et savoir comment elle marche
-         ft_pixel_put(img, x + (int)dot_x, y + (int)dot_y, color);
-         angle++;
+            dot_x = cos(angle) * (double)radius;
+            dot_y = sin(angle) * (double)radius;
+            ft_pixel_put(img, x + (int)dot_x, y + (int)dot_y, color);
+            angle++;
         }
         radius--;
     }
+}
+
+// TODO comprendre 
+void ft_draw_line(t_img *img, int color)
+{
+    int dx, dy, p;
+ 
+    dx = _map()->coord->x1 - _map()->coord->x0;
+    dy = _map()->coord->y1 - _map()->coord->y0;
+    p = 2 * dy - dx;
+    while (_map()->coord->x0 < _map()->coord->x1)
+    {
+        if (p >= 0)
+        {
+            ft_pixel_put(img, _map()->coord->x0, _map()->coord->y0, color);
+            _map()->coord->y0 = _map()->coord->y0 + 1;
+            p = p + 2 * dy - 2 * dx;
+        }
+        else
+        {
+            ft_pixel_put(img, _map()->coord->x0, _map()->coord->y0, color);
+            p = p + 2 * dy;
+        }
+        _map()->coord->x0 = _map()->coord->x0 + 1;
+    }
+    free_coords();
 }
