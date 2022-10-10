@@ -8,6 +8,11 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 [![mjallada's 42 minishell Score](https://badge42.vercel.app/api/v2/cl4dwkra3004009maahzpjn6g/project/2635687)](https://github.com/JaeSeoKim/badge42)
 
+# TODO
+
+- [ ] Map needs error when no starting position
+- [ ] Map file should only accept one map
+
 # Research
 
 ## Raycasting theory
