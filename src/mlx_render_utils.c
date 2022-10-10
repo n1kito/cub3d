@@ -17,16 +17,16 @@ void    ft_pixel_put(t_img *img, int x, int y, int color)
 
 void     ft_put_rectangle(t_img *img, int color)
 {
-    int i;
-    int j;
+    int pY;
+    int pX;
 
-    i = _map()->coord->y0;
-    while (i < _map()->coord->y0 + _map()->coord->x1)
+    pY = _map()->coord->y0;
+    while (pY < _map()->coord->y0 + _map()->coord->x1)
     {
-        j = _map()->coord->x0;
-        while (j < _map()->coord->x0 + _map()->coord->y1)
-            ft_pixel_put(img, j++, i, color);
-        i++;
+        pX = _map()->coord->x0;
+        while (pX < _map()->coord->x0 + _map()->coord->y1)
+            ft_pixel_put(img, pX++, pY, color);
+        pY++;
     }
     free_coords();
 }

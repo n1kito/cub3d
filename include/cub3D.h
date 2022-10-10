@@ -29,7 +29,7 @@
 # define ESC 65307
 # define WALL 1
 # define TILE_SIZE 64
-# define SCALE_FACTOR 0.15
+# define SCALE_FACTOR 0.3
 # define PI 3.14159265
 # define FOV (90 * (PI / 180))
 # define NUM_RAYS 2560
@@ -177,7 +177,7 @@ void   		render_player_dot_on_minimap();
 void    	init_minimap_values(int *draw_pos, int *draw_end);
 
 // map_coord_init.c
-void 	   coords_init(int x0, int y0, int x1, int y1);
+void 	  	coords_init(int x0, int y0, int x1, int y1);
 void		free_coords();
 
 #endif

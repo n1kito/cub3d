@@ -89,15 +89,15 @@ int update_window(void)
 void    init_hooks(void)
 {
     // Initialise player position to center of start position square
-    _map()->plyr.x = _map()->params->pl_start_pos[0] * _map()->graphics->minimap_tile + _map()->graphics->minimap_tile / 2;
-    _map()->plyr.y = _map()->params->pl_start_pos[1] * _map()->graphics->minimap_tile + _map()->graphics->minimap_tile / 2;
+    _map()->plyr.x = _map()->params->pl_start_pos[0] * TILE_SIZE + TILE_SIZE / 2;
+    _map()->plyr.y = _map()->params->pl_start_pos[1] * TILE_SIZE + TILE_SIZE / 2;
     _map()->graphics->minimap_img.image = mlx_new_image(_map()->graphics->mlx_ptr, _map()->graphics->minimap_width, _map()->graphics->minimap_height);
     // TODO protect
     // TODO move minimap rendering
     _map()->graphics->minimap_img.addr = mlx_get_data_addr(_map()->graphics->minimap_img.image, &_map()->graphics->minimap_img.bpp, &_map()->graphics->minimap_img.line_length, &_map()->graphics->minimap_img.endian);
-    render_minimap(_map()->graphics, _map()->map);
+    // render_minimap(_map()->graphics, _map()->map);
     // render_player_position();
-    mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
+    // mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
     // exit when pressing X
     mlx_hook(_map()->graphics->window_ptr, 17, 0L, exit_game, NULL);
     // mlx_key_hook(_map()->graphics->window_ptr, &move_player, NULL);

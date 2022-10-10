@@ -57,6 +57,7 @@ void    graphics_struct_init(t_map *map)
 	map->graphics->window_height = 1440;
 	map->graphics->minimap_width = SCALE_FACTOR * map->graphics->window_width;
 	map->graphics->minimap_height = map->graphics->minimap_width;
-	map->graphics->minimap_tile = 64;
-	// map->graphics->minimap_tile = map->graphics->minimap_width / 11;
+	// map->graphics->minimap_tile = 64;
+	// map->graphics->minimap_tile = TILE_SIZE * SCALE_FACTOR;
+	map->graphics->minimap_tile = map->graphics->minimap_width / 11;
 }

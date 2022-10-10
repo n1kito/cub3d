@@ -69,7 +69,7 @@ void    render_minimap(t_mlx *g, char **map)
     int      minimap[2];
 
     coords_init(0, 0, g->minimap_height, g->minimap_width);
-    ft_put_rectangle(&g->minimap_img, BLACK);
+    ft_put_rectangle(&g->minimap_img, RED);
     init_minimap_values(pos, lim);
     minimap[1] = 0;
     while (pos[1] < lim[1] && _map()->map[pos[1]])
@@ -107,8 +107,8 @@ void    render_player_dot_on_minimap(int *draw_end)
 
     tile_size = _map()->graphics->minimap_tile;
     minimap_img = _map()->graphics->minimap_img;
-    dot_pos[0] = _map()->plyr.x - (draw_end[0] - 10) * tile_size - 1;
-    dot_pos[1] = _map()->plyr.y - (draw_end[1] - 10) * tile_size- 1;
+    dot_pos[0] = _map()->plyr.x - (draw_end[0] - 10) * tile_size - 1; // TODO fix this
+    dot_pos[1] = _map()->plyr.y - (draw_end[1] - 10) * tile_size- 1; // TODO fix this
     ft_put_circle(&minimap_img, dot_pos[0], dot_pos[1], tile_size * 0.5 / 5, RED);
     coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 40, dot_pos[1] + sin(_map()->plyr.rot_angle) * 40);
     ft_draw_line(&minimap_img, RED);
