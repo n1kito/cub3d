@@ -64,6 +64,7 @@ all: header $(NAME)
 bonus: $(NAME_BONUS)
 
 $(NAME): $(OBJ_FILES)
+	@make --no-print-directory -C minilibx-linux
 	@make --no-print-directory -C libft
 	@$(CC) -g -o $(NAME) $(OBJ_FILES) $(LFLAGS) -L $(LIB_DIR) -l $(LIB)
 	@echo "\n🧟 $(GREEN_BLINK)$(NAME) compiled$(END_COLOR) 🔫\n"
@@ -85,6 +86,7 @@ clean:
 	@rm -rf $(BIN_DIR)
 	@echo "$(YELLOW)$(NAME) all object & dependency files cleaned.$(END_COLOR)"
 	@make clean --no-print-directory -C libft
+	@make clean --no-print-directory -C minilibx-linux
 
 fclean: clean
 	@rm -f $(NAME)
