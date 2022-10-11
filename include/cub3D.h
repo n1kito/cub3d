@@ -154,6 +154,10 @@ int			line_contains_parameter(char *line);
 void		check_map_line(char *line, int i);
 int			is_start_position(char c);
 
+// map_parsing_utils2.c
+void		get_map_dimensions(void);
+void		map_last_in_file_check(void);
+
 // map_structure.c
 t_map		*_map(void);
 void		map_struct_init(t_map *map);

@@ -5,9 +5,11 @@
 void	check_color_values(char **line)
 {
 	int		i;
-	char **splitted_line;
+	char 	**splitted_line;
 
 	splitted_line = ft_split(line[1], ',');
+	if (ft_tabsize(splitted_line) != 3)
+		ft_exit("color has too few/many values", 1);
 	i = 0;
 	while (splitted_line[i])
 	{
@@ -17,17 +19,17 @@ void	check_color_values(char **line)
 		{
 			ft_freetab(&line);
 			ft_freetab(&splitted_line);
-			ft_exit("too many color values.", 1);
+			ft_exit("too many color values", 1);
 		}
 		if (ft_strlen(splitted_line[i]) == 0
-			|| (ft_strlen(splitted_line[i]) > 3)
+			|| ft_strlen(splitted_line[i]) > 3
 			|| !ft_string_is_digit(splitted_line[i])
 			|| atoi(splitted_line[i]) > 255
 			|| atoi(splitted_line[i]) < 0)
 			{
 				ft_freetab(&line);
 				ft_freetab(&splitted_line);
-				ft_exit("color values are wrong.", 1);
+				ft_exit("color values are wrong", 1);
 			}
 		i++;
 	}

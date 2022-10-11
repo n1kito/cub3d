@@ -104,35 +104,60 @@ test_map() { # TODO modify this so the expected error is passed as an argument ?
 	if [ -f $1 ]; then
 		FILE_CHECK=$(cat $1 | wc -l)
 		if [ "$FILE_CHECK" -eq 0 ]; then
-			printf " ${BYELLOW}Error: ${YELLOW}\"$1\" is empty.${NC}\n"
+			printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}] \"$1\" is empty.${NC}\n"
 			return
 		fi
 	else
-		printf " ${BYELLOW}Error: ${YELLOW}\"$1\" file does not exist or is directory.${NC}\n"
+		printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}] \"$1\" file does not exist or is directory.${NC}\n"
 		return
 	fi
 
 	# printf " ${GREEN}$1 is not empty${NC}\n"
 	RESULT=$(${EXECUTABLE_PATH}/${EXECUTABLE} $1 2>&1)
 	RESULT_COUNT=$(${EXECUTABLE_PATH}/${EXECUTABLE} $1 2>&1 | wc -l)
-	if [ "$RESULT_COUNT" -eq 2 ]; then
-        printf " ${GREEN}[${NC}${BGREEN}OK${NC}${GREEN}]\t$1${NC} " # IF RESULT MATCHES EXPECTED_OUTPUT, PRINT 'OK'
+	TEST_NAME=${1%????}						# remove .cub extension from map filename
+	TEST_NAME=${TEST_NAME//_/ }				# replace map file name underscores with spaces
+	TEST_NAME=$(echo $TEST_NAME | cut -c6-)	# leading ./map/ from map filemame
+	if [ "$RESULT_COUNT" -gt 1 ]; then
+        printf " ${GREEN}[${NC}${BGREEN}OK${GREEN}]\t$TEST_NAME${NC} " # IF RESULT MATCHES EXPECTED_OUTPUT, PRINT 'OK'
+		(( TEST_PASSED++ ))
+        (( TEST_COUNT++ ))
 	else
         printf " ${RED}[${KO}]${NC}\t${RED}$1" # IF RESULTS DON'T MATCH, PRINT 'KO' ND SHOW TEST, EXPECTED OUTPUT AND RESULT
+		(( TEST_COUNT++ ))
 	fi
 	echo
 }
 
 # Print test title
 
-printf "\n \e[4mChecking wrong map returns error\e[24m:\n\n"
+echo
+echo
+printf "${MAGENTA}                        ╔╦╗╔═╗╔═╗  ╔╦╗╔═╗╔═╗╔╦╗╔═╗╦═╗    ${NC}\n"
+printf "${MAGENTA}                     ** ║║║╠═╣╠═╝   ║ ║╣ ╚═╗ ║ ║╣ ╠╦╝ ** ${NC}\n"
+printf "${MAGENTA}                        ╩ ╩╩ ╩╩     ╩ ╚═╝╚═╝ ╩ ╚═╝╩╚═    ${NC}\n"
+echo
+echo
 
 for file in ${MAPS_DIRECTORY}/*
 do
 	test_map $file
 done
 
+################################################################################
+##                                PRINT RESULTS                               ##
+################################################################################
 
+echo
+echo "$SEPARATOR";
+echo
+printf " \e[4mTests passed\e[24m: "
+if [ ${TEST_PASSED} -eq ${TEST_COUNT} ]
+then
+  printf "✅ ${GREEN}${TEST_PASSED}/${TEST_COUNT}${NC}"
+else
+  printf "\e[5m💀\e[0m ${BRED}${TEST_PASSED}${NC}/${TEST_COUNT}"
+fi
 
 echo
 echo

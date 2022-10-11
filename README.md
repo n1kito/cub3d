@@ -10,12 +10,12 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 # TODO
 
-- [ ] Map needs error when no starting position
-- [ ] Map file should only accept one map
-- [ ] Sefault when map file has no map
-- [ ] Segfault when map has no starting position
-- [ ] Segfault when color param is too short
-- [ ] Segfault when map is not last in file
+- [x] Map needs error when no starting position
+- [x] Map file should only accept one map
+- [x] Sefault when map file has no map
+- [X] Segfault when map has no starting position
+- [x] Segfault when color param is too short
+- [x] Segfault when map is not last in file
 
 # Research
 

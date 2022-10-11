@@ -1,29 +1,5 @@
 #include "cub3D.h"
 
-// TODO move this
-/* Stores the number of lines in the map as well as the length of the longest line. */
-void	get_map_dimensions(void)
-{
-	int	map_height;
-	int	map_width;
-	int	map_width_tmp;
-
-	map_width = 0;
-	map_width_tmp = 0;
-	map_height = 0;
-	while (_map()->map[map_height])
-	{
-		map_width_tmp = 0;
-		while (_map()->map[map_height][map_width_tmp])
-			map_width_tmp++;
-		if (map_width_tmp > map_width)
-			map_width = map_width_tmp;
-		map_height++;
-	}
-	_map()->map_height = map_height;
-	_map()->map_width = map_width - 1;
-}
-
 /* Analyses map file and exits in case of error, or if all parameters are not correct. */
 void	map_parsing(void)
 {
@@ -34,12 +10,15 @@ void	map_parsing(void)
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
+	if (!_map()->map)
+		ft_exit("map not found", 1);
 	// 4. check that map is closed
 	closed_map_check();
-	// TODO: as is, we can have several maps in the same file if the first one is correctly closed.
-	// But the parsing will be screwed. Add a check like:
-	// map_is_last_check();
-	get_map_dimensions(); // TODO move this
+	// 5. check that there is a starting position
+	if (_map()->params->pl_start_pos[0] == -1)
+		ft_exit("missing player starting position", 1);
+	get_map_dimensions();
+	map_last_in_file_check();
 }
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one
