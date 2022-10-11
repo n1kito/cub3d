@@ -1,8 +1,140 @@
 #!/bin/bash
 
 # Usage: ./cub3D_tester
+# To add more maps to test, add them to maps/ directory
 
-for file in ./maps/*
+################################################################################
+##                             USEFUL VARIABLES                               ##
+################################################################################
+
+EXECUTABLE_PATH=".."
+EXECUTABLE="cub3D"
+MAPS_DIRECTORY="maps"
+
+# Variables used to dynamically count the number of tests ran.
+TEST_COUNT=0
+TEST_PASSED=0
+
+## RETURNS
+################################################################################
+
+OK="[OK]"
+KO="❌"
+
+## COLORS
+################################################################################
+
+RED='\033[0;31m'
+BRED='\033[1;31m'
+GREEN='\033[0;32m'
+BGREEN='\033[1;32m'
+YELLOW='\033[0;33m'
+BYELLOW='\033[1;33m'
+BLUE='\033[0;36m'
+PINK='\033[0;35m'
+ITALIC='\e[3m'
+CODE='\e[1;41;100m' # White text on grey background
+# CODE='\e[7m' # Second option, this one just inverts
+NC='\033[0m' # No Color
+SEPARATOR='░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░'
+
+################################################################################
+##                                  HEADER                                    ##
+################################################################################
+
+## DISPLAY TITLE
+clear -x # clears screen, equals to CTRL + L in Terminal
+
+echo
+echo "$SEPARATOR";
+echo
+printf "                ${YELLOW}  ██████╗██╗   ██╗██████╗ ${NC}██████╗ ██████╗ \n";
+printf "                ${YELLOW} ██╔════╝██║   ██║██╔══██╗${NC}╚════██╗██╔══██╗\n";
+printf "                ${YELLOW} ██║     ██║   ██║██████╔╝${NC} █████╔╝██║  ██║\n";
+printf "                ${YELLOW} ██║     ██║   ██║██╔══██╗${NC} ╚═══██╗██║  ██║\n";
+printf "                ${YELLOW} ╚██████╗╚██████╔╝██████╔╝${NC}██████╔╝██████╔╝\n";
+printf "                ${YELLOW}  ╚═════╝ ╚═════╝ ╚═════╝ ${NC}╚═════╝ ╚═════╝ \n";
+printf "                            \e[2m(tester by nikito 🔥)\e[22m"
+printf "\n"
+
+################################################################################
+##                             PRELIMINARY CHECKS                             ##
+################################################################################
+
+# Checks that:
+#   - The directory that holds the test files exists.
+#   - That it actually has files in it.
+#   - (The individual files checks are done in the testing function).
+
+if [ -d "${MAPS_DIRECTORY}" ]
+then
+      TEST_FILES_CHECK=$(ls $MAPS_DIRECTORY | wc -l)
+      if [ "$TEST_FILES_CHECK" -eq 0 ]; then
+        printf "\n         ⚠️  ${BRED}Error${NC}${RED}: there are no map files in the ${BRED}${MAPS_DIRECTORY}${NC}${RED}/ directory${NC} ⚠️\n"
+        printf "\n               ${ITALIC}Come back when you have some maps to test 🐙${NC}\n"
+        printf "\n${SEPARATOR}\n\n"
+        exit
+     fi
+else
+      printf "\n              ⚠️  ${BRED}Error${RED}: the ${BRED}${MAPS_DIRECTORY}${NC}${RED}/ directory does not exist${NC} ⚠️\n"
+      printf "\n               ${ITALIC}Come back when you have some maps to test 🐙${NC}\n"
+      printf "\n${SEPARATOR}\n\n"
+      exit
+fi
+
+# for file in ./maps/*
+# do
+# 	echo $file
+# done
+
+################################################################################
+##                            TESTING LOOP FUNCTION                           ##
+################################################################################
+
+# test_map()
+# Argument 1: name of the test file
+
+test_map() { # TODO modify this so the expected error is passed as an argument ?
+
+  # This section checks that the test file exists and that it is not empty.
+  # If it is not empty, it checks that the file has at least 2 lines in it.
+
+	# Cannot be used here because some files should be empty or directories.
+
+	if [ -f $1 ]; then
+		FILE_CHECK=$(cat $1 | wc -l)
+		if [ "$FILE_CHECK" -eq 0 ]; then
+			printf " ${BYELLOW}Error: ${YELLOW}\"$1\" is empty.${NC}\n"
+			return
+		fi
+	else
+		printf " ${BYELLOW}Error: ${YELLOW}\"$1\" file does not exist or is directory.${NC}\n"
+		return
+	fi
+
+	# printf " ${GREEN}$1 is not empty${NC}\n"
+	RESULT=$(${EXECUTABLE_PATH}/${EXECUTABLE} $1 2>&1)
+	RESULT_COUNT=$(${EXECUTABLE_PATH}/${EXECUTABLE} $1 2>&1 | wc -l)
+	if [ "$RESULT_COUNT" -eq 2 ]; then
+        printf " ${GREEN}[${NC}${BGREEN}OK${NC}${GREEN}]\t$1${NC} " # IF RESULT MATCHES EXPECTED_OUTPUT, PRINT 'OK'
+	else
+        printf " ${RED}[${KO}]${NC}\t${RED}$1" # IF RESULTS DON'T MATCH, PRINT 'KO' ND SHOW TEST, EXPECTED OUTPUT AND RESULT
+	fi
+	echo
+}
+
+# Print test title
+
+printf "\n \e[4mChecking wrong map returns error\e[24m:\n\n"
+
+for file in ${MAPS_DIRECTORY}/*
 do
-	echo $file
+	test_map $file
 done
+
+
+
+echo
+echo
+echo "$SEPARATOR";
+echo
