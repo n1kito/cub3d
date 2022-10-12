@@ -10,6 +10,7 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 # TODO
 
+- [ ] Segfault on tiny map
 - [x] Map needs error when no starting position
 - [x] Map file should only accept one map
 - [x] Sefault when map file has no map

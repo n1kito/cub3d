@@ -49,8 +49,8 @@ void    render_player_dot_on_minimap(int *draw_end)
     dot_pos[1] = (_map()->plyr.y * SCALE_FACTOR) - (draw_end[1] - 10) * tile_size- 1; // TODO fix this
     if (_map()->plyr.x > _map()->map_width * TILE_SIZE)
         ft_exit("player left map", 1);
-    printf("draw_pos(%f, %f)\n", dot_pos[0], dot_pos[1]);
-    ft_put_circle(&minimap_img, dot_pos[0], dot_pos[1], tile_size * 0.5 / 5, GREY);
+    // printf("draw_pos(%f, %f)\n", dot_pos[0], dot_pos[1]);
+    ft_put_circle(&minimap_img, dot_pos[0], dot_pos[1], tile_size * 0.5 / 5, RED);
     coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 40, dot_pos[1] + sin(_map()->plyr.rot_angle) * 40);
     ft_draw_line(&minimap_img, RED);
 }
@@ -63,7 +63,7 @@ void    init_minimap_values(int *draw_pos, int *draw_end)
         draw_pos[0] = ((_map()->plyr.x * SCALE_FACTOR) / _map()->graphics->minimap_tile) - 5;
     if ((_map()->plyr.y  * SCALE_FACTOR) / _map()->graphics->minimap_tile >= 5)
         draw_pos[1] = ((_map()->plyr.y * SCALE_FACTOR) / _map()->graphics->minimap_tile) - 5;
-    printf("plyr_pos(%f, %f)\n", _map()->plyr.x, _map()->plyr.y);
+    // printf("plyr_pos(%f, %f)\n", _map()->plyr.x, _map()->plyr.y);
     draw_end[0] = draw_pos[0] + 10;
     draw_end[1] = draw_pos[1] + 10;
 }
