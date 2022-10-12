@@ -53,11 +53,11 @@ void    graphics_struct_init(t_map *map)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);
 	map->graphics->mlx_ptr = NULL;
 	map->graphics->window_ptr = NULL;
-	map->graphics->window_width = 2560;
-	map->graphics->window_height = 1440;
-	map->graphics->minimap_width = SCALE_FACTOR * map->graphics->window_width;
-	map->graphics->minimap_height = map->graphics->minimap_width;
+	map->graphics->window_width = 1920;
+	map->graphics->window_height = 1080;
 	// map->graphics->minimap_tile = 64;
-	// map->graphics->minimap_tile = TILE_SIZE * SCALE_FACTOR;
-	map->graphics->minimap_tile = map->graphics->minimap_width / 11;
+	map->graphics->minimap_tile = TILE_SIZE * SCALE_FACTOR;
+	map->graphics->minimap_width = 11 * map->graphics->minimap_tile;
+	map->graphics->minimap_height = map->graphics->minimap_width;
+	// map->graphics->minimap_tile = map->graphics->minimap_width / 11;
 }

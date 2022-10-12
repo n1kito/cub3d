@@ -25,6 +25,7 @@ KO="❌"
 ################################################################################
 
 RED='\033[0;31m'
+MAGENTA='\033[0;35m'
 BRED='\033[1;31m'
 GREEN='\033[0;32m'
 BGREEN='\033[1;32m'
@@ -48,12 +49,12 @@ clear -x # clears screen, equals to CTRL + L in Terminal
 echo
 echo "$SEPARATOR";
 echo
-printf "                ${YELLOW}  ██████╗██╗   ██╗██████╗ ${NC}██████╗ ██████╗ \n";
-printf "                ${YELLOW} ██╔════╝██║   ██║██╔══██╗${NC}╚════██╗██╔══██╗\n";
-printf "                ${YELLOW} ██║     ██║   ██║██████╔╝${NC} █████╔╝██║  ██║\n";
-printf "                ${YELLOW} ██║     ██║   ██║██╔══██╗${NC} ╚═══██╗██║  ██║\n";
-printf "                ${YELLOW} ╚██████╗╚██████╔╝██████╔╝${NC}██████╔╝██████╔╝\n";
-printf "                ${YELLOW}  ╚═════╝ ╚═════╝ ╚═════╝ ${NC}╚═════╝ ╚═════╝ \n";
+printf "                ${GREEN}  ██████╗██╗   ██╗██████╗ ${NC}██████${GREEN}╗${NC} ██████${GREEN}╗${NC} \n";
+printf "                ${GREEN} ██╔════╝██║   ██║██╔══██╗${NC}${GREEN}╚════${NC}██${GREEN}╗${NC}██${GREEN}╔══${NC}██${GREEN}╗${NC}\n";
+printf "                ${GREEN} ██║     ██║   ██║██████╔╝${NC} █████${GREEN}╔╝${NC}██${GREEN}║${NC}  ██${GREEN}║${NC}\n";
+printf "                ${GREEN} ██║     ██║   ██║██╔══██╗${NC} ${GREEN}╚═══${NC}██${GREEN}╗${NC}██${GREEN}║${NC}  ██${GREEN}║${NC}\n";
+printf "                ${GREEN} ╚██████╗╚██████╔╝██████╔╝${NC}██████${GREEN}╔╝${NC}██████${GREEN}╔╝${NC}\n";
+printf "                ${GREEN}  ╚═════╝ ╚═════╝ ╚═════╝ ${NC}${GREEN}╚═════╝ ╚═════╝${NC} \n";
 printf "                            \e[2m(tester by nikito 🔥)\e[22m"
 printf "\n"
 
@@ -133,9 +134,9 @@ test_map() { # TODO modify this so the expected error is passed as an argument ?
 
 echo
 echo
-printf "${MAGENTA}                        ╔╦╗╔═╗╔═╗  ╔╦╗╔═╗╔═╗╔╦╗╔═╗╦═╗    ${NC}\n"
-printf "${MAGENTA}                     ** ║║║╠═╣╠═╝   ║ ║╣ ╚═╗ ║ ║╣ ╠╦╝ ** ${NC}\n"
-printf "${MAGENTA}                        ╩ ╩╩ ╩╩     ╩ ╚═╝╚═╝ ╩ ╚═╝╩╚═    ${NC}\n"
+printf "                       ╔╦╗╔═╗╔═╗  ╔╦╗╔═╗╔═╗╔╦╗╔═╗╦═╗   \n"
+printf "                    ** ║║║╠═╣╠═╝   ║ ║╣ ╚═╗ ║ ║╣ ╠╦╝ **\n"
+printf "                       ╩ ╩╩ ╩╩     ╩ ╚═╝╚═╝ ╩ ╚═╝╩╚═   \n"
 echo
 echo
 

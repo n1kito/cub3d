@@ -29,7 +29,7 @@
 # define ESC 65307
 # define WALL 1
 # define TILE_SIZE 64
-# define SCALE_FACTOR 0.3
+# define SCALE_FACTOR 1
 # define PI 3.14159265
 # define FOV (90 * (PI / 180))
 # define NUM_RAYS 2560
