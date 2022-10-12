@@ -5,13 +5,20 @@ void	map_parsing(void)
 {
 	// Create and init params structure
 	// 1. count map lines
-	get_map_dimensions();
+	get_file_dimensions();
 	// 2. extract map with GNL
 	extract_map_file();
 	// 3. process map file contents
 	process_map_file_contents();
+	if (!_map()->map)
+		ft_exit("map not found", 1);
 	// 4. check that map is closed
 	closed_map_check();
+	// 5. check that there is a starting position
+	if (_map()->params->pl_start_pos[0] == -1)
+		ft_exit("missing player starting position", 1);
+	get_map_dimensions();
+	map_last_in_file_check();
 }
 
 /* Saves the map to a char** in my structure, and calls get_next_line() one

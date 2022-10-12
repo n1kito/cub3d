@@ -2,7 +2,7 @@
 
 /* Measures the number of lines and columns in the map and saves them in the
  * map structure. */
-void	get_map_dimensions(void)
+void	get_file_dimensions(void)
 {
 	char	*line;
 
@@ -74,8 +74,8 @@ void	check_map_line(char *line, int i)
 		{	
 			if (_map()->params->pl_start_pos[0] != -1)
 				ft_exit("map has too many starting positions", 1);
-			_map()->params->pl_start_pos[0] = i - 1;
-			_map()->params->pl_start_pos[1] = j;
+			_map()->params->pl_start_pos[0] = j;
+			_map()->params->pl_start_pos[1] = i - 1;
 		}
 		j++;
 	}

@@ -8,6 +8,16 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 [![mjallada's 42 minishell Score](https://badge42.vercel.app/api/v2/cl4dwkra3004009maahzpjn6g/project/2635687)](https://github.com/JaeSeoKim/badge42)
 
+# TODO
+
+- [ ] Segfault on tiny map
+- [x] Map needs error when no starting position
+- [x] Map file should only accept one map
+- [x] Sefault when map file has no map
+- [X] Segfault when map has no starting position
+- [x] Segfault when color param is too short
+- [x] Segfault when map is not last in file
+
 # Research
 
 ## Raycasting theory

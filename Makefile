@@ -38,16 +38,21 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES		:= 	main\
-					map_structure\
+SRC_FILES		:= 	closed_map_check\
 					error\
 					exit\
+					main\
 					map_checker\
 					map_color_checking\
 					map_parsing_utils\
+					map_parsing_utils2\
 					map_parsing\
-					closed_map_check\
-					map_texture_checking
+					map_structure\
+					map_texture_checking\
+					mlx_render_utils\
+					mlx_setup\
+					map_coords_init\
+					render_minimap
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))
@@ -59,7 +64,7 @@ all: header $(NAME)
 
 bonus: $(NAME_BONUS)
 
-$(NAME): $(OBJ_FILES)
+$(NAME): minilib $(OBJ_FILES)
 	@make --no-print-directory -C libft
 	@$(CC) -g -o $(NAME) $(OBJ_FILES) $(LFLAGS) -L $(LIB_DIR) -l $(LIB)
 	@echo "\n🧟 $(GREEN_BLINK)$(NAME) compiled$(END_COLOR) 🔫\n"
@@ -77,10 +82,16 @@ $(BIN_DIR):
 	@mkdir $(BIN_DIR)
 	@echo "$(IPURPLE)Created $(BIN_DIR)/ directory.$(END_COLOR)"
 
+minilib:
+	@echo "\ncompiling minilibX...\n"
+	@make --no-print-directory -s -C minilibx-linux
+	@echo "\n$(GREEN)minilibX compiled$(END_COLOR)\n"
+
 clean:
 	@rm -rf $(BIN_DIR)
 	@echo "$(YELLOW)$(NAME) all object & dependency files cleaned.$(END_COLOR)"
 	@make clean --no-print-directory -C libft
+	@make clean --no-print-directory -s -C minilibx-linux
 
 fclean: clean
 	@rm -f $(NAME)
