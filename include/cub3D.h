@@ -14,6 +14,7 @@
 # include <errno.h> //TODO check that it is used, remove if not
 # include <string.h>
 # include <math.h>
+# include <limits.h>
 # include "libft.h"
 
 // MACROS
@@ -28,11 +29,18 @@
 # define ARROW_RIGHT 65363
 # define ESC 65307
 # define WALL 1
+
+# define WINDOW_WIDTH 1920
+# define WINDOW_HEIGHT 1080
 # define TILE_SIZE 64
 # define SCALE_FACTOR 1
 # define PI 3.14159265
+# define TWO_PI 6.28318530
 # define FOV (90 * (PI / 180))
-# define NUM_RAYS 2560
+# define NUM_RAYS WINDOW_WIDTH
+
+# define FALSE 0
+# define TRUE 1
 
 // BASIC COLORS
 
@@ -52,6 +60,18 @@ typedef struct	s_player
 	double	y;
 }				t_player;
 
+typedef struct s_ray {
+	float	ray_angle;
+	float	wall_hit_x;
+	float	wall_hit_y;
+	float	distance;
+	int		was_hit_vertical;
+	int		is_ray_facing_up;
+	int		is_ray_facing_down;
+	int		is_ray_facing_left;
+	int		is_ray_facing_right;
+}				t_ray;
+
 typedef struct s_map
 {
 	char				**file_contents;
@@ -70,6 +90,7 @@ typedef struct s_map
 	struct s_mlx		*graphics;
 	struct s_coord		*coord;
 	struct s_player		plyr;
+	struct s_ray		rays[NUM_RAYS];
 }				t_map;
 
 
