@@ -79,12 +79,16 @@ float distance_between_points(float x1, float y1, float x2, float y2) {
     return sqrt((x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1));
 }
 
+//TODO replace player starting with 0 when parsing map?
 int map_has_wall_at(float x, float y) {
     if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
         return TRUE;
     }
     int mapGridIndexX = floor(x / TILE_SIZE);
     int mapGridIndexY = floor(y / TILE_SIZE);
+	if (mapGridIndexY > 5 || mapGridIndexX > 5)
+	 return 1; 
+	// printf("map char: %c, on [%d][%d]\n", _map()->map[mapGridIndexY][mapGridIndexX], mapGridIndexY, mapGridIndexX);
     return _map()->map[mapGridIndexY][mapGridIndexX] != 0;
 }
 
@@ -116,7 +120,7 @@ void    cast_ray(float ray_angle, int strip_id)
     xintercept = _map()->plyr.x + (yintercept - _map()->plyr.y) / tan(ray_angle);
 
     ystep = TILE_SIZE;
-    if (_map()->rays[strip_id].is_ray_facing_up)
+    if (is_ray_facing_up)
         ystep *= -1;
 
     xstep = TILE_SIZE / tan(ray_angle);
@@ -157,16 +161,16 @@ void    cast_ray(float ray_angle, int strip_id)
     if (is_ray_facing_right)
         xintercept += TILE_SIZE;
     
-    yintercept = _map()->plyr.y + (xintercept - _map()->plyr.x) / tan(ray_angle);
+    yintercept = _map()->plyr.y + (xintercept - _map()->plyr.x) * tan(ray_angle);
 
     xstep = TILE_SIZE;
     if (is_ray_facing_right)
         xstep *= -1;
     
-    ystep = TILE_SIZE / tan(ray_angle);
-    if (is_ray_facing_up && xstep > 0)
+    ystep = TILE_SIZE * tan(ray_angle);
+    if (is_ray_facing_up && ystep > 0)
         ystep *= -1;
-    if (is_ray_facing_down && xstep < 0)
+    if (is_ray_facing_down && ystep < 0)
         ystep *= -1;
 
     float next_vert_touch_x = xintercept;
@@ -199,11 +203,11 @@ void    cast_ray(float ray_angle, int strip_id)
     if (found_horz_wall_hit)
         horz_hit_distance = distance_between_points(_map()->plyr.x, _map()->plyr.y, horz_wall_hit_x, horz_wall_hit_y);
     else
-        horz_hit_distance = INT_MAX;
+        horz_hit_distance = (float)INT_MAX;
     if (found_vert_wall_hit)
         vert_hit_distance = distance_between_points(_map()->plyr.x, _map()->plyr.y, horz_wall_hit_x, horz_wall_hit_y);
     else
-        vert_hit_distance = INT_MAX;
+        vert_hit_distance = (float)INT_MAX;
 
     if (vert_hit_distance < horz_hit_distance)
     {
@@ -282,6 +286,7 @@ int update_window(void)
 
 void    init_hooks(void)
 {
+
     // Initialise player position to center of start position square
     _map()->plyr.x = _map()->params->pl_start_pos[0] * TILE_SIZE + TILE_SIZE / 2;
     _map()->plyr.y = _map()->params->pl_start_pos[1] * TILE_SIZE + TILE_SIZE / 2;
@@ -297,5 +302,6 @@ void    init_hooks(void)
     // mlx_key_hook(_map()->graphics->window_ptr, &move_player, NULL);
     mlx_hook(_map()->graphics->window_ptr, 2, 1L << 0, key_press, NULL);
     mlx_hook(_map()->graphics->window_ptr, 3, 1L << 1, key_release, NULL);
+	// update_window();
     mlx_loop_hook(_map()->graphics->mlx_ptr, &update_window, NULL);
 }

@@ -36,7 +36,7 @@
 # define SCALE_FACTOR 1
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define FOV (90 * (PI / 180))
+# define FOV (90 * (3.14159265 / 180))
 # define NUM_RAYS WINDOW_WIDTH
 
 # define FALSE 0
