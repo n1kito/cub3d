@@ -48,6 +48,12 @@
 # define GREY 0x808080
 # define BLACK 0x1000000
 # define WHITE 0xFFFFFF
+# define LIME 0x00FF00 
+# define GREEN 0x008000 
+# define PURPLE 0x800080 
+# define TEAL 0x008080 
+# define BLUE 0x0000FF 
+# define AQUA 0x00FFFF 
 
 // STRUCTURES
 

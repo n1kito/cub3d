@@ -80,13 +80,15 @@ float distance_between_points(float x1, float y1, float x2, float y2) {
 }
 
 //TODO replace player starting with 0 when parsing map?
-int map_has_wall_at(float x, float y) {
+int map_has_wall_at(float x, float y)
+{
     if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
         return TRUE;
     }
     int mapGridIndexX = floor(x / TILE_SIZE);
     int mapGridIndexY = floor(y / TILE_SIZE);
-	if (mapGridIndexY > 5 || mapGridIndexX > 5) // TODO fix
+	// printf("%d\n", ft_tabsize(_map()->map));
+	if (mapGridIndexY > _map()->map_height -1 ) // TODO fix
 	 return 1; 
 	// printf("map char: %c, on [%d][%d]\n", _map()->map[mapGridIndexY][mapGridIndexX], mapGridIndexY, mapGridIndexX);
     if (_map()->map[mapGridIndexY][mapGridIndexX] == '1')
@@ -260,11 +262,14 @@ void    render_rays()
     i = 0;
     while (i < NUM_RAYS)
     {
-        coords_init(SCALE_FACTOR * _map()->plyr.x, 
-                    SCALE_FACTOR * _map()->plyr.y,
-                    SCALE_FACTOR * _map()->rays[i].wall_hit_x,
-                    SCALE_FACTOR * _map()->rays[i].wall_hit_y);
-        ft_draw_line(&_map()->graphics->minimap_img, RED);
+		if (i % 25 == 0)
+		{
+			coords_init(SCALE_FACTOR * _map()->plyr.x, 
+						SCALE_FACTOR * _map()->plyr.y,
+						SCALE_FACTOR * _map()->rays[i].wall_hit_x,
+						SCALE_FACTOR * _map()->rays[i].wall_hit_y);
+			ft_draw_line(&_map()->graphics->minimap_img, BLUE);
+		}
         i++;
     }
 }
