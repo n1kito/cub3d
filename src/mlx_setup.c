@@ -338,7 +338,7 @@ int update_window(void)
 	move_player();
     cast_all_rays();
     render_minimap(_map()->graphics, _map()->map);
-    // render_rays();
+    render_rays();
 	generate_proj();
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
