@@ -292,10 +292,12 @@ void	generate_proj(void)
 	int	i;
 
 	i = 0;
+	printf("Dist : %f\n", _map()->rays[960].distance);
 	while (i < NUM_RAYS)
 	{
+		float perpDistance = _map()->rays[i].distance * cos(_map()->rays[i].ray_angle - _map()->plyr.rot_angle);
 		float distanceProjPlane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
-		float projectedWallHeight = (TILE_SIZE / _map()->rays[i].distance * distanceProjPlane);
+		float projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
 
 		int	wallStripHeight = (int)projectedWallHeight;
 		
@@ -305,14 +307,31 @@ void	generate_proj(void)
 		int wallBottomPixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
 		wallBottomPixel = wallBottomPixel < 0 ? 0 : wallBottomPixel;
 
-		coords_init(i, 0, wallTopPixel, 1);
-		ft_put_rectangle(&_map()->graphics->game_img, TEAL);
 		
-		coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
-		ft_put_rectangle(&_map()->graphics->game_img, GREY);
-
-		coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
-		ft_put_rectangle(&_map()->graphics->game_img, PURPLE);
+		if (_map()->rays[i].distance < 96)
+		{
+			coords_init(i, 0, wallTopPixel, 1);
+			ft_put_rectangle(&_map()->graphics->game_img, PLA_1);
+			coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
+			if (_map()->rays[i].was_hit_vertical)
+				ft_put_rectangle(&_map()->graphics->game_img, XMUR_1);
+			else
+				ft_put_rectangle(&_map()->graphics->game_img, YMUR_1);
+			coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
+			ft_put_rectangle(&_map()->graphics->game_img, SOL_1);
+		}
+		else if (_map()->rays[i].distance >= 96 /*&& _map()->rays[WINDOW_WIDTH / 2].distance < 160*/)
+		{
+			coords_init(i, 0, wallTopPixel, 1);
+			ft_put_rectangle(&_map()->graphics->game_img, PLA_1);
+			coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
+			if (_map()->rays[i].was_hit_vertical)
+				ft_put_rectangle(&_map()->graphics->game_img, XMUR_2);
+			else
+				ft_put_rectangle(&_map()->graphics->game_img, YMUR_2);
+			coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
+			ft_put_rectangle(&_map()->graphics->game_img, SOL_1);
+		}
 		i++;
 
 	}
@@ -324,8 +343,8 @@ void	move_player(void)
 	float	new_y;
 
     _map()->plyr.rot_angle += _map()->plyr.rot * 0.09;
-    new_x = (_map()->plyr.x + cos(_map()->plyr.rot_angle) * 5) * _map()->plyr.move;
-    new_y = (_map()->plyr.y + sin(_map()->plyr.rot_angle) * 5) * _map()->plyr.move;
+    new_x = (_map()->plyr.x + (cos(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
+    new_y = (_map()->plyr.y + (sin(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
 	if (!map_has_wall_at(new_x, new_y))
 	{
 		_map()->plyr.x = new_x;
@@ -338,7 +357,7 @@ int update_window(void)
 	move_player();
     cast_all_rays();
     render_minimap(_map()->graphics, _map()->map);
-    // render_rays();
+    render_rays();
 	generate_proj();
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);

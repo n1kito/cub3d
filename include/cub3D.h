@@ -33,10 +33,10 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 # define TILE_SIZE 64
-# define SCALE_FACTOR 0.4
+# define SCALE_FACTOR 0.3
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define FOV (100 * (3.14159265 / 180))
+# define FOV (90 * (3.14159265 / 180))
 # define NUM_RAYS WINDOW_WIDTH
 
 # define FALSE 0
@@ -45,7 +45,8 @@
 // BASIC COLORS
 
 # define RED 0xFF0000
-# define GREY 0x808080
+# define LGREY 0x808080
+# define GREY 0x505050
 # define BLACK 0x1000000
 # define WHITE 0xFFFFFF
 # define LIME 0x00FF00 
@@ -53,7 +54,19 @@
 # define PURPLE 0x800080 
 # define TEAL 0x008080 
 # define BLUE 0x0000FF 
-# define AQUA 0x00FFFF 
+# define AQUA 0x00FFFF
+
+# define SOL_1 0xF89F5B
+# define XMUR_1 0xE53F71
+# define YMUR_1 0x9C3587
+# define PLA_1 0x653780
+
+# define SOL_2 0x3F1651
+# define XMUR_2 0x3F1651
+# define YMUR_2 0x3F1651
+# define PLA_2 0x3F1651
+// # define 0x
+// # define 0x
 
 // STRUCTURES
 
