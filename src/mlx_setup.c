@@ -86,15 +86,18 @@ int map_has_wall_at(float x, float y) {
     }
     int mapGridIndexX = floor(x / TILE_SIZE);
     int mapGridIndexY = floor(y / TILE_SIZE);
-	if (mapGridIndexY > 5 || mapGridIndexX > 5)
+	if (mapGridIndexY > 5 || mapGridIndexX > 5) // TODO fix
 	 return 1; 
 	// printf("map char: %c, on [%d][%d]\n", _map()->map[mapGridIndexY][mapGridIndexX], mapGridIndexY, mapGridIndexX);
-    return _map()->map[mapGridIndexY][mapGridIndexX] != 0;
+    if (_map()->map[mapGridIndexY][mapGridIndexX] == '1')
+		return (1);
+	return (0);
 }
 
 void    cast_ray(float ray_angle, int strip_id)
 {
     ray_angle = normalize_angle(ray_angle);
+
     int is_ray_facing_down;
     int is_ray_facing_up;
     int is_ray_facing_right;
@@ -131,12 +134,15 @@ void    cast_ray(float ray_angle, int strip_id)
     
     float next_horz_touch_x = xintercept;
     float next_horz_touch_y = yintercept;
+
     while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
     {
         float   x_to_check = next_horz_touch_x;
         float   y_to_check = next_horz_touch_y;
         if (is_ray_facing_up)
             y_to_check -= 1;
+		else
+			y_to_check = next_horz_touch_y;
 
         if (map_has_wall_at(x_to_check, y_to_check))
         {
@@ -154,8 +160,8 @@ void    cast_ray(float ray_angle, int strip_id)
 
     // VERTICAL WALL HIT INTERSECTION
     int found_vert_wall_hit = FALSE;
-    float   vert_wall_hit_x;
-    float   vert_wall_hit_y;
+    float   vert_wall_hit_x = 0;
+    float   vert_wall_hit_y = 0;
     
     xintercept = floor(_map()->plyr.x / TILE_SIZE) * TILE_SIZE;
     if (is_ray_facing_right)
@@ -164,7 +170,7 @@ void    cast_ray(float ray_angle, int strip_id)
     yintercept = _map()->plyr.y + (xintercept - _map()->plyr.x) * tan(ray_angle);
 
     xstep = TILE_SIZE;
-    if (is_ray_facing_right)
+    if (is_ray_facing_left)
         xstep *= -1;
     
     ystep = TILE_SIZE * tan(ray_angle);
@@ -175,17 +181,18 @@ void    cast_ray(float ray_angle, int strip_id)
 
     float next_vert_touch_x = xintercept;
     float next_vert_touch_y = yintercept;
+
     while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
     {
-        float   x_to_check = next_horz_touch_x;
+        float   x_to_check = next_vert_touch_x;
         if (is_ray_facing_left)
             x_to_check -= 1;
-        float   y_to_check = next_horz_touch_y;
+        float   y_to_check = next_vert_touch_y;
 
         if (map_has_wall_at(x_to_check, y_to_check))
         {
-            vert_wall_hit_x = next_horz_touch_x;
-            vert_wall_hit_y = next_horz_touch_y;
+            vert_wall_hit_x = next_vert_touch_x;
+            vert_wall_hit_y = next_vert_touch_y;
             found_vert_wall_hit = TRUE;
             break ;
         }
@@ -205,7 +212,7 @@ void    cast_ray(float ray_angle, int strip_id)
     else
         horz_hit_distance = (float)INT_MAX;
     if (found_vert_wall_hit)
-        vert_hit_distance = distance_between_points(_map()->plyr.x, _map()->plyr.y, horz_wall_hit_x, horz_wall_hit_y);
+        vert_hit_distance = distance_between_points(_map()->plyr.x, _map()->plyr.y, vert_wall_hit_x, vert_wall_hit_y);
     else
         vert_hit_distance = (float)INT_MAX;
 
