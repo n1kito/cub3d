@@ -33,10 +33,10 @@
 # define WINDOW_WIDTH 1920
 # define WINDOW_HEIGHT 1080
 # define TILE_SIZE 64
-# define SCALE_FACTOR 1
+# define SCALE_FACTOR 0.4
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define FOV (90 * (3.14159265 / 180))
+# define FOV (100 * (3.14159265 / 180))
 # define NUM_RAYS WINDOW_WIDTH
 
 # define FALSE 0

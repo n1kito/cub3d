@@ -262,38 +262,87 @@ void    render_rays()
     i = 0;
     while (i < NUM_RAYS)
     {
-		if (i % 25 == 0)
+		if (i % 1 == 0)
 		{
-			coords_init(SCALE_FACTOR * _map()->plyr.x, 
-						SCALE_FACTOR * _map()->plyr.y,
-						SCALE_FACTOR * _map()->rays[i].wall_hit_x,
-						SCALE_FACTOR * _map()->rays[i].wall_hit_y);
+			// coords_init(SCALE_FACTOR * _map()->plyr.x, 
+			// 			SCALE_FACTOR * _map()->plyr.y,
+			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_x,
+			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_y);
+			// ft_draw_line(&_map()->graphics->minimap_img, BLUE);
+			if (i == 0 || i == WINDOW_WIDTH -1)
+			{
+				coords_init(SCALE_FACTOR * _map()->plyr.x, 
+				SCALE_FACTOR * _map()->plyr.y,
+				SCALE_FACTOR * _map()->rays[i].wall_hit_x,
+				SCALE_FACTOR * _map()->rays[i].wall_hit_y);
 			ft_draw_line(&_map()->graphics->minimap_img, BLUE);
+			}
+			coords_init(SCALE_FACTOR * _map()->rays[i].wall_hit_x, 
+			SCALE_FACTOR * _map()->rays[i].wall_hit_y,
+			5,
+			5);
+			ft_put_rectangle(&_map()->graphics->minimap_img, BLUE);
 		}
         i++;
     }
 }
 
+void	generate_proj(void)
+{
+	int	i;
+
+	i = 0;
+	while (i < NUM_RAYS)
+	{
+		float distanceProjPlane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+		float projectedWallHeight = (TILE_SIZE / _map()->rays[i].distance * distanceProjPlane);
+
+		int	wallStripHeight = (int)projectedWallHeight;
+		
+		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
+		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
+
+		int wallBottomPixel = (WINDOW_HEIGHT / 2) + (wallStripHeight / 2);
+		wallBottomPixel = wallBottomPixel < 0 ? 0 : wallBottomPixel;
+
+		coords_init(i, 0, wallTopPixel, 1);
+		ft_put_rectangle(&_map()->graphics->game_img, TEAL);
+		
+		coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
+		ft_put_rectangle(&_map()->graphics->game_img, GREY);
+
+		coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
+		ft_put_rectangle(&_map()->graphics->game_img, PURPLE);
+		i++;
+
+	}
+}
+
+void	move_player(void)
+{
+	float	new_x;
+	float	new_y;
+
+    _map()->plyr.rot_angle += _map()->plyr.rot * 0.09;
+    new_x = (_map()->plyr.x + cos(_map()->plyr.rot_angle) * 5) * _map()->plyr.move;
+    new_y = (_map()->plyr.y + sin(_map()->plyr.rot_angle) * 5) * _map()->plyr.move;
+	if (!map_has_wall_at(new_x, new_y))
+	{
+		_map()->plyr.x = new_x;
+		_map()->plyr.y = new_y;
+	}
+}
+
 int update_window(void)
 {
-    _map()->plyr.rot_angle += _map()->plyr.rot * 0.018;
-    if (_map()->plyr.move == 1)
-    {
-        printf("ROT_ANGLE : %f\n", _map()->plyr.rot_angle);
-        _map()->plyr.x = _map()->plyr.x + cos(_map()->plyr.rot_angle) * 0.5;
-        _map()->plyr.y = _map()->plyr.y + sin(_map()->plyr.rot_angle) * 0.5;
-    }
-    if (_map()->plyr.move == -1)
-    {
-        printf("ROT_ANGLE : %f\n", _map()->plyr.rot_angle);
-        _map()->plyr.x = (_map()->plyr.x + -cos(_map()->plyr.rot_angle) * 0.5);
-        _map()->plyr.y = (_map()->plyr.y + -sin(_map()->plyr.rot_angle) * 0.5);
-    }
+	move_player();
     cast_all_rays();
     render_minimap(_map()->graphics, _map()->map);
-    render_rays();
+    // render_rays();
+	generate_proj();
+    mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
-    return (0);
+	return (0);
 }
 
 void    init_hooks(void)
@@ -303,10 +352,12 @@ void    init_hooks(void)
     _map()->plyr.x = _map()->params->pl_start_pos[0] * TILE_SIZE + TILE_SIZE / 2;
     _map()->plyr.y = _map()->params->pl_start_pos[1] * TILE_SIZE + TILE_SIZE / 2;
     _map()->graphics->minimap_img.image = mlx_new_image(_map()->graphics->mlx_ptr, _map()->graphics->minimap_width, _map()->graphics->minimap_height);
-    // TODO protect
+    _map()->graphics->game_img.image = mlx_new_image(_map()->graphics->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	// TODO protect
     // TODO move minimap rendering
     _map()->graphics->minimap_img.addr = mlx_get_data_addr(_map()->graphics->minimap_img.image, &_map()->graphics->minimap_img.bpp, &_map()->graphics->minimap_img.line_length, &_map()->graphics->minimap_img.endian);
-    // render_minimap(_map()->graphics, _map()->map);
+    _map()->graphics->game_img.addr = mlx_get_data_addr(_map()->graphics->game_img.image, &_map()->graphics->game_img.bpp, &_map()->graphics->game_img.line_length, &_map()->graphics->game_img.endian);
+	// render_minimap(_map()->graphics, _map()->map);
     // render_player_position();
     // mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
     // exit when pressing X

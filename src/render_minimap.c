@@ -51,7 +51,7 @@ void    render_player_dot_on_minimap(int *draw_end)
         ft_exit("player left map", 1);
     // printf("draw_pos(%f, %f)\n", dot_pos[0], dot_pos[1]);
     ft_put_circle(&minimap_img, dot_pos[0], dot_pos[1], tile_size * 0.5 / 5, RED);
-    coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 40, dot_pos[1] + sin(_map()->plyr.rot_angle) * 40);
+    coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 20, dot_pos[1] + sin(_map()->plyr.rot_angle) * 20);
     ft_draw_line(&minimap_img, RED);
 }
 
