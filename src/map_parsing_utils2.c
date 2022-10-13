@@ -31,7 +31,7 @@ void	map_last_in_file_check(void)
 
 	map_last_line = _map()->map + _map()->map_height;
 	i = 0;
-	while (map_last_line[++i])
+	while (map_last_line && map_last_line[i] && map_last_line[++i])
 		if (map_last_line[i]
 			&& (map_last_line[i][0] != '\n')) // TODO this means we accept new lines after the map but nothing else
 			ft_exit("map is not at the end of the file", 1);

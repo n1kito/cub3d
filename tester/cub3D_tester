@@ -105,11 +105,11 @@ test_map() { # TODO modify this so the expected error is passed as an argument ?
 	if [ -f $1 ]; then
 		FILE_CHECK=$(cat $1 | wc -l)
 		if [ "$FILE_CHECK" -eq 0 ]; then
-			printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}] \"$1\" is empty.${NC}\n"
+			printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}]\t\"$1\" is empty.${NC}\n"
 			return
 		fi
 	else
-		printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}] \"$1\" file does not exist or is directory.${NC}\n"
+		printf " ${YELLOW}[${BYELLOW}⚠️ ${YELLOW}]\t\"$1\" file does not exist or is directory.${NC}\n"
 		return
 	fi
 
