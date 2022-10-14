@@ -82,7 +82,7 @@ float distance_between_points(float x1, float y1, float x2, float y2) {
 //TODO replace player starting with 0 when parsing map?
 int map_has_wall_at(float x, float y)
 {
-    if (x < 0 || x > WINDOW_WIDTH || y < 0 || y > WINDOW_HEIGHT) {
+    if (x < 0 || x > 200000 || y < 0 || y > 200000) {
         return TRUE;
     }
     int mapGridIndexX = floor(x / TILE_SIZE);
@@ -137,7 +137,7 @@ void    cast_ray(float ray_angle, int strip_id)
     float next_horz_touch_x = xintercept;
     float next_horz_touch_y = yintercept;
 
-    while (next_horz_touch_x >= 0 && next_horz_touch_x <= WINDOW_WIDTH && next_horz_touch_y >= 0 && next_horz_touch_y <= WINDOW_HEIGHT)
+    while (next_horz_touch_x >= 0 /*&& next_horz_touch_x <= WINDOW_WIDTH */&& next_horz_touch_y >= 0 /*&& next_horz_touch_y <= WINDOW_HEIGHT*/)
     {
         float   x_to_check = next_horz_touch_x;
         float   y_to_check = next_horz_touch_y;
@@ -184,7 +184,7 @@ void    cast_ray(float ray_angle, int strip_id)
     float next_vert_touch_x = xintercept;
     float next_vert_touch_y = yintercept;
 
-    while (next_vert_touch_x >= 0 && next_vert_touch_x <= WINDOW_WIDTH && next_vert_touch_y >= 0 && next_vert_touch_y <= WINDOW_HEIGHT)
+    while (next_vert_touch_x >= 0 /*&& next_vert_touch_x <= WINDOW_WIDTH */&& next_vert_touch_y >= 0 /*&& next_vert_touch_y <= WINDOW_HEIGHT*/)
     {
         float   x_to_check = next_vert_touch_x;
         if (is_ray_facing_left)
@@ -342,15 +342,30 @@ void	move_player(void)
 {
 	float	new_x;
 	float	new_y;
+	double	tmp_rot;
 
     _map()->plyr.rot_angle += _map()->plyr.rot * 0.09;
-    new_x = (_map()->plyr.x + (cos(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
-    new_y = (_map()->plyr.y + (sin(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
-	if (!map_has_wall_at(new_x, new_y))
+	if (_map()->plyr.move == 2)
 	{
-		_map()->plyr.x = new_x;
-		_map()->plyr.y = new_y;
+		tmp_rot = (_map()->plyr.rot_angle + 80.12);
+		new_x = (_map()->plyr.x + cos(tmp_rot) * 5);
+		new_y = (_map()->plyr.y + sin(tmp_rot) * 5);
 	}
+	else if (_map()->plyr.move == -2)
+	{
+		tmp_rot = (_map()->plyr.rot_angle + 80.12);
+		new_x = (_map()->plyr.x + -cos(tmp_rot) * 5);
+		new_y = (_map()->plyr.y + -sin(tmp_rot) * 5);
+	}
+	else
+	{
+		new_x = (_map()->plyr.x + (cos(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
+		new_y = (_map()->plyr.y + (sin(_map()->plyr.rot_angle) * _map()->plyr.move) * 5);
+	}
+	if (!map_has_wall_at(new_x, _map()->plyr.y))
+		_map()->plyr.x = new_x;
+	if (!map_has_wall_at(_map()->plyr.x, new_y))
+		_map()->plyr.y = new_y;
 }
 
 int update_window(void)

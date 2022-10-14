@@ -30,8 +30,8 @@
 # define ESC 65307
 # define WALL 1
 
-# define WINDOW_WIDTH 1920
-# define WINDOW_HEIGHT 1080
+# define WINDOW_WIDTH 950
+# define WINDOW_HEIGHT 950
 # define TILE_SIZE 64
 # define SCALE_FACTOR 0.3
 # define PI 3.14159265
