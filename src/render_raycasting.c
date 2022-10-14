@@ -173,19 +173,19 @@ void	render_rays(void)
 			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_x,
 			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_y);
 			// ft_draw_line(&_map()->graphics->minimap_img, BLUE);
-			if (i == 0 || i == WINDOW_WIDTH -1)
-			{
+//			if (i == 0 || i == WINDOW_WIDTH -1)
+//			{
 				coords_init(SCALE_FACTOR * _map()->plyr.x,
 				SCALE_FACTOR * _map()->plyr.y,
 				SCALE_FACTOR * _map()->rays[i].wall_hit_x,
 				SCALE_FACTOR * _map()->rays[i].wall_hit_y);
 			ft_draw_line(&_map()->graphics->minimap_img, BLUE);
-			}
-			coords_init(SCALE_FACTOR * _map()->rays[i].wall_hit_x,
-			SCALE_FACTOR * _map()->rays[i].wall_hit_y,
-			5,
-			5);
-			ft_put_rectangle(&_map()->graphics->minimap_img, BLUE);
+//			}
+//			coords_init(SCALE_FACTOR * _map()->rays[i].wall_hit_x,
+//			SCALE_FACTOR * _map()->rays[i].wall_hit_y,
+//			5,
+//			5);
+//			ft_put_rectangle(&_map()->graphics->minimap_img, BLUE);
 		}
 		i++;
 	}

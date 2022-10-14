@@ -6,8 +6,8 @@ void	render_minimap(t_mlx *g, char **map)
 	int	lim[2];
 	int	minimap[2];
 
-	// coords_init(0, 0, g->minimap_height, g->minimap_width);
-	// ft_put_rectangle(&g->minimap_img, RED);
+	coords_init(0, 0, g->minimap_height, g->minimap_width);
+	ft_put_rectangle(&g->minimap_img, BLACK);
 	init_minimap_values(pos, lim);
 	minimap[1] = 0;
 	while (pos[1] < lim[1] && _map()->map[pos[1]])
@@ -18,14 +18,14 @@ void	render_minimap(t_mlx *g, char **map)
 		{
 			if (map[pos[1]][pos[0]] == '0' || is_start_position(map[pos[1]][pos[0]]))
 			{
-				coords_init(minimap[0] * g->minimap_tile + 0.5,
-					minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1);
+				coords_init(minimap[0] * g->minimap_tile,
+					minimap[1] * g->minimap_tile, g->minimap_tile, g->minimap_tile);
 				ft_put_rectangle(&g->minimap_img, WHITE);
 			}
 			else if (map[pos[1]][pos[0]] == '1')
 			{
-				coords_init(minimap[0] * g->minimap_tile + 0.5,
-					minimap[1] * g->minimap_tile + 0.5, g->minimap_tile - 1, g->minimap_tile - 1);
+				coords_init(minimap[0] * g->minimap_tile,
+					minimap[1] * g->minimap_tile, g->minimap_tile, g->minimap_tile);
 				ft_put_rectangle(&g->minimap_img, GREY);
 			}
 			pos[0]++;
@@ -45,8 +45,8 @@ void	render_player_dot_on_minimap(int *draw_end)
 
 	tile_size = _map()->graphics->minimap_tile;
 	minimap_img = _map()->graphics->minimap_img;
-	dot_pos[0] = (_map()->plyr.x * SCALE_FACTOR) - (draw_end[0] - 10) * tile_size - 1; // TODO fix this
-	dot_pos[1] = (_map()->plyr.y * SCALE_FACTOR) - (draw_end[1] - 10) * tile_size - 1; // TODO fix this
+	dot_pos[0] = (_map()->plyr.x * SCALE_FACTOR) - (draw_end[0] - 10) * tile_size; // TODO fix this
+	dot_pos[1] = (_map()->plyr.y * SCALE_FACTOR) - (draw_end[1] - 10) * tile_size; // TODO fix this
 	if (_map()->plyr.x > _map()->map_width * TILE_SIZE)
 		ft_exit("player left map", 1);
 	// printf("draw_pos(%f, %f)\n", dot_pos[0], dot_pos[1]);

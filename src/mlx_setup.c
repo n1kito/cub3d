@@ -95,8 +95,9 @@ int update_window(void)
 	render_rays();
 	generate_proj();
 	mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
+	mlx_clear_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr);
 	// image should be put to window so dot is always in the center of the minimap window
-	mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr, _map()->graphics->minimap_img.image, -MINI_TILE, -MINI_TILE);
+	mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr, _map()->graphics->minimap_img.image, (_map()->graphics->minimap_width - 2 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[0], (_map()->graphics->minimap_height - 2 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[1]);
 	return (0);
 }
 
