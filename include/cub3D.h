@@ -30,13 +30,14 @@
 # define ESC 65307
 # define WALL 1
 
-# define WINDOW_WIDTH 1000
+# define WINDOW_WIDTH 950
 # define WINDOW_HEIGHT 950
 # define TILE_SIZE 64
-# define SCALE_FACTOR 0.3
+# define SCALE_FACTOR 0.4
+# define MINI_TILE (TILE_SIZE * SCALE_FACTOR)
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define FOV (90 * (3.14159265 / 180))
+# define FOV (100 * (3.14159265 / 180))
 # define NUM_RAYS WINDOW_WIDTH
 
 # define FALSE 0
@@ -134,6 +135,7 @@ typedef struct s_mlx
 {
 	void	*mlx_ptr;
 	void	*window_ptr;
+	void	*minimap_window_ptr;
 	t_img	game_img;
 	t_img	minimap_img;
 	int		window_height;
@@ -141,6 +143,8 @@ typedef struct s_mlx
 	int		minimap_height;
 	int		minimap_width;
 	int		minimap_tile;
+	double	minimap_dot_pos[2];
+	int 	minimap_draw_end[2];
 }				t_mlx;
 
 typedef struct s_params
@@ -220,7 +224,7 @@ void		init_hooks(void);
 // render_minimap.c
 void    	render_minimap(t_mlx *g, char **map);
 void   		render_player_dot_on_minimap();
-void    	init_minimap_values(int *draw_pos, int *draw_end);
+void    	init_minimap_values(int draw_pos[2], int draw_end[2]);
 
 // map_coord_init.c
 void 	  	coords_init(int x0, int y0, int x1, int y1);

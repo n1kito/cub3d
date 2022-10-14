@@ -1,23 +1,29 @@
 #include "cub3D.h"
 
-void    mlx_setup(void)
+void	mlx_setup(void)
 {
-    t_map   *m;
-    t_mlx   *g;
+	t_map	*m;
+	t_mlx	*g;
 
-    m = _map();
-    g = m->graphics;
-    g->mlx_ptr = mlx_init();
-    if (!g->mlx_ptr)
-        ft_exit("mlx_init() fail [mlx_setup()]", 1);
-    g->window_ptr = mlx_new_window(g->mlx_ptr,
-        g->window_width, g->window_height,
-        m->map_name);
-    if (!g->window_ptr)
-        ft_exit("failed to create window [mlx_setup()]", 1);   
-    g->minimap_img.image = mlx_new_image(g->mlx_ptr, g->minimap_width, g->minimap_height);
-    if (!g->minimap_img.image)
-        ft_exit("failed to create minimap image", 1);
+	m = _map();
+	g = m->graphics;
+	g->mlx_ptr = mlx_init();
+	if (!g->mlx_ptr)
+		ft_exit("mlx_init() fail [mlx_setup()]", 1);
+	g->window_ptr = mlx_new_window(g->mlx_ptr,
+		g->window_width, g->window_height,
+		m->map_name);
+	g->minimap_window_ptr = mlx_new_window(g->mlx_ptr,
+			g->minimap_width - 2 * MINI_TILE,
+			g->minimap_height - 2 * MINI_TILE,
+			"MINIMAP");
+	if (!g->window_ptr || !g->minimap_window_ptr)
+		ft_exit("failed to create window [mlx_setup()]", 1);
+	// minimap image has to be bigger than its window
+	g->minimap_img.image = mlx_new_image(g->mlx_ptr, g->minimap_width, g->minimap_height);
+	g->game_img.image = mlx_new_image(g->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	if (!g->game_img.image || !g->minimap_img.image)
+		ft_exit("failed to create images", 1);
 }
 
 int     exit_game()
@@ -255,36 +261,41 @@ void    cast_all_rays()
     }
 }
 
-void    render_rays()
+void	render_rays(void)
 {
-    int i;
+	int i;
 
-    i = 0;
-    while (i < NUM_RAYS)
-    {
+	i = 0;
+	while (i < NUM_RAYS)
+	{
 		if (i % 1 == 0)
 		{
-			// coords_init(SCALE_FACTOR * _map()->plyr.x, 
+			// coords_init(SCALE_FACTOR * _map()->plyr.x,
 			// 			SCALE_FACTOR * _map()->plyr.y,
 			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_x,
 			// 			SCALE_FACTOR * _map()->rays[i].wall_hit_y);
 			// ft_draw_line(&_map()->graphics->minimap_img, BLUE);
-			if (i == 0 || i == WINDOW_WIDTH -1)
-			{
-				coords_init(SCALE_FACTOR * _map()->plyr.x, 
-				SCALE_FACTOR * _map()->plyr.y,
-				SCALE_FACTOR * _map()->rays[i].wall_hit_x,
-				SCALE_FACTOR * _map()->rays[i].wall_hit_y);
-			ft_draw_line(&_map()->graphics->minimap_img, BLUE);
-			}
-			coords_init(SCALE_FACTOR * _map()->rays[i].wall_hit_x, 
-			SCALE_FACTOR * _map()->rays[i].wall_hit_y,
-			5,
-			5);
-			ft_put_rectangle(&_map()->graphics->minimap_img, BLUE);
+//			if (i == 0 || i == WINDOW_WIDTH -1)
+//			{
+			double ray_coords[4];
+			ray_coords[0] = (_map()->plyr.x * SCALE_FACTOR) - (_map()->graphics->minimap_draw_end[0] - 10) * MINI_TILE;
+			ray_coords[1] = (_map()->plyr.y * SCALE_FACTOR) - (_map()->graphics->minimap_draw_end[1] - 10) * MINI_TILE;
+			ray_coords[2] = (_map()->rays[i].wall_hit_x * SCALE_FACTOR) - (_map()->graphics->minimap_draw_end[0] - 10) * MINI_TILE;
+			ray_coords[3] = (_map()->rays[i].wall_hit_y * SCALE_FACTOR) - (_map()->graphics->minimap_draw_end[1] - 10) * MINI_TILE;
+						coords_init(ray_coords[0],
+									ray_coords[1],
+									ray_coords[2],
+									ray_coords[3]);
+			ft_draw_line(&_map()->graphics->minimap_img, TEAL);
+//			}
+//			coords_init(SCALE_FACTOR * _map()->rays[i].wall_hit_x,
+//			SCALE_FACTOR * _map()->rays[i].wall_hit_y,
+//			5,
+//			5);
+//			ft_put_rectangle(&_map()->graphics->minimap_img, BLUE);
 		}
-        i++;
-    }
+		i++;
+	}
 }
 
 void	generate_proj(void)
@@ -370,7 +381,9 @@ int update_window(void)
     render_rays();
 	generate_proj();
     mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
-    mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->minimap_img.image, _map()->graphics->minimap_tile, _map()->graphics->minimap_tile);
+	mlx_clear_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr);
+	// image should be put to window so dot is always in the center of the minimap window
+	mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr, _map()->graphics->minimap_img.image, (_map()->graphics->minimap_width - 2 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[0], (_map()->graphics->minimap_height - 2 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[1]);
 	return (0);
 }
 
