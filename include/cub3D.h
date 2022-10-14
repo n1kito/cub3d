@@ -163,6 +163,32 @@ typedef struct s_projection {
 	int		wall_bottom_pixel;
 }				t_projection;
 
+typedef struct s_raycasting {
+	float	ray_angle;
+	int		ray_is_facing_down;
+	int		ray_is_facing_up;
+	int		ray_is_facing_right;
+	int		ray_is_facing_left;
+	float	x_to_check;
+	float	y_to_check;
+	float	x_intercept;
+	float	y_intercept;
+	float	x_step;
+	float	y_step;
+	float	horz_hit_distance;
+	float	vert_hit_distance;
+	float	next_horz_touch_x;
+	float	next_horz_touch_y;
+	int		found_horz_wall_hit;
+	float	horz_wall_hit_x;
+	float	horz_wall_hit_y;
+	float	next_vert_touch_x;
+	float	next_vert_touch_y;
+	int		found_vert_wall_hit;
+	float	vert_wall_hit_x;
+	float	vert_wall_hit_y;
+}				t_raycasting;
+
 // error.c
 int			error_print(char *error, int return_value);
 
@@ -231,20 +257,28 @@ void		ft_draw_line_deg(t_img *img, int color);
 void		mlx_setup(void);
 void		init_hooks(void);
 
+// raycasting.c
+void		calculate_wall_hit_distances(t_raycasting *r);
+void		find_horz_grid_intersection(t_raycasting *r);
+void		find_vert_grid_intersection(t_raycasting *r);
+void		cast_ray(float ray_angle, int strip_id);
+void		cast_all_rays(void);
+
+// raycasting_init.c
+void		init_horz_intercepts(t_raycasting *r);
+void		init_vert_intercepts(t_raycasting *r);
+void		init_raycasting_values(t_raycasting *r, float ray_angle);
+
+// raycasting_utils.c
+float		normalize_angle(float angle);
+float		distance_between_points(float x1, float y1, float x2, float y2);
+int			map_has_wall_at(float x, float y);
+
 // render_minimap.c
 void		render_minimap(t_mlx *g, char **map);
 void		render_player_dot_on_minimap();
 void		init_minimap_values(int draw_pos[2], int draw_end[2]);
-
-// render_raycasting.c
-void		cast_ray(float ray_angle, int strip_id);
-void		cast_all_rays(void);
 void		render_rays(void);
-
-// render_raycasting_utils.c
-float		normalize_angle(float angle);
-float		distance_between_points(float x1, float y1, float x2, float y2);
-int			map_has_wall_at(float x, float y);
 
 // render_wall_projection.c
 void		generate_projection(void);
