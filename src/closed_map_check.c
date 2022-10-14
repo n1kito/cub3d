@@ -1,6 +1,6 @@
 #include "cub3D.h"
 
-int		is_valid_map_char(char c)
+int	is_valid_map_char(char c)
 {
 	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
