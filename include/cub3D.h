@@ -30,7 +30,7 @@
 # define ESC 65307
 # define WALL 1
 
-# define WINDOW_WIDTH 950
+# define WINDOW_WIDTH 1000
 # define WINDOW_HEIGHT 950
 # define TILE_SIZE 64
 # define SCALE_FACTOR 0.3
@@ -208,8 +208,10 @@ void        graphics_struct_init(t_map *map);
 int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		ft_put_rectangle(t_img *img, int color);
+void		ft_put_rectangle_deg(t_img *img, int color);
 void		ft_put_circle(t_img *img, int x, int y, int radius, int color);
 void        ft_draw_line(t_img *img, int color);
+void        ft_draw_line_deg(t_img *img, int color);
 
 // mlx_setup.c
 void		mlx_setup(void);

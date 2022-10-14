@@ -35,6 +35,26 @@ void     ft_put_rectangle(t_img *img, int color)
     free_coords();
 }
 
+void     ft_put_rectangle_deg(t_img *img, int color)
+{
+    int pY;
+    int pX;
+	int	i = 0;
+
+    pY = _map()->coord->y0;
+    while (pY < _map()->coord->y0 + _map()->coord->x1)
+    {
+        pX = _map()->coord->x0;
+        while (pX < _map()->coord->x0 + _map()->coord->y1)
+            ft_pixel_put(img, pX++, pY, color);
+        pY++;
+		i++;
+		if (i % 5 == 0)
+		color++;
+    }
+    free_coords();
+}
+
 /* Displays a filled in ellipse on image. */
 void    ft_put_circle(t_img *img, int x, int y, int radius, int color)
 {
@@ -74,6 +94,33 @@ void ft_draw_line(t_img *img, int color)
         pX += dx;
         pY += dy;
         --p;
+    }
+    free_coords();
+}
+
+void ft_draw_line_deg(t_img *img, int color)
+{
+    double dx, dy, pX, pY;
+    int p;
+	int	i;
+	
+	i = 0;
+    dx = _map()->coord->x1 - _map()->coord->x0;
+    dy = _map()->coord->y1 - _map()->coord->y0;
+    p = sqrt((dx * dx) + (dy * dy));
+    dx /= p;
+    dy /= p;
+    pX = _map()->coord->x0;
+    pY = _map()->coord->y0;
+    while (p)
+    {
+        ft_pixel_put(img, pX, pY, color);
+        pX += dx;
+        pY += dy;
+        --p;
+		if (i % 5 == 0)
+		color++;
+		i++;
     }
     free_coords();
 }

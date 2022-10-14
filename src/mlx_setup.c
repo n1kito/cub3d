@@ -309,30 +309,24 @@ void	generate_proj(void)
 		wallBottomPixel = wallBottomPixel < 0 ? 0 : wallBottomPixel;
 
 		
-		if (_map()->rays[i].distance < 96)
-		{
+
 			coords_init(i, 0, wallTopPixel, 1);
-			ft_put_rectangle(&_map()->graphics->game_img, PLA_1);
-			coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
+			ft_put_rectangle_deg(&_map()->graphics->game_img, PLA_1);
+			// coords_init(i,  0, i, wallTopPixel + 1);
+			// ft_draw_line_deg(&_map()->graphics->game_img, PLA_1);
+
+			coords_init(i, wallTopPixel, i, wallBottomPixel);
 			if (_map()->rays[i].was_hit_vertical)
-				ft_put_rectangle(&_map()->graphics->game_img, XMUR_1);
+				ft_draw_line(&_map()->graphics->game_img, XMUR_1);
 			else
-				ft_put_rectangle(&_map()->graphics->game_img, YMUR_1);
-			coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
-			ft_put_rectangle(&_map()->graphics->game_img, SOL_1);
-		}
-		else if (_map()->rays[i].distance >= 96 /*&& _map()->rays[WINDOW_WIDTH / 2].distance < 160*/)
-		{
-			coords_init(i, 0, wallTopPixel, 1);
-			ft_put_rectangle(&_map()->graphics->game_img, PLA_1);
-			coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
-			if (_map()->rays[i].was_hit_vertical)
-				ft_put_rectangle(&_map()->graphics->game_img, XMUR_1);
-			else
-				ft_put_rectangle(&_map()->graphics->game_img, YMUR_1);
-			coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
-			ft_put_rectangle(&_map()->graphics->game_img, SOL_1);
-		}
+				ft_draw_line(&_map()->graphics->game_img, YMUR_1);
+
+			// coords_init(i,  WINDOW_HEIGHT, i, wallBottomPixel - 1);
+			// ft_draw_line_deg(&_map()->graphics->game_img, SOL_1);
+			coords_init(i,  wallBottomPixel,  WINDOW_HEIGHT - wallTopPixel, 1);
+			ft_put_rectangle_deg(&_map()->graphics->game_img, SOL_1);
+
+
 		i++;
 
 	}
