@@ -300,7 +300,8 @@ void	generate_proj(void)
 		float projectedWallHeight = (TILE_SIZE / perpDistance) * distanceProjPlane;
 
 		int	wallStripHeight = (int)projectedWallHeight;
-		
+		if (wallStripHeight > WINDOW_HEIGHT)
+			wallStripHeight = WINDOW_HEIGHT;		
 		int wallTopPixel = (WINDOW_HEIGHT / 2) - (wallStripHeight / 2);
 		wallTopPixel = wallTopPixel < 0 ? 0 : wallTopPixel;
 
@@ -326,9 +327,9 @@ void	generate_proj(void)
 			ft_put_rectangle(&_map()->graphics->game_img, PLA_1);
 			coords_init(i, wallTopPixel, wallBottomPixel - wallTopPixel, 1);
 			if (_map()->rays[i].was_hit_vertical)
-				ft_put_rectangle(&_map()->graphics->game_img, XMUR_2);
+				ft_put_rectangle(&_map()->graphics->game_img, XMUR_1);
 			else
-				ft_put_rectangle(&_map()->graphics->game_img, YMUR_2);
+				ft_put_rectangle(&_map()->graphics->game_img, YMUR_1);
 			coords_init(i, wallBottomPixel, WINDOW_HEIGHT - wallBottomPixel, 1);
 			ft_put_rectangle(&_map()->graphics->game_img, SOL_1);
 		}
