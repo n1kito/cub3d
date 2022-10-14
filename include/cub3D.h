@@ -1,4 +1,3 @@
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -23,12 +22,9 @@
 # define DOWN 115
 # define LEFT 97
 # define RIGHT 100
-# define ARROW_UP 65362
 # define ARROW_LEFT 65361
-# define ARROW_DOWN 65364
 # define ARROW_RIGHT 65363
 # define ESC 65307
-# define WALL 1
 
 # define WINDOW_WIDTH 950
 # define WINDOW_HEIGHT 950
@@ -158,16 +154,30 @@ typedef struct s_params
 	int		pl_start_pos[2];
 }				t_params;
 
+typedef struct s_projection {
+	float	perp_distance;
+	float	distance_proj_plane;
+	float	projected_wall_height;
+	int		wall_strip_height;
+	int		wall_top_pixel;
+	int		wall_bottom_pixel;
+}				t_projection;
+
 // error.c
 int			error_print(char *error, int return_value);
 
 // exit.c
+int			exit_game();
 void		ft_exit(char *error, int exit_code);
 void		free_all(void);
 
 // map_checker.c
 void		map_name_checker(void);
 int			map_file_checker(void);
+
+// map_coord_init.c
+void		coords_init(int x0, int y0, int x1, int y1);
+void		free_coords();
 
 // closed_map_checker.c
 void		closed_map_check();
@@ -205,8 +215,8 @@ void		map_last_in_file_check(void);
 // map_structure.c
 t_map		*_map(void);
 void		map_struct_init(t_map *map);
-void        params_struct_init(t_map *map);
-void        graphics_struct_init(t_map *map);
+void		params_struct_init(t_map *map);
+void		graphics_struct_init(t_map *map);
 
 // mlx_render_utils.c
 int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
@@ -214,20 +224,30 @@ void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		ft_put_rectangle(t_img *img, int color);
 void		ft_put_rectangle_deg(t_img *img, int color);
 void		ft_put_circle(t_img *img, int x, int y, int radius, int color);
-void        ft_draw_line(t_img *img, int color);
-void        ft_draw_line_deg(t_img *img, int color);
+void		ft_draw_line(t_img *img, int color);
+void		ft_draw_line_deg(t_img *img, int color);
 
 // mlx_setup.c
 void		mlx_setup(void);
 void		init_hooks(void);
 
 // render_minimap.c
-void    	render_minimap(t_mlx *g, char **map);
-void   		render_player_dot_on_minimap();
-void    	init_minimap_values(int draw_pos[2], int draw_end[2]);
+void		render_minimap(t_mlx *g, char **map);
+void		render_player_dot_on_minimap();
+void		init_minimap_values(int draw_pos[2], int draw_end[2]);
 
-// map_coord_init.c
-void 	  	coords_init(int x0, int y0, int x1, int y1);
-void		free_coords();
+// render_raycasting.c
+void		cast_ray(float ray_angle, int strip_id);
+void		cast_all_rays(void);
+void		render_rays(void);
+
+// render_raycasting_utils.c
+float		normalize_angle(float angle);
+float		distance_between_points(float x1, float y1, float x2, float y2);
+int			map_has_wall_at(float x, float y);
+
+// render_wall_projection.c
+void		generate_projection(void);
+void		init_projection_values(t_projection *p, int i);
 
 #endif

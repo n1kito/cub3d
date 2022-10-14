@@ -52,7 +52,10 @@ SRC_FILES		:= 	closed_map_check\
 					mlx_render_utils\
 					mlx_setup\
 					map_coords_init\
-					render_minimap
+					render_minimap\
+					render_raycasting\
+					render_raycasting_utils\
+					render_wall_projection
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))
