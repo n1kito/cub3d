@@ -10,7 +10,17 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 # TODO
 
-- [ ] Segfault on tiny map
+- [ ] Minimap blinks on some opens ?
+- [ ] Huge texures not working (see `render_wall_projection.c` ratio in `texture->bpp / 8`)
+- [ ] Distortion effet to fix
+- [ ] Bonus: minimap cursor update
+- [ ] Setup bonus rule in Makefile
+- [ ] W + D goes diagonal (better movement)
+- [ ] Norm
+- [ ] Memory management
+- [ ] Testing
+- [x] Segfault on tiny map
+- check sprite size 
 - [x] Map needs error when no starting position
 - [x] Map file should only accept one map
 - [x] Sefault when map file has no map

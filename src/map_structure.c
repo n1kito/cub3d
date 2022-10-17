@@ -42,10 +42,10 @@ void    params_struct_init(t_map *map)
     map->params = malloc(sizeof(t_params));
 	if (!map->params)
 		ft_exit("malloc fail [map_struct_init()][1]", 1);
-	map->params->n_texture = NULL;
-	map->params->s_texture = NULL;
-	map->params->e_texture = NULL;
-	map->params->w_texture = NULL;
+	map->params->n_texture.image = NULL;
+	map->params->s_texture.image = NULL;
+	map->params->e_texture.image = NULL;
+	map->params->w_texture.image = NULL;
 	map->params->c_color[0] = -1;
 	map->params->f_color[0] = -1;
 	map->params->pl_start_pos[0] = -1;

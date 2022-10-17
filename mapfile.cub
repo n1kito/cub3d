@@ -1,7 +1,7 @@
-NO path
-EA path      
-WE path
-SO path
+NO sprites/Bricks.xpm
+EA sprites/Castle-Wall.xpm     
+WE sprites/Metal.xpm
+SO sprites/Wood.xpm
 
 F 252,253,255
 
@@ -10,7 +10,7 @@ C 1,2,2
         11111111111
         10000000001
     111110100010011
-    100000N00001001
+    100000S00001001
     111110000000011
         11011011111
         11011111111

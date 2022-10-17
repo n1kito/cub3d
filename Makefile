@@ -38,18 +38,18 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES		:= 	closed_map_check\
-					error\
+SRC_FILES		:= 	error\
 					exit\
 					main\
-					map_checker\
-					map_color_checking\
+					map_check_borders\
+					map_check_colors\
+					map_check_file\
+					map_check_textures\
 					map_coords_init\
 					map_parsing\
 					map_parsing_utils\
 					map_parsing_utils2\
 					map_structure\
-					map_texture_checking\
 					mlx_render_utils\
 					mlx_setup\
 					raycasting\

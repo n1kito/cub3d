@@ -57,6 +57,18 @@ int	line_contains_parameter(char *line)
 	return (0);
 }
 
+void	set_player_start_angle(char player_char)
+{
+	if (player_char == 'N')
+		_map()->plyr.rot_angle = PI * 1.5;
+	else if (player_char == 'E')
+		_map()->plyr.rot_angle = 0;
+	else if (player_char == 'S')
+		_map()->plyr.rot_angle = PI * 0.5;
+	else if (player_char == 'W')
+		_map()->plyr.rot_angle = PI;
+}
+
 /* Checks that the map line has only authorized characters.
  * If the character is a player starting position indicator and
  * none has been logged before, coordinates are logged.
@@ -76,6 +88,7 @@ void	check_map_line(char *line, int i)
 				ft_exit("map has too many starting positions", 1);
 			_map()->params->pl_start_pos[0] = j;
 			_map()->params->pl_start_pos[1] = i - 1;
+			set_player_start_angle(line[j]);
 		}
 		j++;
 	}
