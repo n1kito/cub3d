@@ -27,6 +27,12 @@ void	map_struct_init(t_map *map)
 	map->params = NULL;
     map->graphics = NULL;
 	map->plyr.rot_angle = 0;
+	map->plyr.rot = 0;
+	map->plyr.move = 0;
+	map->is_minimap_open = 0;
+	// map->rays = malloc(sizeof(t_ray) * NUM_RAYS);
+	// if (!map->rays)
+	// 	ft_exit("malloc fail [map_struct_init()]", 1);
 	params_struct_init(map);
     graphics_struct_init(map);
 }
@@ -53,8 +59,8 @@ void    graphics_struct_init(t_map *map)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);
 	map->graphics->mlx_ptr = NULL;
 	map->graphics->window_ptr = NULL;
-	map->graphics->window_width = 1920;
-	map->graphics->window_height = 1080;
+	map->graphics->window_width = WINDOW_WIDTH; // TODO CHANGE IN CODE TO USE DEFDINED VALUE AND REMOVE THESE
+	map->graphics->window_height = WINDOW_HEIGHT;
 	// map->graphics->minimap_tile = 64;
 	map->graphics->minimap_tile = TILE_SIZE * SCALE_FACTOR;
 	map->graphics->minimap_width = 11 * map->graphics->minimap_tile;

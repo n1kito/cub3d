@@ -1,5 +1,11 @@
 #include "cub3D.h"
 
+int	exit_game()
+{
+	ft_exit(NULL, 0);
+	exit(0);
+}
+
 void	ft_exit(char *error, int exit_code)
 {
 	if (error)

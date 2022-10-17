@@ -44,15 +44,19 @@ SRC_FILES		:= 	closed_map_check\
 					main\
 					map_checker\
 					map_color_checking\
+					map_coords_init\
+					map_parsing\
 					map_parsing_utils\
 					map_parsing_utils2\
-					map_parsing\
 					map_structure\
 					map_texture_checking\
 					mlx_render_utils\
 					mlx_setup\
-					map_coords_init\
-					render_minimap
+					raycasting\
+					raycasting_utils\
+					raycasting_init\
+					render_minimap\
+					render_wall_projection
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))

@@ -26,13 +26,15 @@ void	get_map_dimensions(void)
 /* Checks that there is nothing after the map in the file. */
 void	map_last_in_file_check(void)
 {
-	char	**map_last_line;
-	int		i;
-
-	map_last_line = _map()->map + _map()->map_height;
-	i = 0;
-	while (map_last_line[++i])
-		if (map_last_line[i]
-			&& (map_last_line[i][0] != '\n')) // TODO this means we accept new lines after the map but nothing else
+	char	**after_map_last_line;
+	int		 line_index;
+	
+	after_map_last_line = _map()->map + _map()->map_height;
+	line_index = after_map_last_line - _map()->file_contents;
+	while (line_index < _map()->file_line_count)
+	{
+		if (_map()->file_contents[line_index] && _map()->file_contents[line_index][0] != '\n') // TODO this means we accept new lines after the map but nothing else
 			ft_exit("map is not at the end of the file", 1);
+		line_index++;
+	}
 }
