@@ -49,8 +49,8 @@ void	render_player_dot_on_minimap(int *draw_end)
 	minimap_img = _map()->graphics->minimap_img;
 	dot_pos[0] = (_map()->plyr.x * SCALE_FACTOR) - (draw_end[0] - 10) * tile_size; // TODO fix this
 	dot_pos[1] = (_map()->plyr.y * SCALE_FACTOR) - (draw_end[1] - 10) * tile_size; // TODO fix this
-	// coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 10, dot_pos[1] + sin(_map()->plyr.rot_angle) * 10);
-	// ft_draw_line(&minimap_img, TEAL);
+	coords_init(dot_pos[0], dot_pos[1], dot_pos[0] + cos(_map()->plyr.rot_angle) * 10, dot_pos[1] + sin(_map()->plyr.rot_angle) * 10);
+	ft_draw_line(&minimap_img, TEAL);
 	ft_put_circle(&minimap_img, dot_pos[0], dot_pos[1], tile_size * 0.5 / 3, TEAL);
 	_map()->graphics->minimap_dot_pos[0] = dot_pos[0];
 	_map()->graphics->minimap_dot_pos[1] = dot_pos[1];

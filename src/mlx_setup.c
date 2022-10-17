@@ -152,7 +152,6 @@ int update_window(void)
 {
 	move_player();
 	cast_all_rays();
-	// render_rays();
 	generate_projection();
 	mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, _map()->graphics->game_img.image, 0, 0);
 	mlx_string_put(_map()->graphics->mlx_ptr, _map()->graphics->window_ptr, 15, 20, WHITE, "(m) minimap");
@@ -161,6 +160,7 @@ int update_window(void)
 	if (_map()->is_minimap_open)
 	{
 		render_minimap(_map()->graphics, _map()->map);
+		// render_rays();
 		mlx_clear_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr);
 		mlx_put_image_to_window(_map()->graphics->mlx_ptr, _map()->graphics->minimap_window_ptr, _map()->graphics->minimap_img.image, (_map()->graphics->minimap_width - 3 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[0], (_map()->graphics->minimap_height - 3 * MINI_TILE) / 2 - _map()->graphics->minimap_dot_pos[1]);
 	}
