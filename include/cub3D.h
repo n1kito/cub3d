@@ -25,15 +25,17 @@
 # define ARROW_LEFT 65361
 # define ARROW_RIGHT 65363
 # define ESC 65307
+# define KEY_M 109
+# define KEY_Q 113
 
 # define WINDOW_WIDTH 950
 # define WINDOW_HEIGHT 950
 # define TILE_SIZE 64
-# define SCALE_FACTOR 0.4
+# define SCALE_FACTOR 0.5
 # define MINI_TILE (TILE_SIZE * SCALE_FACTOR)
 # define PI 3.14159265
 # define TWO_PI 6.28318530
-# define FOV (100 * (3.14159265 / 180))
+# define FOV (60 * (3.14159265 / 180))
 # define NUM_RAYS WINDOW_WIDTH
 
 # define FALSE 0
@@ -101,6 +103,7 @@ typedef struct s_map
 	//int					player_position[2];
 	int					win_width;
 	int					win_height;
+	int					is_minimap_open;
 	char				**spltd;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
@@ -108,7 +111,6 @@ typedef struct s_map
 	struct s_player		plyr;
 	struct s_ray		rays[NUM_RAYS];
 }				t_map;
-
 
 typedef struct	s_img
 {
@@ -256,6 +258,8 @@ void		ft_draw_line_deg(t_img *img, int color);
 // mlx_setup.c
 void		mlx_setup(void);
 void		init_hooks(void);
+int			key_press(int key, void *param);
+int 		key_release(int key, void *param);
 
 // raycasting.c
 void		calculate_wall_hit_distances(t_raycasting *r);

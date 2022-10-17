@@ -29,6 +29,7 @@ void	map_struct_init(t_map *map)
 	map->plyr.rot_angle = 0;
 	map->plyr.rot = 0;
 	map->plyr.move = 0;
+	map->is_minimap_open = 0;
 	// map->rays = malloc(sizeof(t_ray) * NUM_RAYS);
 	// if (!map->rays)
 	// 	ft_exit("malloc fail [map_struct_init()]", 1);
