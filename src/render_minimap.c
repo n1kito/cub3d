@@ -25,7 +25,7 @@ void	render_minimap(t_mlx *g, char **map)
 				minimap[1] * g->minimap_tile, g->minimap_tile, g->minimap_tile);
 			if (map[pos[1]][pos[0]] == '1')
 				ft_put_rectangle(&g->minimap_img, XMUR_1);
-			else if (map[pos[1]][pos[0]] == '0' || map[pos[1]][pos[0]] == 'N') // TODO add other starting positions
+			else if (map[pos[1]][pos[0]] == '0' || is_start_position(map[pos[1]][pos[0]])) // TODO add other starting positions
 				ft_put_rectangle(&g->minimap_img, SOL_1);
 			pos[0]++;
 			minimap[0]++;

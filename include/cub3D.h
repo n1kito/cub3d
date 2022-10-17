@@ -119,6 +119,7 @@ typedef struct	s_img
 	int		bpp;
 	int		line_length;
 	int		endian;
+	int		sprite_size;
 }				t_img;
 
 typedef struct s_coord
@@ -147,10 +148,14 @@ typedef struct s_mlx
 
 typedef struct s_params
 {
-	void	*n_texture;
-	void	*s_texture;
-	void	*e_texture;
-	void	*w_texture;
+	t_img	n_texture;
+	t_img	s_texture;
+	t_img	e_texture;
+	t_img	w_texture;
+	int		n_sprite_size;
+	int		e_sprite_size;
+	int		s_sprite_size;
+	int		w_sprite_size;
 	int		f_color[3];
 	int		c_color[3];
 	int		pl_start_pos[2];
@@ -199,23 +204,23 @@ int			exit_game();
 void		ft_exit(char *error, int exit_code);
 void		free_all(void);
 
-// map_checker.c
-void		map_name_checker(void);
-int			map_file_checker(void);
-
 // map_coord_init.c
 void		coords_init(int x0, int y0, int x1, int y1);
 void		free_coords();
 
-// closed_map_checker.c
+// map_check_borders.c
 void		closed_map_check();
 
-// map_color_checking.c
+// map_check_colors.c
 void		check_color_values(char **line);
 void		init_map_colors(char **line);
 int			check_for_colors(char *line);
 
-// map_texture_checking.c
+// map_check_file.c
+void		map_name_checker(void);
+int			map_file_checker(void);
+
+// map_check_textures.c
 void		check_for_texture(char *line);
 void		check_and_store_path(char **args);
 void		check_for_double_textures(char **args);

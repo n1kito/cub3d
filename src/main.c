@@ -9,9 +9,9 @@ int	main(int argc, char *argv[], char *env[])
 	(void)env;
 	_map();
 	_map()->map_name = argv[1];
+	mlx_setup();
 	map_file_checker();
 	map_parsing();
-	mlx_setup();
 	init_hooks();
 	mlx_loop(_map()->graphics->mlx_ptr);
 	// game process
