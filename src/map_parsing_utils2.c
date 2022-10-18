@@ -60,3 +60,17 @@ void	map_last_in_file_check(void)
 		line_index++;
 	}
 }
+
+/* Returns 1 if path tested is a directory. */
+int	is_path_directory(char *path)
+{
+	int		dir_test;
+
+	dir_test = open(path, O_DIRECTORY);
+	if (dir_test != -1)
+	{
+		close(dir_test);
+		return (1);
+	}
+	return (0);
+}

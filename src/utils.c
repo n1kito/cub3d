@@ -33,3 +33,9 @@ void	free_all(void)
 	ft_freetab(&_map()->file_contents);
 	free(_map());
 }
+
+/* Returns an int containing the RGB color values passed as parameter. */
+int	color_generator(u_int8_t red, u_int8_t green, u_int8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}

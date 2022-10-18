@@ -12,8 +12,10 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 - [x] Minimap blinks on some opens ?
   - Cannot replicate
+- [ ] Window opens before parsing checks.
 - [ ] Huge texures not working (see `render_wall_projection.c` ratio in `texture->bpp / 8`)
 - [ ] Distortion effet to fix
+- [ ] Implement correct ceiling + floor colors
 - [ ] Bonus: minimap cursor update
 - [ ] Setup bonus rule in Makefile
 - [ ] W + D goes diagonal (better movement)
