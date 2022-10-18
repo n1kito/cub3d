@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Analyses a line extracted from the .cub file and checks if the first cell
  * is a texture identifier. If a texture identifier is found, the corresponding

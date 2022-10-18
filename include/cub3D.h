@@ -90,6 +90,14 @@ typedef struct s_ray {
 	int		is_ray_facing_right;
 }				t_ray;
 
+typedef struct s_coord
+{
+	int		x0;
+	int		y0;
+	int		x1; // also used for height
+	int		y1; // also used for width
+}				t_coord;
+
 typedef struct s_map
 {
 	char				**file_contents;
@@ -107,7 +115,7 @@ typedef struct s_map
 	char				**spltd;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
-	struct s_coord		*coord;
+	struct s_coord		coord;
 	struct s_player		plyr;
 	struct s_ray		rays[NUM_RAYS];
 }				t_map;
@@ -122,14 +130,6 @@ typedef struct	s_img
 	int		sprite_size;
 }				t_img;
 
-typedef struct s_coord
-{
-	int		x0;
-	int		y0;
-	int		x1; // also used for height
-	int		y1; // also used for width
-}				t_coord;
-
 typedef struct s_mlx
 {
 	void	*mlx_ptr;
@@ -137,8 +137,6 @@ typedef struct s_mlx
 	void	*minimap_window_ptr;
 	t_img	game_img;
 	t_img	minimap_img;
-	int		window_height;
-	int		window_width;
 	int		minimap_height;
 	int		minimap_width;
 	int		minimap_tile;
@@ -196,18 +194,6 @@ typedef struct s_raycasting {
 	float	vert_wall_hit_y;
 }				t_raycasting;
 
-// error.c
-int			error_print(char *error, int return_value);
-
-// exit.c
-int			exit_game();
-void		ft_exit(char *error, int exit_code);
-void		free_all(void);
-
-// map_coord_init.c
-void		coords_init(int x0, int y0, int x1, int y1);
-void		free_coords();
-
 // map_check_borders.c
 void		closed_map_check();
 
@@ -251,20 +237,23 @@ void		map_struct_init(t_map *map);
 void		params_struct_init(t_map *map);
 void		graphics_struct_init(t_map *map);
 
+// mlx_move_setup.c
+void		trigger_minimap(void);
+int			key_press(int key, void *param);
+int			key_release(int key, void *param);
+void		move_player(void);
+
 // mlx_render_utils.c
-int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
 void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		ft_put_rectangle(t_img *img, int color);
-void		ft_put_rectangle_deg(t_img *img, int color);
-void		ft_put_circle(t_img *img, int x, int y, int radius, int color);
+void		ft_put_rectangle_gradient(t_img *img, int color);
+void		ft_put_circle(t_img *img, double pos[2], int radius, int color);
 void		ft_draw_line(t_img *img, int color);
-void		ft_draw_line_deg(t_img *img, int color);
 
 // mlx_setup.c
 void		mlx_setup(void);
+int			update_window(void);
 void		init_hooks(void);
-int			key_press(int key, void *param);
-int 		key_release(int key, void *param);
 
 // raycasting.c
 void		calculate_wall_hit_distances(t_raycasting *r);
@@ -282,6 +271,7 @@ void		init_raycasting_values(t_raycasting *r, float ray_angle);
 float		normalize_angle(float angle);
 float		distance_between_points(float x1, float y1, float x2, float y2);
 int			map_has_wall_at(float x, float y);
+void		coords_init(int x0, int y0, int x1, int y1);
 
 // render_minimap.c
 void		render_minimap(t_mlx *g, char **map);
@@ -292,5 +282,11 @@ void		render_rays(void);
 // render_wall_projection.c
 void		generate_projection(void);
 void		init_projection_values(t_projection *p, int i);
+
+// utils.v
+int			error_print(char *error, int return_value);
+int			exit_game(void);
+void		ft_exit(char *error, int exit_code);
+void		free_all(void);
 
 #endif

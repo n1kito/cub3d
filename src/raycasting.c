@@ -1,4 +1,5 @@
-#include "../include/cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 void	calculate_wall_hit_distances(t_raycasting *r)
 {

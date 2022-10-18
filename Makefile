@@ -38,25 +38,24 @@ END_COLOR			:= \033[0;39m
 # **************************************************************************** #
 # SOURCES
 
-SRC_FILES		:= 	error\
-					exit\
-					main\
+SRC_FILES		:=	main\
 					map_check_borders\
 					map_check_colors\
 					map_check_file\
 					map_check_textures\
-					map_coords_init\
 					map_parsing\
 					map_parsing_utils\
 					map_parsing_utils2\
 					map_structure\
+					mlx_move_setup\
 					mlx_render_utils\
 					mlx_setup\
 					raycasting\
 					raycasting_utils\
 					raycasting_init\
 					render_minimap\
-					render_wall_projection
+					render_wall_projection\
+					utils
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))

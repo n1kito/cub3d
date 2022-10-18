@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Draws each projection line on game image. */
 void	generate_projection(void)
@@ -12,7 +13,7 @@ void	generate_projection(void)
 		init_projection_values(&p, i);
 		// draw sky
 		coords_init(i, 0, p.wall_top_pixel, 1);
-		ft_put_rectangle_deg(&_map()->graphics->game_img, PLA_1);
+		ft_put_rectangle_gradient(&_map()->graphics->game_img, PLA_1);
 		// draw wall
 		coords_init(i, p.wall_top_pixel, i, p.wall_bottom_pixel);
 		// calculate texture_offset_x
@@ -49,7 +50,7 @@ void	generate_projection(void)
 		// draw floor
 		coords_init(i, p.wall_bottom_pixel,
 			WINDOW_HEIGHT - p.wall_top_pixel, 1);
-		ft_put_rectangle_deg(&_map()->graphics->game_img, SOL_1);
+		ft_put_rectangle_gradient(&_map()->graphics->game_img, SOL_1);
 		i++;
 	}
 }

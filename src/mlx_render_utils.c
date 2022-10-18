@@ -1,126 +1,95 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
-/* Returns an int containing the RGB color values passed as parameter. */
-int     color_generator(u_int8_t red, u_int8_t green, u_int8_t blue)
+/* Places pixel of color on image. */
+void	ft_pixel_put(t_img *img, int x, int y, int color)
 {
-    return (red << 16 | green << 8 | blue);
-}
+	char	*pixel;
 
-void    ft_pixel_put(t_img *img, int x, int y, int color)
-{
-    char    *pixel;
-
-    //TODO research to understand this formula cf aurelienbrabant.fr
 	if (x > WINDOW_WIDTH || x < 0)
 		return ;
 	if (y > WINDOW_HEIGHT || y < 0)
 		return ;
-    pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
-    *(int *)pixel = color;
+	pixel = img->addr + (y * img->line_length + x * (img->bpp / 8));
+	*(int *)pixel = color;
 }
 
-void     ft_put_rectangle(t_img *img, int color)
+/* Places rectangle in image. Needs coords struct to be set first. */
+void	ft_put_rectangle(t_img *img, int color)
 {
-    int pY;
-    int pX;
+	int	position_x;
+	int	position_y;
 
-    pY = _map()->coord->y0;
-    while (pY < _map()->coord->y0 + _map()->coord->x1)
-    {
-        pX = _map()->coord->x0;
-        while (pX < _map()->coord->x0 + _map()->coord->y1)
-            ft_pixel_put(img, pX++, pY, color);
-        pY++;
-    }
-    free_coords();
+	position_y = _map()->coord.y0;
+	while (position_y < _map()->coord.y0 + _map()->coord.x1)
+	{
+		position_x = _map()->coord.x0;
+		while (position_x < _map()->coord.x0 + _map()->coord.y1)
+			ft_pixel_put(img, position_x++, position_y, color);
+		position_y++;
+	}
 }
 
-void     ft_put_rectangle_deg(t_img *img, int color)
+/* Places gradient rectangle in image. Needs coords struct to be set first. */
+void	ft_put_rectangle_gradient(t_img *img, int color)
 {
-    int pY;
-    int pX;
-	int	i = 0;
+	int	pos_x;
+	int	pos_y;
+	int	i;
 
-    pY = _map()->coord->y0;
-    while (pY < _map()->coord->y0 + _map()->coord->x1)
-    {
-        pX = _map()->coord->x0;
-        while (pX < _map()->coord->x0 + _map()->coord->y1)
-            ft_pixel_put(img, pX++, pY, color);
-        pY++;
+	i = 0;
+	pos_y = _map()->coord.y0;
+	while (pos_y < _map()->coord.y0 + _map()->coord.x1)
+	{
+		pos_x = _map()->coord.x0;
+		while (pos_x < _map()->coord.x0 + _map()->coord.y1)
+			ft_pixel_put(img, pos_x++, pos_y, color);
+		pos_y++;
 		i++;
 		if (i % 5 == 0)
-		color++;
-    }
-    free_coords();
+			color++;
+	}
 }
 
 /* Displays a filled in ellipse on image. */
-void    ft_put_circle(t_img *img, int x, int y, int radius, int color)
+void	ft_put_circle(t_img *img, double pos[2], int radius, int color)
 {
-    double angle;
-    double dot_x;
-    double dot_y;
+	double	angle;
+	double	dot_x;
+	double	dot_y;
 
-    while (radius)
-    {  
-        angle = 0;
-        while (angle < 360)
-        {
-            dot_x = cos(angle) * (double)radius;
-            dot_y = sin(angle) * (double)radius;
-            ft_pixel_put(img, x + (int)dot_x, y + (int)dot_y, color);
-            angle++;
-        }
-        radius--;
-    }
+	while (radius)
+	{
+		angle = 0;
+		while (angle < 360)
+		{
+			dot_x = cos(angle) * (double)radius;
+			dot_y = sin(angle) * (double)radius;
+			ft_pixel_put(img, pos[0] + (int)dot_x, pos[1] + (int)dot_y, color);
+			angle++;
+		}
+		radius--;
+	}
 }
 
-void ft_draw_line(t_img *img, int color)
+void	ft_draw_line(t_img *img, int color)
 {
-    double dx, dy, pX, pY;
-    int p;
+	double	dist[2];
+	double	pos[2];
+	int		p;
 
-    dx = _map()->coord->x1 - _map()->coord->x0;
-    dy = _map()->coord->y1 - _map()->coord->y0;
-    p = sqrt((dx * dx) + (dy * dy));
-    dx /= p;
-    dy /= p;
-    pX = _map()->coord->x0;
-    pY = _map()->coord->y0;
-    while (p)
-    {
-        ft_pixel_put(img, pX, pY, color);
-        pX += dx;
-        pY += dy;
-        --p;
-    }
-    free_coords();
-}
-
-void ft_draw_line_deg(t_img *img, int color)
-{
-    double dx, dy, pX, pY;
-    int p;
-	int	i;
-	
-	i = 0;
-    dx = _map()->coord->x1 - _map()->coord->x0;
-    dy = _map()->coord->y1 - _map()->coord->y0;
-    p = sqrt((dx * dx) + (dy * dy));
-    dx /= p;
-    dy /= p;
-    pX = _map()->coord->x0;
-    pY = _map()->coord->y0;
-    while (p)
-    {
-        ft_pixel_put(img, pX, pY, color);
-        pX += dx;
-        pY += dy;
-        --p;
-		if (i % 5 == 0)
-		color++;
-		i++;
-    }
-    free_coords();
+	dist[0] = _map()->coord.x1 - _map()->coord.x0;
+	dist[1] = _map()->coord.y1 - _map()->coord.y0;
+	p = sqrt((dist[0] * dist[0]) + (dist[1] * dist[1]));
+	dist[0] /= p;
+	dist[1] /= p;
+	pos[0] = _map()->coord.x0;
+	pos[1] = _map()->coord.y0;
+	while (p)
+	{
+		ft_pixel_put(img, pos[0], pos[1], color);
+		pos[0] += dist[0];
+		pos[1] += dist[1];
+		--p;
+	}
 }

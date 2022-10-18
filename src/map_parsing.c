@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Analyses map file and exits in case of error, or if all parameters are not correct. */
 void	map_parsing(void)

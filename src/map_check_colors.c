@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Checks the given string has actual digits, 3 of them, not over 255 / below 0
  * If any is wrong, will exit with a message on stderr. */
