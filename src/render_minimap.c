@@ -4,6 +4,9 @@
 /* Place tiles on minimap image. */
 void	place_minimap_tiles(int pos[2], int lim[2], int minimap[2], char **map)
 {
+	t_params	*p;
+
+	p = _map()->params;
 	minimap[1] = 0;
 	while (pos[1] < lim[1] && _map()->map[pos[1]])
 	{
@@ -14,10 +17,12 @@ void	place_minimap_tiles(int pos[2], int lim[2], int minimap[2], char **map)
 			coords_init(minimap[0] * MINI_TILE,
 				minimap[1] * MINI_TILE, MINI_TILE, MINI_TILE);
 			if (map[pos[1]][pos[0]] == '1')
-				ft_put_rectangle(&_map()->graphics->minimap_img, XMUR_1);
+				ft_put_rectangle_gradient(&_map()->graphics->minimap_img,
+					p->c_color);
 			else if (map[pos[1]][pos[0]] == '0'
 					|| is_start_position(map[pos[1]][pos[0]]))
-				ft_put_rectangle(&_map()->graphics->minimap_img, SOL_1);
+				ft_put_rectangle_gradient(&_map()->graphics->minimap_img,
+					p->f_color);
 			pos[0]++;
 			minimap[0]++;
 		}
@@ -43,9 +48,11 @@ void	render_minimap(t_mlx *g, char **map)
 /* Place player dot on top of minimap image. */
 void	render_player_dot_on_minimap(int *draw_end)
 {
-	double	dot_pos[2];
-	t_img	minimap_img;
+	double		dot_pos[2];
+	t_img		minimap_img;
+	t_params	*p;
 
+	p = _map()->params;
 	_map()->graphics->minimap_draw_end[0] = draw_end[0];
 	_map()->graphics->minimap_draw_end[1] = draw_end[1];
 	minimap_img = _map()->graphics->minimap_img;
@@ -56,8 +63,8 @@ void	render_player_dot_on_minimap(int *draw_end)
 	coords_init(dot_pos[0], dot_pos[1],
 		dot_pos[0] + cos(_map()->plyr.rot_angle) * 10,
 		dot_pos[1] + sin(_map()->plyr.rot_angle) * 10);
-	ft_draw_line(&minimap_img, TEAL);
-	ft_put_circle(&minimap_img, dot_pos, MINI_TILE * 0.5 / 3, TEAL);
+	ft_draw_line(&minimap_img, p->c_color);
+	ft_put_circle(&minimap_img, dot_pos, MINI_TILE * 0.5 / 3, p->c_color);
 	_map()->graphics->minimap_dot_pos[0] = dot_pos[0];
 	_map()->graphics->minimap_dot_pos[1] = dot_pos[1];
 }

@@ -30,30 +30,32 @@ void	check_color_values(char **line)
 	ft_freetab(&splitted_line);
 }
 
-/* Checks if a F or C is set twice, if not, assigns each values to
+/* Checks if F or C is set twice, if not, assigns each values to
  * an int array that will be the RGB value for the floor and ceiling */
 void	init_map_colors(char **line)
 {
 	char	**numbers;
 
 	numbers = ft_split(line[1], ',');
-	if ((line[0][0] == 'F' && _map()->params->f_color[0] != -1)
-		|| (line[0][0] == 'C' && _map()->params->c_color[0] != -1))
+	if ((line[0][0] == 'F' && _map()->params->f_rgb_color[0] != -1)
+		|| (line[0][0] == 'C' && _map()->params->c_rgb_color[0] != -1))
 	{
 		multi_freetab(&line, &numbers);
 		ft_exit("color set twice", 1);
 	}
 	if (line[0][0] == 'F')
 	{
-		_map()->params->f_color[0] = ft_atoi(numbers[0]);
-		_map()->params->f_color[1] = ft_atoi(numbers[1]);
-		_map()->params->f_color[2] = ft_atoi(numbers[2]);
+		_map()->params->f_rgb_color[0] = ft_atoi(numbers[0]);
+		_map()->params->f_rgb_color[1] = ft_atoi(numbers[1]);
+		_map()->params->f_rgb_color[2] = ft_atoi(numbers[2]);
+		assign_color(&_map()->params->f_color, _map()->params->f_rgb_color);
 	}
 	else
 	{
-		_map()->params->c_color[0] = ft_atoi(numbers[0]);
-		_map()->params->c_color[1] = ft_atoi(numbers[1]);
-		_map()->params->c_color[2] = ft_atoi(numbers[2]);
+		_map()->params->c_rgb_color[0] = ft_atoi(numbers[0]);
+		_map()->params->c_rgb_color[1] = ft_atoi(numbers[1]);
+		_map()->params->c_rgb_color[2] = ft_atoi(numbers[2]);
+		assign_color(&_map()->params->c_color, _map()->params->c_rgb_color);
 	}
 	ft_freetab(&numbers);
 }

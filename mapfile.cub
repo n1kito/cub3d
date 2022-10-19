@@ -3,9 +3,9 @@ EA sprites/Castle-Wall.xpm
 WE sprites/Metal.xpm
 SO sprites/Wood.xpm
 
-F 252,253,255
+F 128,0,128
 
-C 1,2,2
+C 127,255,212
 
         11111111111
         10000000001

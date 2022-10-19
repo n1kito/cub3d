@@ -144,8 +144,10 @@ typedef struct s_params
 	t_img				s_texture;
 	t_img				e_texture;
 	t_img				w_texture;
-	int					f_color[3];
-	int					c_color[3];
+	int					f_rgb_color[3];
+	int					c_rgb_color[3];
+	int					c_color;
+	int					f_color;
 	int					pl_start_pos[2];
 }						t_params;
 
@@ -224,6 +226,7 @@ void		get_file_dimensions(void);
 void		get_map_dimensions(void);
 void		map_last_in_file_check(void);
 int			is_path_directory(char *path);
+void		assign_color(int *color_ptr, int rgb[3]);
 
 // map_structure.c
 t_map		*_map(void);

@@ -22,8 +22,11 @@ t_img	*pick_texture(int i)
 /* Draws sky for pixel column of index i. */
 void	draw_sky(t_projection p, int i)
 {
+	int	ceiling_color;
+
+	ceiling_color = _map()->params->c_color;
 	coords_init(i, 0, p.wall_top_pixel, 1);
-	ft_put_rectangle_gradient(&_map()->graphics->game_img, PLA_1);
+	ft_put_rectangle_gradient(&_map()->graphics->game_img, ceiling_color);
 }
 
 /* Draws wall textures for pixel column of index i. */
@@ -58,7 +61,10 @@ void	draw_walls(t_projection p, int i)
 /* Draws floor for pixel column of index i. */
 void	draw_floor(t_projection p, int i)
 {
+	int	floor_color;
+
+	floor_color = _map()->params->f_color;
 	coords_init(i, p.wall_bottom_pixel,
 		WINDOW_HEIGHT - p.wall_top_pixel, 1);
-	ft_put_rectangle_gradient(&_map()->graphics->game_img, SOL_1);
+	ft_put_rectangle_gradient(&_map()->graphics->game_img, floor_color);
 }

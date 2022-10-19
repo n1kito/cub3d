@@ -74,3 +74,8 @@ int	is_path_directory(char *path)
 	}
 	return (0);
 }
+
+void	assign_color(int *color_ptr, int rgb[3])
+{
+	*color_ptr = color_generator(rgb[0], rgb[1], rgb[2]);
+}
