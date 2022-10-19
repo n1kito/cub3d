@@ -67,7 +67,6 @@ void	move_player(void)
 	if (p->move == 2)
 	{
 		new_pos[0] = (p->x + cos(p->rot_angle + 80.12) * 5);
-		//TODO eclaircir le 80.12 avec Nathan)
 		new_pos[1] = (p->y + sin(p->rot_angle + 80.12) * 5);
 	}
 	else if (p->move == -2)
