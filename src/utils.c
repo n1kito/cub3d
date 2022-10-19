@@ -28,10 +28,21 @@ void	ft_exit(char *error, int exit_code)
 void	free_all(void)
 {
 	// TODO add destroy functions
-	free(_map()->graphics);
+	free(_map()->params->e_texture.path);
+	free(_map()->params->s_texture.path);
+	free(_map()->params->n_texture.path);
+	free(_map()->params->w_texture.path);
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->params->e_texture.image);
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->params->w_texture.image);
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->params->n_texture.image);
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->params->s_texture.image);
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->graphics->minimap_img.image);	// ! SOMEWHERE GRAPHICS ALLOCED TWICE SO UNABLE TO FIX LEAK
+	mlx_destroy_image(_map()->graphics->mlx_ptr, _map()->graphics->game_img.image);		// ! SOMEWHERE GRAPHICS ALLOCED TWICE SO UNABLE TO FIX LEAK
 	free(_map()->params);
 	// in params the paths need to be freed
 	ft_freetab(&_map()->file_contents);
+
+	free(_map()->graphics);
 	free(_map());
 }
 
