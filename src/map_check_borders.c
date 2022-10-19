@@ -1,6 +1,7 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
-int		is_valid_map_char(char c)
+int	is_valid_map_char(char c)
 {
 	if (c == '0' || c == '1' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 		return (1);
@@ -60,7 +61,7 @@ void	check_around(int i, int j)
 	}
 }
 
-void	closed_map_check()
+void	closed_map_check(void)
 {
 	int	i;
 	int	j;

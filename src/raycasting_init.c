@@ -1,4 +1,5 @@
-#include "../include/cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 void	init_horz_intercepts(t_raycasting *r)
 {

@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Analyses map file and exits in case of error, or if all parameters are not correct. */
 void	map_parsing(void)
@@ -54,9 +55,9 @@ int	all_map_params_are_set(void)
 	p = _map()->params;
 	if (!p->n_texture.image || !p->s_texture.image || !p->e_texture.image || !p->w_texture.image)
 		ft_exit("missing texture parameter(s) in map file", 1);
-	if (_map()->params->c_color[0] == -1)
+	if (_map()->params->c_rgb_color[0] == -1)
 		ft_exit("missing ceiling color parameter in map file", 1);
-	if (_map()->params->f_color[0] == -1)
+	if (_map()->params->f_rgb_color[0] == -1)
 		ft_exit("missing floor color parameter in map file", 1);
 	return (1);
 }

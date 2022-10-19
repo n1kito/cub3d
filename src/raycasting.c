@@ -1,4 +1,5 @@
-#include "../include/cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 void	calculate_wall_hit_distances(t_raycasting *r)
 {
@@ -6,12 +7,12 @@ void	calculate_wall_hit_distances(t_raycasting *r)
 		r->horz_hit_distance = distance_between_points(_map()->plyr.x,
 				_map()->plyr.y, r->horz_wall_hit_x, r->horz_wall_hit_y);
 	else
-		r->horz_hit_distance = (float)INT_MAX; // TODO REPLACE WITH FLOAT MAX
+		r->horz_hit_distance = (float)INT_MAX;
 	if (r->found_vert_wall_hit)
 		r->vert_hit_distance = distance_between_points(_map()->plyr.x,
 				_map()->plyr.y, r->vert_wall_hit_x, r->vert_wall_hit_y);
 	else
-		r->vert_hit_distance = (float)INT_MAX; // TODO REPLACE WITH FLOAT MAX
+		r->vert_hit_distance = (float)INT_MAX;
 }
 
 void	find_horz_grid_intersection(t_raycasting *r)
@@ -100,14 +101,14 @@ void	cast_ray(float ray_angle, int strip_id)
 void	cast_all_rays(void)
 {
 	float	ray_angle;
-	int		strip_ID;
+	int		strip_id;
 
 	ray_angle = _map()->plyr.rot_angle - (FOV / 2);
-	strip_ID = 0;
-	while (strip_ID < NUM_RAYS)
+	strip_id = 0;
+	while (strip_id < NUM_RAYS)
 	{
-		cast_ray(ray_angle, strip_ID);
+		cast_ray(ray_angle, strip_id);
 		ray_angle += FOV / NUM_RAYS;
-		strip_ID++;
+		strip_id++;
 	}
 }

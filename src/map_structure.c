@@ -1,4 +1,5 @@
-#include "cub3D.h"
+//#include "cub3D.h"
+#include "../include/cub3D.h" //TODO REMOVE THIS
 
 /* Called everytime a pointer to the main map structure is needed.
  * Initializes said map structure only on first call. */
@@ -16,8 +17,7 @@ t_map	*_map(void)
 	return (map);
 }
 
-
-/* Allocated memoery for all elements of map structure
+/* Allocated memory for all elements of map structure
  * and initializes all pointers. */
 void	map_struct_init(t_map *map)
 {
@@ -25,45 +25,38 @@ void	map_struct_init(t_map *map)
 	map->file_contents = NULL;
 	map->map = NULL;
 	map->params = NULL;
-    map->graphics = NULL;
+	map->graphics = NULL;
 	map->plyr.rot_angle = 0;
 	map->plyr.rot = 0;
 	map->plyr.move = 0;
 	map->is_minimap_open = 0;
-	// map->rays = malloc(sizeof(t_ray) * NUM_RAYS);
-	// if (!map->rays)
-	// 	ft_exit("malloc fail [map_struct_init()]", 1);
+	coords_init(0, 0, 0, 0);
 	params_struct_init(map);
-    graphics_struct_init(map);
+	graphics_struct_init(map);
 }
 
-void    params_struct_init(t_map *map)
+void	params_struct_init(t_map *map)
 {
-    map->params = malloc(sizeof(t_params));
+	map->params = malloc(sizeof(t_params));
 	if (!map->params)
 		ft_exit("malloc fail [map_struct_init()][1]", 1);
 	map->params->n_texture.image = NULL;
 	map->params->s_texture.image = NULL;
 	map->params->e_texture.image = NULL;
 	map->params->w_texture.image = NULL;
-	map->params->c_color[0] = -1;
-	map->params->f_color[0] = -1;
+	map->params->c_rgb_color[0] = -1;
+	map->params->f_rgb_color[0] = -1;
 	map->params->pl_start_pos[0] = -1;
 	map->params->pl_start_pos[1] = -1;
 }
 
-void    graphics_struct_init(t_map *map)
+void	graphics_struct_init(t_map *map)
 {
 	map->graphics = malloc(sizeof(t_mlx));
 	if (!map->graphics)
 		ft_exit("malloc fail [map_struct_init()][2]", 1);
 	map->graphics->mlx_ptr = NULL;
 	map->graphics->window_ptr = NULL;
-	map->graphics->window_width = WINDOW_WIDTH; // TODO CHANGE IN CODE TO USE DEFDINED VALUE AND REMOVE THESE
-	map->graphics->window_height = WINDOW_HEIGHT;
-	// map->graphics->minimap_tile = 64;
-	map->graphics->minimap_tile = TILE_SIZE * SCALE_FACTOR;
-	map->graphics->minimap_width = 11 * map->graphics->minimap_tile;
+	map->graphics->minimap_width = 11 * MINI_TILE;
 	map->graphics->minimap_height = map->graphics->minimap_width;
-	// map->graphics->minimap_tile = map->graphics->minimap_width / 11;
 }
