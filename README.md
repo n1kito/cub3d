@@ -15,7 +15,7 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 - [ ] Window opens before parsing checks
   - Move texture open to after parsing
 - [ ] Huge texures not working (see `render_wall_projection.c` ratio in `texture->bpp / 8`)
-- [ ] Distortion effet to fix
+- [x] Distortion effet to fix
 - [x] Implement correct ceiling + floor colors
   - [ ] Gradient does not work on all colors
 - [ ] Bonus: minimap cursor update?
