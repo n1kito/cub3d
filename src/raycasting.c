@@ -69,7 +69,7 @@ void	find_vert_grid_intersection(t_raycasting *r)
 	}
 }
 
-void	cast_ray(float ray_angle, int strip_id)
+void	cast_ray(float ray_angle, int column)
 {
 	t_raycasting	r;
 
@@ -79,36 +79,36 @@ void	cast_ray(float ray_angle, int strip_id)
 	calculate_wall_hit_distances(&r);
 	if (r.vert_hit_distance < r.horz_hit_distance)
 	{
-		_map()->rays[strip_id].distance = r.vert_hit_distance;
-		_map()->rays[strip_id].wall_hit_x = r.vert_wall_hit_x;
-		_map()->rays[strip_id].wall_hit_y = r.vert_wall_hit_y;
-		_map()->rays[strip_id].was_hit_vertical = TRUE;
+		_map()->rays[column].distance = r.vert_hit_distance;
+		_map()->rays[column].wall_hit_x = r.vert_wall_hit_x;
+		_map()->rays[column].wall_hit_y = r.vert_wall_hit_y;
+		_map()->rays[column].was_hit_vertical = TRUE;
 	}
 	else
 	{
-		_map()->rays[strip_id].distance = r.horz_hit_distance;
-		_map()->rays[strip_id].wall_hit_x = r.horz_wall_hit_x;
-		_map()->rays[strip_id].wall_hit_y = r.horz_wall_hit_y;
-		_map()->rays[strip_id].was_hit_vertical = FALSE;
+		_map()->rays[column].distance = r.horz_hit_distance;
+		_map()->rays[column].wall_hit_x = r.horz_wall_hit_x;
+		_map()->rays[column].wall_hit_y = r.horz_wall_hit_y;
+		_map()->rays[column].was_hit_vertical = FALSE;
 	}
-	_map()->rays[strip_id].ray_angle = r.ray_angle;
-	_map()->rays[strip_id].is_ray_facing_down = r.ray_is_facing_down;
-	_map()->rays[strip_id].is_ray_facing_up = r.ray_is_facing_up;
-	_map()->rays[strip_id].is_ray_facing_left = r.ray_is_facing_left;
-	_map()->rays[strip_id].is_ray_facing_right = r.ray_is_facing_right;
+	_map()->rays[column].ray_angle = r.ray_angle;
+	_map()->rays[column].is_ray_facing_down = r.ray_is_facing_down;
+	_map()->rays[column].is_ray_facing_up = r.ray_is_facing_up;
+	_map()->rays[column].is_ray_facing_left = r.ray_is_facing_left;
+	_map()->rays[column].is_ray_facing_right = r.ray_is_facing_right;
 }
 
 void	cast_all_rays(void)
 {
 	float	ray_angle;
-	int		strip_id;
+	int		column;
 
-	ray_angle = _map()->plyr.rot_angle - (FOV / 2);
-	strip_id = 0;
-	while (strip_id < NUM_RAYS)
+	column = 0;
+	while (column < NUM_RAYS)
 	{
-		cast_ray(ray_angle, strip_id);
-		ray_angle += FOV / NUM_RAYS;
-		strip_id++;
+		ray_angle = _map()->plyr.rot_angle
+			+ atan((column - NUM_RAYS / 2) / _map()->dist_proj_plane);
+		cast_ray(ray_angle, column);
+		column++;
 	}
 }

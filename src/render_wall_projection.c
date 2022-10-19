@@ -23,9 +23,8 @@ void	init_projection_values(t_projection *p, int i)
 {
 	p->perp_distance = _map()->rays[i].distance
 		* cos(_map()->rays[i].ray_angle - _map()->plyr.rot_angle);
-	p->distance_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
 	p->projected_wall_height = (TILE_SIZE / p->perp_distance)
-		* p->distance_proj_plane;
+		* _map()->dist_proj_plane;
 	p->wall_strip_height = (int)p->projected_wall_height;
 	p->wall_top_pixel = (WINDOW_HEIGHT / 2) - (p->wall_strip_height / 2);
 	if (p->wall_top_pixel < 0)

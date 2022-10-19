@@ -3,11 +3,12 @@ EA sprites/Castle-Wall.xpm
 WE sprites/Bricks.xpm
 SO sprites/Castle-Wall.xpm
 
-F 150,150,150
-C 40,40,40
+F 0,120,120
+C 110,0,100
 
 1111111111
 1000000001
+1111000001
 1000000001
 1000000001
 1000000001
