@@ -26,8 +26,8 @@
 # define KEY_M 109
 # define KEY_Q 113
 
-# define WINDOW_WIDTH 950
-# define WINDOW_HEIGHT 950
+# define WINDOW_WIDTH (600 * 2)
+# define WINDOW_HEIGHT (400 * 2)
 # define TILE_SIZE 64
 # define SCALE_FACTOR 0.5
 # define MINI_TILE (TILE_SIZE * SCALE_FACTOR)
@@ -66,6 +66,7 @@
 typedef struct	s_player
 {
 	int					move;
+	int					side;
 	int					rot;
 	double				rot_angle;
 	double				x;

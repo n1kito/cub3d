@@ -29,6 +29,7 @@ void	map_struct_init(t_map *map)
 	map->plyr.rot_angle = 0;
 	map->plyr.rot = 0;
 	map->plyr.move = 0;
+	map->plyr.side = 0;
 	map->is_minimap_open = 0;
 	map->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
 	coords_init(0, 0, 0, 0);
