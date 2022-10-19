@@ -29,6 +29,7 @@ void	map_struct_init(t_map *map)
 	map->plyr.rot_angle = 0;
 	map->plyr.rot = 0;
 	map->plyr.move = 0;
+	map->plyr.side = 0;
 	map->is_minimap_open = 0;
 	coords_init(0, 0, 0, 0);
 	params_struct_init(map);
