@@ -107,7 +107,6 @@ typedef struct s_map
 	int					win_width;
 	int					win_height;
 	int					is_minimap_open;
-	char				**spltd;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
 	struct s_coord		coord;
@@ -118,6 +117,7 @@ typedef struct s_map
 typedef struct	s_img
 {
 	void				*image;
+	char				*path;
 	char				*addr;
 	int					bpp;
 	int					line_length;
@@ -202,11 +202,9 @@ int			map_file_checker(void);
 
 // map_check_textures.c
 void		check_for_texture(char *line);
-void		assign_texture_parameters(t_img *texture,
-				void *sprite, int sprite_size);
-void		analyse_texture(char **args, void *sprite, int sprite_size);
 void		check_and_store_path(char **args);
 void		check_for_double_textures(char **args);
+void		assign_texture_parameters(t_img *texture, int sprite_size);
 
 // map_parsing.c
 void		map_parsing(void);
@@ -252,6 +250,8 @@ void		ft_draw_line(t_img *img, int color);
 void		mlx_setup(void);
 int			update_window(void);
 void		init_hooks(void);
+void		open_all_textures(void);
+void		open_texture(t_img *texture);
 
 // raycasting.c
 void		calculate_wall_hit_distances(t_raycasting *r);

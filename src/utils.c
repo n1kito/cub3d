@@ -30,6 +30,7 @@ void	free_all(void)
 	// TODO add destroy functions
 	free(_map()->graphics);
 	free(_map()->params);
+	// in params the paths need to be freed
 	ft_freetab(&_map()->file_contents);
 	free(_map());
 }

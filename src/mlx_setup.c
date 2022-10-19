@@ -11,6 +11,7 @@ void	mlx_setup(void)
 	g->mlx_ptr = mlx_init();
 	if (!g->mlx_ptr)
 		ft_exit("mlx_init() fail [mlx_setup()]", 1);
+	open_all_textures();
 	g->window_ptr = mlx_new_window(g->mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT, m->map_name);
 	if (!g->window_ptr)
@@ -69,4 +70,26 @@ void	init_hooks(void)
 	mlx_hook(g->window_ptr, 2, 1L << 0, key_press, NULL);
 	mlx_hook(g->window_ptr, 3, 1L << 1, key_release, NULL);
 	mlx_loop_hook(_map()->graphics->mlx_ptr, &update_window, NULL);
+}
+
+void	open_all_textures(void)
+{
+	open_texture(&_map()->params->n_texture);
+	open_texture(&_map()->params->e_texture);
+	open_texture(&_map()->params->s_texture);
+	open_texture(&_map()->params->w_texture);
+}
+
+void	open_texture(t_img *texture)
+{
+	int		texture_width;
+	int		texture_height;
+
+	texture->image = mlx_xpm_file_to_image(_map()->graphics->mlx_ptr,
+			texture->path, &texture_width, &texture_height);
+	if (!texture->image)
+		ft_exit("texture file open failed", 1);
+	if (texture_width != 64 || texture_width != texture_height)
+		ft_exit("textures must be 64x64", 1);
+	assign_texture_parameters(texture, texture_width);
 }

@@ -53,7 +53,10 @@ int	all_map_params_are_set(void)
 	t_params	*p;
 
 	p = _map()->params;
-	if (!p->n_texture.image || !p->s_texture.image || !p->e_texture.image || !p->w_texture.image)
+	if (!p->n_texture.path
+		|| !p->s_texture.path
+		|| !p->e_texture.path
+		|| !p->w_texture.path)
 		ft_exit("missing texture parameter(s) in map file", 1);
 	if (_map()->params->c_rgb_color[0] == -1)
 		ft_exit("missing ceiling color parameter in map file", 1);
@@ -88,7 +91,7 @@ int	correct_parameter_type(char *line)
 				|| ft_strcmp(split[0], "SO") == 0
 				|| ft_strcmp(split[0], "EA") == 0
 				|| ft_strcmp(split[0], "WE") == 0)))
-					return (ft_freetab(&split), 1);
+		return (ft_freetab(&split), 1);
 	ft_freetab(&split);
 	return (ft_exit("wrong argument type", 1), 0);
 }
