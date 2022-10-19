@@ -54,8 +54,8 @@ void	draw_walls(t_projection p, int i)
 		texture_offset[1] = distance_from_top
 			* ((float)texture->sprite_size / p.wall_strip_height);
 		texel_color = texture->addr + (texture_offset[1] * texture->line_length
-				+ texture_offset[0] * (texture->bpp / 8) * (texture->sprite_size / TILE_SIZE));
 //				+ texture_offset[0] * (texture->bpp / 8));
+				+ texture_offset[0] * (texture->bpp / 8));
 		ft_pixel_put(&_map()->graphics->game_img, i, y, *(int *)texel_color);
 		y++;
 	}

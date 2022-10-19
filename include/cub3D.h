@@ -100,6 +100,7 @@ typedef struct s_map
 	int					sprite_size;
 	int					map_fd;
 	int					map_height;
+	float				dist_proj_plane;
 	int					map_width;
 	int					file_line_count;
 	//int				player_position[2];
@@ -256,7 +257,7 @@ void		init_hooks(void);
 void		calculate_wall_hit_distances(t_raycasting *r);
 void		find_horz_grid_intersection(t_raycasting *r);
 void		find_vert_grid_intersection(t_raycasting *r);
-void		cast_ray(float ray_angle, int strip_id);
+void		cast_ray(float ray_angle, int column);
 void		cast_all_rays(void);
 
 // raycasting_init.c
