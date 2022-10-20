@@ -1,7 +1,7 @@
 NO sprites/Bricks.xpm
 EA sprites/Castle-Wall.xpm
-WE sprites/Bricks.xpm
-SO sprites/Castle-Wall.xpm
+WE sprites/Wood.xpm
+SO sprites/Metal.xpm
 
 F 0,120,120
 C 110,110,200

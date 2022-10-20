@@ -28,8 +28,16 @@ void	check_and_store_path(char **args)
 {
 	if (args[1][ft_strlen(args[1]) - 1] == '\n')
 		args[1][ft_strlen(args[1]) - 1] = '\0';
+	if (!file_has_extension(args[1], ".xpm"))
+	{
+		ft_freetab(&args);
+		ft_exit("textures require .xpm files", 1);
+	}
 	if (is_path_directory(args[1]))
+	{
+		ft_freetab(&args);
 		ft_exit("one of the textures is a directory", 1);
+	}
 	check_for_double_textures(args);
 	if (ft_strcmp(args[0], "NO") == 0)
 		_map()->params->n_texture.path = ft_strdup(args[1]);
@@ -45,13 +53,25 @@ void	check_and_store_path(char **args)
 void	check_for_double_textures(char **args)
 {
 	if (ft_strcmp(args[0], "NO") == 0 && _map()->params->n_texture.path)
+	{
+		ft_freetab(&args);
 		ft_exit("north wall texture defined twice", 1);
+	}
 	else if (ft_strcmp(args[0], "SO") == 0 && _map()->params->s_texture.path)
+	{
+		ft_freetab(&args);
 		ft_exit("south wall texture defined twice", 1);
+	}
 	else if (ft_strcmp(args[0], "EA") == 0 && _map()->params->e_texture.path)
+	{
+		ft_freetab(&args);
 		ft_exit("east wall texture defined twice", 1);
+	}
 	else if (ft_strcmp(args[0], "WE") == 0 && _map()->params->w_texture.path)
+	{
+		ft_freetab(&args);
 		ft_exit("west wall texture defined twice", 1);
+	}
 }
 
 void	assign_texture_parameters(t_img *texture, int sprite_size)

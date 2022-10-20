@@ -65,4 +65,6 @@ void	graphics_struct_init(t_map *map)
 	map->graphics->window_ptr = NULL;
 	map->graphics->minimap_width = 11 * MINI_TILE;
 	map->graphics->minimap_height = map->graphics->minimap_width;
+	map->graphics->game_img.image = NULL;
+	map->graphics->minimap_img.image = NULL;
 }
