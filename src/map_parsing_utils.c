@@ -11,26 +11,25 @@ int	is_map_character(char c)
 }
 
 /* Checks that line contains the idenfifier of a parameter. */
-int    line_contains_parameter(char *line)
+int	line_contains_parameter(char *line)
 {
-    int    i;
+	int	i;
 
-    i = 0;
-    while (line[i] == 32)
-    {
-        if (line[i] != 32)
-            break ;
-        i++;
-    }
-    printf("line[i] : %d '%c'\n", i, line[i]);
-    if ((line[i] == 'F' && line[i + 1] == ' ')
-        || (line[i] == 'C' && line[i + 1] == ' ')
-        || (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        || (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
-        || (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
-        || (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' '))
-        return (1);
-    return (0);
+	i = 0;
+	while (line[i] == 32)
+	{
+		if (line[i] != 32)
+			break ;
+		i++;
+	}
+	if ((line[i] == 'F' && line[i + 1] == ' ')
+		|| (line[i] == 'C' && line[i + 1] == ' ')
+		|| (line[i] == 'N' && line[i + 1] == 'O' && line[i + 2] == ' ')
+		|| (line[i] == 'S' && line[i + 1] == 'O' && line[i + 2] == ' ')
+		|| (line[i] == 'E' && line[i + 1] == 'A' && line[i + 2] == ' ')
+		|| (line[i] == 'W' && line[i + 1] == 'E' && line[i + 2] == ' '))
+		return (1);
+	return (0);
 }
 
 /* Turns the player's original angle depending on the map player parameter. */

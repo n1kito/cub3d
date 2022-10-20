@@ -24,7 +24,6 @@ void	trigger_minimap(void)
 		mlx_destroy_window(g->mlx_ptr, g->minimap_window_ptr);
 		g->minimap_window_ptr = NULL;
 		_map()->is_minimap_open = 0;
-
 	}
 }
 
