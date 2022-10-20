@@ -1,21 +1,16 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
-/* Analyses map file and exits in case of error, or if all parameters are not correct. */
+/* Analyses map file and exits in case of error,
+ * or if all parameters are not correct. */
 void	map_parsing(void)
 {
-	// Create and init params structure
-	// 1. count map lines
 	get_file_dimensions();
-	// 2. extract map with GNL
 	extract_map_file();
-	// 3. process map file contents
 	process_map_file_contents();
 	if (!_map()->map)
 		ft_exit("map not found", 1);
-	// 4. check that map is closed
 	closed_map_check();
-	// 5. check that there is a starting position
 	if (_map()->params->pl_start_pos[0] == -1)
 		ft_exit("missing player starting position", 1);
 	get_map_dimensions();
@@ -30,7 +25,8 @@ void	extract_map_file(void)
 	int	*map_fd_tmp;
 
 	map_fd_tmp = &_map()->map_fd;
-	_map()->file_contents = malloc(sizeof(char *) * (_map()->file_line_count + 1));
+	_map()->file_contents = malloc(sizeof(char *)
+		* (_map()->file_line_count + 1));
 	if (!_map()->file_contents)
 	{
 		get_next_line(-1);

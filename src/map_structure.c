@@ -21,6 +21,9 @@ t_map	*_map(void)
  * and initializes all pointers. */
 void	map_struct_init(t_map *map)
 {
+	float	fov;
+
+	fov = 60 * (PI / 180);
 	map->map_name = NULL;
 	map->file_contents = NULL;
 	map->map = NULL;
@@ -31,12 +34,13 @@ void	map_struct_init(t_map *map)
 	map->plyr.move = 0;
 	map->plyr.side = 0;
 	map->is_minimap_open = 0;
-	map->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(FOV / 2);
+	map->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(fov / 2);
 	coords_init(0, 0, 0, 0);
 	params_struct_init(map);
 	graphics_struct_init(map);
 }
 
+/* Initialize all pointers in parameter structure. */
 void	params_struct_init(t_map *map)
 {
 	map->params = malloc(sizeof(t_params));
@@ -56,6 +60,7 @@ void	params_struct_init(t_map *map)
 	map->params->pl_start_pos[1] = -1;
 }
 
+/* Initialize all pointers in graphics structure. */
 void	graphics_struct_init(t_map *map)
 {
 	map->graphics = malloc(sizeof(t_mlx));

@@ -1,6 +1,7 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* Sets values necessary to identify horizontal interceptions. */
 void	init_horz_intercepts(t_raycasting *r)
 {
 	r->y_intercept = floor(_map()->plyr.y / TILE_SIZE) * TILE_SIZE;
@@ -18,6 +19,7 @@ void	init_horz_intercepts(t_raycasting *r)
 		r->x_step *= -1;
 }
 
+/* Sets values necessary to identify vertical interceptions. */
 void	init_vert_intercepts(t_raycasting *r)
 {
 	r->x_intercept = floor(_map()->plyr.x / TILE_SIZE) * TILE_SIZE;
@@ -35,6 +37,7 @@ void	init_vert_intercepts(t_raycasting *r)
 		r->y_step *= -1;
 }
 
+/* Sets values required by the raycasting process. */
 void	init_raycasting_values(t_raycasting *r, float ray_angle)
 {
 	r->ray_angle = normalize_angle(ray_angle);

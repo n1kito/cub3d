@@ -1,6 +1,7 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* Sets up all requires mlx elements. */
 void	mlx_setup(void)
 {
 	t_map	*m;
@@ -23,6 +24,7 @@ void	mlx_setup(void)
 		ft_exit("failed to create images", 1);
 }
 
+/* Update routine for both main game window and minimap window. */
 int	update_window(void)
 {
 	t_mlx	*g;
@@ -37,7 +39,6 @@ int	update_window(void)
 	if (_map()->is_minimap_open)
 	{
 		render_minimap(_map()->graphics, _map()->map);
-		// render_rays();
 		mlx_clear_window(g->mlx_ptr, g->minimap_window_ptr);
 		mlx_put_image_to_window(g->mlx_ptr, g->minimap_window_ptr,
 			g->minimap_img.image,
@@ -47,6 +48,7 @@ int	update_window(void)
 	return (0);
 }
 
+/* Initializes key hooks for main game window. */
 void	init_hooks(void)
 {
 	t_mlx		*g;
@@ -56,11 +58,6 @@ void	init_hooks(void)
 	p = _map()->params;
 	_map()->plyr.x = p->pl_start_pos[0] * TILE_SIZE + TILE_SIZE / 2;
 	_map()->plyr.y = p->pl_start_pos[1] * TILE_SIZE + TILE_SIZE / 2;
-	// g->minimap_img.image = mlx_new_image(g->mlx_ptr,
-	// 		g->minimap_width, g->minimap_height);
-	// g->game_img.image = mlx_new_image(g->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
-	// if (!g->minimap_img.image || !g->game_img.image)
-	// 	ft_exit("mlx_new_image() failed [init_hooks()]", 1);
 	g->minimap_img.addr = mlx_get_data_addr(g->minimap_img.image,
 			&g->minimap_img.bpp, &g->minimap_img.line_length,
 			&g->minimap_img.endian);
@@ -72,6 +69,7 @@ void	init_hooks(void)
 	mlx_loop_hook(_map()->graphics->mlx_ptr, &update_window, NULL);
 }
 
+/* Open all four textures. */
 void	open_all_textures(void)
 {
 	open_texture(&_map()->params->n_texture);
@@ -80,6 +78,8 @@ void	open_all_textures(void)
 	open_texture(&_map()->params->w_texture);
 }
 
+/* Open a texture file, check it was correctly opened and that it is square.
+ * Then assign its parameters in the image structure. */
 void	open_texture(t_img *texture)
 {
 	int		texture_width;

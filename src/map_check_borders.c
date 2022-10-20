@@ -32,7 +32,7 @@ void	print_map_unvalid_char(int i, int j)
 	}
 }
 
-void	check_around(int i, int j)
+void	check_around_zero(int i, int j)
 {
 	if (!_map()->map[i + 1])
 	{
@@ -73,7 +73,7 @@ void	closed_map_check(void)
 		while (_map()->map[i][j])
 		{
 			if (_map()->map[i][j] == '0')
-				check_around(i, j);
+				check_around_zero(i, j);
 			j++;
 		}
 		j = 0;

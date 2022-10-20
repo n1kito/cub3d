@@ -81,6 +81,7 @@ int	check_for_colors(char *line)
 	return (ft_freetab(&splitted_line), 1);
 }
 
+/* Uses freetab() on two tabs. */
 void	multi_freetab(char ***tab1, char ***tab2)
 {
 	ft_freetab(tab1);

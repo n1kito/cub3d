@@ -55,7 +55,8 @@ SRC_FILES		:=	main\
 					render_drawing\
 					render_minimap\
 					render_wall_projection\
-					utils
+					utils\
+					utils_free
 SRC_FILES_BONUS	:=	main
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))

@@ -33,6 +33,7 @@ int    line_contains_parameter(char *line)
     return (0);
 }
 
+/* Turns the player's original angle depending on the map player parameter. */
 void	set_player_start_angle(char player_char)
 {
 	if (player_char == 'N')

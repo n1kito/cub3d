@@ -45,7 +45,7 @@ void	render_minimap(t_mlx *g, char **map)
 	render_player_dot_on_minimap(lim);
 }
 
-/* Place player dot on top of minimap image. */
+/* Place player position dot on top of minimap image. */
 void	render_player_dot_on_minimap(int *draw_end)
 {
 	double		dot_pos[2];
@@ -53,8 +53,6 @@ void	render_player_dot_on_minimap(int *draw_end)
 	t_params	*p;
 
 	p = _map()->params;
-	_map()->graphics->minimap_draw_end[0] = draw_end[0];
-	_map()->graphics->minimap_draw_end[1] = draw_end[1];
 	minimap_img = _map()->graphics->minimap_img;
 	dot_pos[0] = (_map()->plyr.x * SCALE_FACTOR)
 		- (draw_end[0] - 10) * MINI_TILE;
