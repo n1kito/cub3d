@@ -22,7 +22,7 @@ void	check_for_texture(char *line)
 }
 
 /* Checks that texture path is not a directory and tries to open it.
- * Fails if there was already a texture defined for that orientation
+ * Fails and exits if there was already a texture defined for that orientation
  * or texture cannot be opened. */
 void	check_and_store_path(char **args)
 {
@@ -49,7 +49,7 @@ void	check_and_store_path(char **args)
 		_map()->params->w_texture.path = ft_strdup(args[1]);
 }
 
-/* Exits if the texture pointer was already assigned. */
+/* Exits if the texture path pointer was already assigned. */
 void	check_for_double_textures(char **args)
 {
 	if (ft_strcmp(args[0], "NO") == 0 && _map()->params->n_texture.path)
@@ -74,6 +74,8 @@ void	check_for_double_textures(char **args)
 	}
 }
 
+/* Uses mlx_get_data_addr to assign texture parameters to the corresponding
+ * structure. */
 void	assign_texture_parameters(t_img *texture, int sprite_size)
 {
 	texture->sprite_size = sprite_size;

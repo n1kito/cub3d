@@ -1,6 +1,8 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* If minimap is not open, window is opened and hooks are setup.
+ * Else, the window is destroyed (but not the minimap image), */
 void	trigger_minimap(void)
 {
 	t_mlx	*g;
@@ -22,9 +24,11 @@ void	trigger_minimap(void)
 		mlx_destroy_window(g->mlx_ptr, g->minimap_window_ptr);
 		g->minimap_window_ptr = NULL;
 		_map()->is_minimap_open = 0;
+
 	}
 }
 
+/* Sets the actions corresponding to each key press. */
 int	key_press(int key, void *param)
 {
 	(void)param;
@@ -47,6 +51,7 @@ int	key_press(int key, void *param)
 	return (0);
 }
 
+/* Sets the actions corresponding to each key release. */
 int	key_release(int key, void *param)
 {
 	(void)param;
@@ -65,6 +70,8 @@ void	update_pos(float new_pos[2], float new_x, float new_y)
 	new_pos[1] = new_y;
 }
 
+/* Updates player position coordinates depending on its walk direction
+ * and rotation angle. */
 void	move_player(void)
 {
 	float		new_pos[2];

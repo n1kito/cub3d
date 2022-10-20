@@ -40,6 +40,7 @@ void	map_struct_init(t_map *map)
 	graphics_struct_init(map);
 }
 
+/* Initialize all pointers in parameter structure. */
 void	params_struct_init(t_map *map)
 {
 	map->params = malloc(sizeof(t_params));
@@ -59,6 +60,7 @@ void	params_struct_init(t_map *map)
 	map->params->pl_start_pos[1] = -1;
 }
 
+/* Initialize all pointers in graphics structure. */
 void	graphics_struct_init(t_map *map)
 {
 	map->graphics = malloc(sizeof(t_mlx));

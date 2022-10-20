@@ -18,7 +18,7 @@ void	generate_projection(void)
 	}
 }
 
-/* Calculates values necessary to draw each frame. */
+/* Calculates values necessary to draw each 'ray' column. */
 void	init_projection_values(t_projection *p, int i)
 {
 	p->perp_distance = _map()->rays[i].distance

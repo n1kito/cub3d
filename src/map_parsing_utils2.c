@@ -41,7 +41,6 @@ void	get_map_dimensions(void)
 		map_height++;
 	}
 	_map()->map_height = map_height;
-	_map()->map_width = map_width - 1;
 }
 
 /* Checks that there is nothing after the map in the file. */
@@ -75,6 +74,7 @@ int	is_path_directory(char *path)
 	return (0);
 }
 
+/* Generates color value and assigns it to pointer passed as parameter. */
 void	assign_color(int *color_ptr, int rgb[3])
 {
 	*color_ptr = color_generator(rgb[0], rgb[1], rgb[2]);

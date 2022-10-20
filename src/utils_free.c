@@ -1,6 +1,7 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* Frees texture path and destroys image, if they exist. */
 void	free_texture(t_img *texture)
 {
 	if (texture->path)
@@ -9,6 +10,7 @@ void	free_texture(t_img *texture)
 		mlx_destroy_image(_map()->graphics->mlx_ptr, texture->image);
 }
 
+/* Frees every allocated memory space. */
 void	free_all(void)
 {
 	t_mlx		*g;

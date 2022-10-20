@@ -1,6 +1,7 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* Sets up all requires mlx elements. */
 void	mlx_setup(void)
 {
 	t_map	*m;
@@ -23,6 +24,7 @@ void	mlx_setup(void)
 		ft_exit("failed to create images", 1);
 }
 
+/* Update routine for both main game window and minimap window. */
 int	update_window(void)
 {
 	t_mlx	*g;
@@ -46,6 +48,7 @@ int	update_window(void)
 	return (0);
 }
 
+/* Initializes key hooks for main game window. */
 void	init_hooks(void)
 {
 	t_mlx		*g;
@@ -66,6 +69,7 @@ void	init_hooks(void)
 	mlx_loop_hook(_map()->graphics->mlx_ptr, &update_window, NULL);
 }
 
+/* Open all four textures. */
 void	open_all_textures(void)
 {
 	open_texture(&_map()->params->n_texture);
@@ -74,6 +78,8 @@ void	open_all_textures(void)
 	open_texture(&_map()->params->w_texture);
 }
 
+/* Open a texture file, check it was correctly opened and that it is square.
+ * Then assign its parameters in the image structure. */
 void	open_texture(t_img *texture)
 {
 	int		texture_width;

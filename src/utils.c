@@ -3,20 +3,18 @@
 
 int	error_print(char *error, int return_value)
 {
-	static int	is_first_error = 0;
-
-	if (is_first_error++ == 0)
-		ft_printf_fd(2, "\033[1;31mError\033[0;39m\n");
-	ft_printf_fd(2, "> %s\n", error);
+	ft_printf_fd(2, "\033[1;31mError\033[0;39m\n> %s\n", error);
 	return (return_value);
 }
 
+/* Used for key triggers that require a function that returns an int. */
 int	exit_game(void)
 {
 	ft_exit(NULL, 0);
 	exit(0);
 }
 
+/* Prints an error before freeing and exiting. */
 void	ft_exit(char *error, int exit_code)
 {
 	if (error)

@@ -17,7 +17,7 @@ int	file_has_extension(char *filename, char *extension)
 	return (0);
 }
 
-/* */
+/* Checks the filename, file type and permissions on map file. */
 int	map_file_checker(void)
 {
 	int	dir_test;

@@ -30,27 +30,6 @@ void	ft_put_rectangle(t_img *img, int color)
 	}
 }
 
-/* Places gradient rectangle in image. Needs coords struct to be set first. */
-void	ft_put_rectangle_gradient(t_img *img, int color)
-{
-	int	pos_x;
-	int	pos_y;
-	int	i;
-
-	i = 0;
-	pos_y = _map()->coord.y0;
-	while (pos_y < _map()->coord.y0 + _map()->coord.x1)
-	{
-		pos_x = _map()->coord.x0;
-		while (pos_x < _map()->coord.x0 + _map()->coord.y1)
-			ft_pixel_put(img, pos_x++, pos_y, color);
-		pos_y++;
-		i++;
-		if (i % 5 == 0)
-			color++;
-	}
-}
-
 /* Displays a filled in ellipse on image. */
 void	ft_put_circle(t_img *img, double pos[2], int radius, int color)
 {
@@ -72,6 +51,7 @@ void	ft_put_circle(t_img *img, double pos[2], int radius, int color)
 	}
 }
 
+/* Draws line on image passed as parameter. */
 void	ft_draw_line(t_img *img, int color)
 {
 	double	dist[2];

@@ -75,14 +75,10 @@ typedef struct s_map
 	char				**file_contents;
 	char				**map;
 	char				*map_name;
-	int					sprite_size;
 	int					map_fd;
 	int					map_height;
 	float				dist_proj_plane;
-	int					map_width;
 	int					file_line_count;
-	int					win_width;
-	int					win_height;
 	int					is_minimap_open;
 	struct s_params		*params;
 	struct s_mlx		*graphics;
@@ -111,9 +107,7 @@ typedef struct s_mlx
 	t_img				minimap_img;
 	int					minimap_height;
 	int					minimap_width;
-	int					minimap_tile;
 	double				minimap_dot_pos[2];
-	int					minimap_draw_end[2];
 }						t_mlx;
 
 typedef struct s_params
@@ -131,7 +125,6 @@ typedef struct s_params
 
 typedef struct s_projection {
 	float				perp_distance;
-	float				distance_proj_plane;
 	float				projected_wall_height;
 	int					wall_strip_height;
 	int					wall_top_pixel;
@@ -219,7 +212,6 @@ void		move_player(void);
 // mlx_render_utils.c
 void		ft_pixel_put(t_img *img, int x, int y, int color);
 void		ft_put_rectangle(t_img *img, int color);
-void		ft_put_rectangle_gradient(t_img *img, int color);
 void		ft_put_circle(t_img *img, double pos[2], int radius, int color);
 void		ft_draw_line(t_img *img, int color);
 
@@ -248,7 +240,7 @@ float		distance_between_points(float x1, float y1, float x2, float y2);
 int			map_has_wall_at(float x, float y);
 void		coords_init(int x0, int y0, int x1, int y1);
 
-// render_srawing.c
+// render_drawing.c
 t_img		*pick_texture(int i);
 void		draw_sky(t_projection p, int i);
 void		draw_walls(t_projection p, int i);

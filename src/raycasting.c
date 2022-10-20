@@ -1,6 +1,7 @@
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
+/* Calculates distance to wall intersection. */
 void	calculate_wall_hit_distances(t_raycasting *r)
 {
 	if (r->found_horz_wall_hit)
@@ -15,6 +16,7 @@ void	calculate_wall_hit_distances(t_raycasting *r)
 		r->vert_hit_distance = (float)INT_MAX;
 }
 
+/* Finds first horizontal grid intersection. */
 void	find_horz_grid_intersection(t_raycasting *r)
 {
 	init_horz_intercepts(r);
@@ -43,6 +45,7 @@ void	find_horz_grid_intersection(t_raycasting *r)
 	}
 }
 
+/* Finds first vertical grid intersection. */
 void	find_vert_grid_intersection(t_raycasting *r)
 {
 	init_vert_intercepts(r);
@@ -69,6 +72,7 @@ void	find_vert_grid_intersection(t_raycasting *r)
 	}
 }
 
+/* Casts a ray from player position depending on player rotation. */
 void	cast_ray(float ray_angle, int column)
 {
 	t_raycasting	r;
