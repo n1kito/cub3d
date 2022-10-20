@@ -198,7 +198,7 @@ int			check_for_colors(char *line);
 void		multi_freetab(char ***tab1, char ***tab2);
 
 // map_check_file.c
-void		map_name_checker(void);
+int			file_has_extension(char *filename, char *extension);
 int			map_file_checker(void);
 
 // map_check_textures.c
