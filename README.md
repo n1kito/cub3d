@@ -22,7 +22,7 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
   - [ ] Gradient does not work on all colors
 - [ ] Setup bonus rule in Makefile
   - [ ] Move minimap + gradients to bonus rule ?
-- [ ] W + D goes diagonal (better movement)
+- [x] W + D goes diagonal (better movement)
 - [ ] Norm
 - [ ] Memory management
 - [ ] Testing

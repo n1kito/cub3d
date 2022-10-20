@@ -26,7 +26,7 @@ void	draw_sky(t_projection p, int i)
 
 	ceiling_color = _map()->params->c_color;
 	coords_init(i, 0, p.wall_top_pixel, 1);
-	ft_put_rectangle_gradient(&_map()->graphics->game_img, ceiling_color);
+	ft_put_rectangle(&_map()->graphics->game_img, ceiling_color);
 }
 
 /* Draws wall textures for pixel column of index i. */
@@ -41,12 +41,10 @@ void	draw_walls(t_projection p, int i)
 	texture = pick_texture(i);
 	if (_map()->rays[i].was_hit_vertical)
 		texture_offset[0] = ((int)_map()->rays[i].wall_hit_y
-			% texture->sprite_size);
-//			% TILE_SIZE;
+				% texture->sprite_size);
 	else
 		texture_offset[0] = ((int)_map()->rays[i].wall_hit_x
-			% texture->sprite_size);
-//			% TILE_SIZE;
+				% texture->sprite_size);
 	y = p.wall_top_pixel;
 	while (y < p.wall_bottom_pixel)
 	{
@@ -54,7 +52,6 @@ void	draw_walls(t_projection p, int i)
 		texture_offset[1] = distance_from_top
 			* ((float)texture->sprite_size / p.wall_strip_height);
 		texel_color = texture->addr + (texture_offset[1] * texture->line_length
-//				+ texture_offset[0] * (texture->bpp / 8));
 				+ texture_offset[0] * (texture->bpp / 8));
 		ft_pixel_put(&_map()->graphics->game_img, i, y, *(int *)texel_color);
 		y++;
@@ -69,5 +66,5 @@ void	draw_floor(t_projection p, int i)
 	floor_color = _map()->params->f_color;
 	coords_init(i, p.wall_bottom_pixel,
 		WINDOW_HEIGHT - p.wall_top_pixel, 1);
-	ft_put_rectangle_gradient(&_map()->graphics->game_img, floor_color);
+	ft_put_rectangle(&_map()->graphics->game_img, floor_color);
 }

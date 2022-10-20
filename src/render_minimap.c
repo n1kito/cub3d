@@ -17,11 +17,11 @@ void	place_minimap_tiles(int pos[2], int lim[2], int minimap[2], char **map)
 			coords_init(minimap[0] * MINI_TILE,
 				minimap[1] * MINI_TILE, MINI_TILE, MINI_TILE);
 			if (map[pos[1]][pos[0]] == '1')
-				ft_put_rectangle_gradient(&_map()->graphics->minimap_img,
+				ft_put_rectangle(&_map()->graphics->minimap_img,
 					p->c_color);
 			else if (map[pos[1]][pos[0]] == '0'
 					|| is_start_position(map[pos[1]][pos[0]]))
-				ft_put_rectangle_gradient(&_map()->graphics->minimap_img,
+				ft_put_rectangle(&_map()->graphics->minimap_img,
 					p->f_color);
 			pos[0]++;
 			minimap[0]++;
