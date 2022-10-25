@@ -1,7 +1,7 @@
     NO textures/WALL1.xpm
 EA  textures/WALL2.xpm
 WE    textures/WALL3.xpm
-SO                           sprites/WALL4.xpm
+SO                           textures/WALL4.xpm
      F           150,150,150
     C     70,70,70
 111111111111111111111111

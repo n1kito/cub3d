@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_check_textures.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 09:22:22 by mjallada          #+#    #+#             */
+/*   Updated: 2022/10/25 11:07:21 by mjallada         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
@@ -12,7 +24,7 @@ void	check_for_texture(char *line)
 		return ;
 	split = ft_split(line, ' ');
 	if (!split)
-		ft_exit("malloc error in check_for_texture()", 1);
+		ft_exit("malloc fail [check_for_texture()]", 1);
 	if (ft_strcmp(split[0], "NO") == 0
 		|| ft_strcmp(split[0], "SO") == 0
 		|| ft_strcmp(split[0], "EA") == 0

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3D.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
+/*   Updated: 2022/10/25 11:11:55 by mjallada         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -262,7 +274,7 @@ void		ft_exit(char *error, int exit_code);
 int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
 
 // utils_free.c
-void		free_texture(t_img *texture);
+void		free_textures(t_img *txt1, t_img *txt2, t_img *txt3, t_img *txt4);
 void		free_all(void);
 
 #endif

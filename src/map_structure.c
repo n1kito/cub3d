@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   map_structure.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/10/25 09:22:12 by mjallada          #+#    #+#             */
+/*   Updated: 2022/10/25 11:09:58 by mjallada         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 //#include "cub3D.h"
 #include "../include/cub3D.h" //TODO REMOVE THIS
 
@@ -11,7 +23,7 @@ t_map	*_map(void)
 	{
 		map = malloc(sizeof(t_map));
 		if (!map)
-			ft_exit("could not malloc map", 1);
+			exit(error_print("malloc fail [_map()]", 1));
 		map_struct_init(map);
 	}
 	return (map);
@@ -27,6 +39,7 @@ void	map_struct_init(t_map *map)
 	map->map_name = NULL;
 	map->file_contents = NULL;
 	map->map = NULL;
+	map->map_fd = -1;
 	map->params = NULL;
 	map->graphics = NULL;
 	map->plyr.rot_angle = 0;
