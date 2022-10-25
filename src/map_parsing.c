@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:15 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 11:09:05 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 15:45:06 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Analyses map file and exits in case of error,
  * or if all parameters are not correct. */

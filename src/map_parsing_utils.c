@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:20 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:21 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:35:27 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Checks whether the tested char is an accepted map character or not. */
 int	is_map_character(char c)

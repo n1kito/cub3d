@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:51 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 11:05:32 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:40 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Frees texture path and destroys image, if they exist. */
 void	free_text(t_img *txt1, t_img *txt2, t_img *txt3, t_img *txt4)

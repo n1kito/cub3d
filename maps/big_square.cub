@@ -1,9 +1,9 @@
-NO textures/WALL1.xpm
-EA textures/WALL2.xpm
-WE textures/WALL3.xpm
-SO textures/WALL4.xpm
-F 150,150,150
-C 70,70,70
+NO textures/purp_wall.xpm
+SO textures/pink_wall.xpm
+WE textures/blue_wall.xpm
+EA textures/green_wall.xpm
+F 74,171,0
+C 37,150,190
 111111111111111111111111111111111111
 100000000000000000000000000000000001
 100010000000000000000000000000000001

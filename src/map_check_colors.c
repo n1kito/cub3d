@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:26 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 11:07:07 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:50:16 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Checks the given string has actual digits, 3 of them, not over 255 / below 0
  * If any is wrong, will exit with a message on stderr. */

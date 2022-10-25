@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:54 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:21:55 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:36 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Draws each projection line on game image. */
 void	generate_projection(void)

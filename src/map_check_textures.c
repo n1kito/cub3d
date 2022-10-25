@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:22 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 11:07:21 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:50:26 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Analyses a line extracted from the .cub file and checks if the first cell
  * is a texture identifier. If a texture identifier is found, the corresponding

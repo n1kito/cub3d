@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:09 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:10 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:09 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Places pixel of color on image. */
 void	ft_pixel_put(t_img *img, int x, int y, int color)

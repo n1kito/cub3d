@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:04 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:05 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:17 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Sets values necessary to identify horizontal interceptions. */
 void	init_horz_intercepts(t_raycasting *r)

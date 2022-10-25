@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:06 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 10:35:48 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:41:33 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Sets up all requires mlx elements. */
 void	mlx_setup(void)
@@ -68,8 +67,8 @@ void	init_hooks(void)
 
 	g = _map()->graphics;
 	p = _map()->params;
-	_map()->plyr.x = p->pl_start_pos[0] * TILE_SIZE + TILE_SIZE / 2;
-	_map()->plyr.y = p->pl_start_pos[1] * TILE_SIZE + TILE_SIZE / 2;
+	_map()->plyr.x = (p->pl_start_pos[0] * TILE_SIZE) + (TILE_SIZE / 2);
+	_map()->plyr.y = (p->pl_start_pos[1] * TILE_SIZE) + (TILE_SIZE / 2);
 	g->minimap_img.addr = mlx_get_data_addr(g->minimap_img.image,
 			&g->minimap_img.bpp, &g->minimap_img.line_length,
 			&g->minimap_img.endian);

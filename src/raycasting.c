@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:00 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:01 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:41:39 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Calculates distance to wall intersection. */
 void	calculate_wall_hit_distances(t_raycasting *r)

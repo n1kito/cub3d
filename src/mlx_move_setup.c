@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:11 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:12 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:41:22 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* If minimap is not open, window is opened and hooks are setup.
  * Else, the window is destroyed (but not the minimap image), */
@@ -90,12 +89,12 @@ void	move_player(void)
 
 	p = &_map()->plyr;
 	p->rot_angle += p->rot * 0.09;
-	if (_map()->plyr.side == 1 && _map()->plyr.move == 0)
-		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 80.12) * 5,
-			_map()->plyr.y + sin(p->rot_angle + 80.12) * 5);
-	else if (_map()->plyr.side == -1 && _map()->plyr.move == 0)
-		update_pos(new_pos, _map()->plyr.x + -cos(p->rot_angle + 80.12) * 5,
-			_map()->plyr.y + -sin(p->rot_angle + 80.12) * 5);
+	if (_map()->plyr.side == -1 && _map()->plyr.move == 0)
+		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + (PI / 2)) * 5,
+			_map()->plyr.y + sin(p->rot_angle + (PI / 2)) * 5);
+	else if (_map()->plyr.side == 1 && _map()->plyr.move == 0)
+		update_pos(new_pos, _map()->plyr.x + -cos(p->rot_angle + (PI / 2)) * 5,
+			_map()->plyr.y + -sin(p->rot_angle + (PI / 2)) * 5);
 	else if (_map()->plyr.side == 1 && _map()->plyr.move == 1)
 		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 81) * 5,
 			_map()->plyr.y + sin(p->rot_angle + 81) * 5);
@@ -103,9 +102,11 @@ void	move_player(void)
 		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 82.4) * 5,
 			_map()->plyr.y + sin(p->rot_angle + 82.4) * 5);
 	else
+	{
 		update_pos(new_pos,
 			_map()->plyr.x + (cos(p->rot_angle) * _map()->plyr.move) * 5,
 			_map()->plyr.y + (sin(p->rot_angle) * _map()->plyr.move) * 5);
+	}
 	if (!map_has_wall_at(new_pos[0], p->y))
 		p->x = new_pos[0];
 	if (!map_has_wall_at(p->x, new_pos[1]))

@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:57 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:21:58 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:34 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Place tiles on minimap image. */
 void	place_minimap_tiles(int pos[2], int lim[2], int minimap[2], char **map)

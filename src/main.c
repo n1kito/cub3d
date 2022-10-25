@@ -6,11 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:35 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:35 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:13:44 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 int	main(int argc, char *argv[])
 {

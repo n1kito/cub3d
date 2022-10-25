@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:12 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 11:09:58 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 16:35:15 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Called everytime a pointer to the main map structure is needed.
  * Initializes said map structure only on first call. */

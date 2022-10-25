@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:59 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:00 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:15:31 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Returns correct texture pointer depending on wall and ray orientations. */
 t_img	*pick_texture(int i)

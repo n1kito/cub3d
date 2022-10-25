@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:02 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:03 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:41:11 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 float	normalize_angle(float angle)
 {
@@ -32,11 +31,13 @@ int	map_has_wall_at(float x, float y)
 	int	map_grid_index_x;
 	int	map_grid_index_y;
 
-	if (x < 0 || x > 200000 || y < 0 || y > 200000)
+	if (x < 0 || x > _map()->map_width * TILE_SIZE || y < 0 || y > _map()->map_height * TILE_SIZE)
 		return (TRUE);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);
 	if (map_grid_index_y > _map()->map_height - 1)
+		return (TRUE);
+	if (map_grid_index_x > (int)ft_strlen(_map()->map[map_grid_index_y]))
 		return (TRUE);
 	if (_map()->map[map_grid_index_y][map_grid_index_x] == '1')
 		return (TRUE);

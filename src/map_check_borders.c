@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:27 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:28 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 14:13:50 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 int	is_valid_map_char(char c)
 {

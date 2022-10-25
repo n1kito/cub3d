@@ -6,12 +6,11 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:17 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 09:22:18 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:23:30 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "cub3D.h"
-#include "../include/cub3D.h" //TODO REMOVE THIS
+#include "cub3D.h"
 
 /* Measures the number of lines and columns in the map and saves them in the
  * map structure. */
@@ -53,6 +52,7 @@ void	get_map_dimensions(void)
 		map_height++;
 	}
 	_map()->map_height = map_height;
+	_map()->map_width = map_width;
 }
 
 /* Checks that there is nothing after the map in the file. */
