@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:02 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:41:11 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:43:54 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ int	map_has_wall_at(float x, float y)
 	int	map_grid_index_x;
 	int	map_grid_index_y;
 
-	if (x < 0 || x > _map()->map_width * TILE_SIZE || y < 0 || y > _map()->map_height * TILE_SIZE)
+	if (x < 0 || x > _map()->map_width * TILE_SIZE
+		|| y < 0 || y > _map()->map_height * TILE_SIZE)
 		return (TRUE);
 	map_grid_index_x = floor(x / TILE_SIZE);
 	map_grid_index_y = floor(y / TILE_SIZE);

@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:23:22 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:46:26 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 # include <math.h>
 # include <limits.h>
 # include "libft.h"
-#include <stdio.h>
 
 // MACROS
 # define UP 119

@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:11 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:41:22 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/25 17:46:12 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,11 +102,9 @@ void	move_player(void)
 		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 82.4) * 5,
 			_map()->plyr.y + sin(p->rot_angle + 82.4) * 5);
 	else
-	{
 		update_pos(new_pos,
 			_map()->plyr.x + (cos(p->rot_angle) * _map()->plyr.move) * 5,
 			_map()->plyr.y + (sin(p->rot_angle) * _map()->plyr.move) * 5);
-	}
 	if (!map_has_wall_at(new_pos[0], p->y))
 		p->x = new_pos[0];
 	if (!map_has_wall_at(p->x, new_pos[1]))
