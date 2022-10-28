@@ -6,7 +6,7 @@
 #    By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 09:22:45 by mjallada          #+#    #+#              #
-#    Updated: 2022/10/25 11:11:01 by mjallada         ###   ########.fr        #
+#    Updated: 2022/10/28 15:19:36 by mjallada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,17 +16,15 @@
 NAME				:= cub3D
 
 CC					:= cc
-CFLAGS				:= -Wall -Wextra -Werror -I$(INC) 03 -I.. -g
+CFLAGS				:= -Wall -Wextra -Werror -I$(INC) -I.. -g
 
 INC_DIR				:= include
 SRC_DIR				:= src
 BIN_DIR				:= bin
 
-#TODO: check this section for the miniLibX
 INC					:= /usr/include
 INCLIB				:= $(INC)/../lib
 LFLAGS				:= -L./minilibx-linux -lmlx -L$(INCLIB) -lXext -lX11 -lm
-#
 
 LIB_DIR				:= libft
 LIB					:= $(shell echo $(LIB_DIR) | cut -c 4-)
@@ -88,11 +86,6 @@ $(BIN_DIR)/%.o: $(SRC_DIR)/%.c Makefile libft/src/*.c | $(BIN_DIR)
 	@$(CC) -MD -g -c $(CFLAGS) -I $(INC_DIR) -I $(LIB_DIR)/$(INC_DIR) -I./minilibx-linux $< -o $@
 	@printf "\r> $(BLUE)compiling $(notdir $<)$(END_COLOR)"
 
-$(NAME_BONUS): $(OBJ_FILES_BONUS)
-	@make --no-print-directory -C libft
-	@$(CC) -g -o $(NAME_BONUS) $(OBJ_FILES_BONUS) $(LFLAGS) -L $(LIB_DIR) -l $(LIB)
-	@echo "\n🧟 $(GREEN_BLINK)$(NAME_BONUS) compiled$(END_COLOR) 🔫\n"
-
 $(BIN_DIR):
 	@mkdir $(BIN_DIR)
 	@echo "$(IPURPLE)Created $(BIN_DIR)/ directory.$(END_COLOR)"
@@ -127,4 +120,4 @@ space:
 # **************************************************************************** #
 # PHONY
 
-.PHONY: all clean fclean re header space bonus
+.PHONY: all clean fclean re header space bonus minilib

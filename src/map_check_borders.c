@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:27 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 14:13:50 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/10/28 15:35:12 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ int	is_valid_map_char(char c)
 		return (1);
 	else
 		return (0);
+}
+
+int	is_inside_map_char(char c)
+{
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+		return (1);
+	return (0);
 }
 
 void	print_map_unvalid_char(int i, int j)
@@ -32,6 +39,8 @@ void	print_map_unvalid_char(int i, int j)
 		if (x == i)
 		{
 			ft_printf_fd(2, "%s", _map()->map[x]);
+			if (_map()->map[x][ft_strlen(_map()->map[x]) - 1] != '\n')
+				ft_printf_fd(2, "\n");
 			while (++y < j)
 				write(2, "-", 1);
 			write(2, "^", 2);
@@ -43,7 +52,7 @@ void	print_map_unvalid_char(int i, int j)
 	}
 }
 
-void	check_around_zero(int i, int j)
+void	check_if_inside_map(int i, int j)
 {
 	if (!_map()->map[i + 1])
 	{
@@ -83,8 +92,9 @@ void	closed_map_check(void)
 	{
 		while (_map()->map[i][j])
 		{
-			if (_map()->map[i][j] == '0')
-				check_around_zero(i, j);
+			if (_map()->map[i][j] == '0'
+				|| is_start_position(_map()->map[i][j]))
+				check_if_inside_map(i, j);
 			j++;
 		}
 		j = 0;
