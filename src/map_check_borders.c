@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:27 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/28 15:35:12 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:00:57 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ void	print_map_unvalid_char(int i, int j)
 			ft_printf_fd(2, "%s", _map()->map[x]);
 		x++;
 	}
+	if (_map()->map[x - 1][ft_strlen(_map()->map[x - 1]) - 1] != '\n')
+		ft_printf_fd(2, "\n");
 }
 
 void	check_if_inside_map(int i, int j)
@@ -64,7 +66,7 @@ void	check_if_inside_map(int i, int j)
 		print_map_unvalid_char(i, j);
 		ft_exit("map not closed", 1);
 	}
-	if (!is_valid_map_char(_map()->map[i - 1][j]))
+	if (i == 0 || !is_valid_map_char(_map()->map[i - 1][j]))
 	{
 		print_map_unvalid_char(i, j);
 		ft_exit("map not closed", 1);
