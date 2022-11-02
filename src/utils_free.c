@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:51 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 14:15:40 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:23 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,16 @@ void	free_text(t_img *txt1, t_img *txt2, t_img *txt3, t_img *txt4)
 		mlx_destroy_image(_map()->graphics->mlx_ptr, txt4->image);
 }
 
+void	free_file_contents(void)
+{
+	int i;
+
+	i = 0;
+	while (i < _map()->file_line_count)
+		free(_map()->file_contents[i++]);
+	free(_map()->file_contents);
+}
+
 /* Frees every allocated memory space. */
 void	free_all(void)
 {
@@ -56,7 +66,7 @@ void	free_all(void)
 	if (g)
 		free(g->mlx_ptr);
 	free(p);
-	ft_freetab(&_map()->file_contents);
+	free_file_contents();
 	free(g);
 	if (_map()->map_fd >= 0)
 		close(_map()->map_fd);

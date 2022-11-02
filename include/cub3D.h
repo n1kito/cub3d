@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 11:09:29 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:38:40 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -282,6 +282,7 @@ int			color_generator(u_int8_t red, u_int8_t green, u_int8_t blue);
 
 // utils_free.c
 void		free_textures(t_img *txt1, t_img *txt2, t_img *txt3, t_img *txt4);
+void		free_file_contents(void);
 void		free_all(void);
 
 #endif
