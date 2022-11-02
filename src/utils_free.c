@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:51 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 11:38:23 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:18:46 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,11 @@ void	free_file_contents(void)
 {
 	int i;
 
-	i = 0;
-	while (i < _map()->file_line_count)
-		free(_map()->file_contents[i++]);
+	if (!_map()->file_contents)
+		return ;
+	i = -1;
+	while (++i < _map()->file_line_count)
+			free(_map()->file_contents[i]);
 	free(_map()->file_contents);
 }
 
