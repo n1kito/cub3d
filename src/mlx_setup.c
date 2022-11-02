@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:06 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 12:03:42 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 12:12:58 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,10 @@ int	update_window(void)
 	generate_projection();
 	mlx_put_image_to_window(g->mlx_ptr, g->window_ptr, g->game_img.image, 0, 0);
 	mlx_string_put(g->mlx_ptr, g->window_ptr, 15, 20, WHITE, "(m) minimap");
-	mlx_string_put(g->mlx_ptr, g->window_ptr, 15, 35, WHITE, "(f) fastness toggle");
+	if (_map()->plyr.mode_dell)
+		mlx_string_put(g->mlx_ptr, g->window_ptr, 15, 35, WHITE, "(f) go fast");
+	else
+		mlx_string_put(g->mlx_ptr, g->window_ptr, 15, 35, WHITE, "(f) go slow");
 	mlx_string_put(g->mlx_ptr, g->window_ptr, 15, 50, WHITE, "(q) quit");
 	if (_map()->is_minimap_open)
 	{
