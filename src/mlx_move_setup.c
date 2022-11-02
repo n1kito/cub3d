@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_move_setup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:11 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 11:08:09 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:57:46 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,8 +118,8 @@ void	move_player(void)
 		update_pos(n_pos,
 			p->x + (cos(p->rot_angle) * p->move) * p->mv_speed,
 			p->y + (sin(p->rot_angle) * p->move) * p->mv_speed);
-	if (!wall_at(n_pos[0] + 1, p->y + 1) && !wall_at(n_pos[0] - 1, p->y - 1))
+	if (!wall_at(n_pos[0] + 1, p->y + 1) && !wall_at(n_pos[0] - 1, p->y - 1) && !wall_at(n_pos[0], p->y))
 		p->x = n_pos[0];
-	if (!wall_at(p->x + 1, n_pos[1] + 1) && !wall_at(p->x - 1, n_pos[1] - 1))
+	if (!wall_at(p->x + 1, n_pos[1] + 1) && !wall_at(p->x - 1, n_pos[1] - 1) && !wall_at(p->x, n_pos[1]))
 		p->y = n_pos[1];
 }
