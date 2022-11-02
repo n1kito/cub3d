@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:06 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 12:12:58 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:24:02 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	update_window(void)
 	t_mlx	*g;
 
 	g = _map()->graphics;
-	move_player();
+	move_player(&_map()->plyr);
 	cast_all_rays();
 	generate_projection();
 	mlx_put_image_to_window(g->mlx_ptr, g->window_ptr, g->game_img.image, 0, 0);

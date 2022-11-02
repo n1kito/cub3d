@@ -6,7 +6,7 @@
 #    By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/25 09:22:45 by mjallada          #+#    #+#              #
-#    Updated: 2022/10/28 15:19:36 by mjallada         ###   ########.fr        #
+#    Updated: 2022/11/02 13:39:09 by mjallada         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ SRC_FILES		:=	main\
 					render_wall_projection\
 					utils\
 					utils_free
-SRC_FILES_BONUS	:=	main
+SRC_FILES_BONUS	:=	$(SRC_FILES)
 OBJ_FILES		:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES)))
 OBJ_FILES_BONUS	:=	$(addprefix $(BIN_DIR)/, $(addsuffix .o, $(SRC_FILES_BONUS)))
 

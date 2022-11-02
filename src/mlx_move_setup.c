@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_move_setup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:11 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 11:57:46 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/11/02 13:39:30 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,31 +95,30 @@ int	key_release(int key, void *param)
 
 /* Updates player position coordinates depending on its walk direction
  * and rotation angle. */
-void	move_player(void)
+void	move_player(t_player *p)
 {
-	float		n_pos[2];
-	t_player	*p;
+	float		new[2];
 
-	p = &_map()->plyr;
 	p->rot_angle += p->rot * p->rot_speed;
 	if (p->side == -1 && p->move == 0)
-		update_pos(n_pos, p->x + cos(p->rot_angle + (PI / 2)) * p->mv_speed,
+		update_pos(new, p->x + cos(p->rot_angle + (PI / 2)) * p->mv_speed,
 			p->y + sin(p->rot_angle + (PI / 2)) * p->mv_speed);
 	else if (p->side == 1 && p->move == 0)
-		update_pos(n_pos, p->x + -cos(p->rot_angle + (PI / 2)) * p->mv_speed,
+		update_pos(new, p->x + -cos(p->rot_angle + (PI / 2)) * p->mv_speed,
 			p->y + -sin(p->rot_angle + (PI / 2)) * p->mv_speed);
 	else if (p->side == 1 && p->move == 1)
-		update_pos(n_pos, p->x + cos(p->rot_angle + 81) * p->mv_speed,
+		update_pos(new, p->x + cos(p->rot_angle + 81) * p->mv_speed,
 			p->y + sin(p->rot_angle + 81) * p->mv_speed);
 	else if (p->side == -1 && p->move == 1)
-		update_pos(n_pos, p->x + cos(p->rot_angle + 82.4) * p->mv_speed,
+		update_pos(new, p->x + cos(p->rot_angle + 82.4) * p->mv_speed,
 			p->y + sin(p->rot_angle + 82.4) * p->mv_speed);
 	else
-		update_pos(n_pos,
-			p->x + (cos(p->rot_angle) * p->move) * p->mv_speed,
+		update_pos(new, p->x + (cos(p->rot_angle) * p->move) * p->mv_speed,
 			p->y + (sin(p->rot_angle) * p->move) * p->mv_speed);
-	if (!wall_at(n_pos[0] + 1, p->y + 1) && !wall_at(n_pos[0] - 1, p->y - 1) && !wall_at(n_pos[0], p->y))
-		p->x = n_pos[0];
-	if (!wall_at(p->x + 1, n_pos[1] + 1) && !wall_at(p->x - 1, n_pos[1] - 1) && !wall_at(p->x, n_pos[1]))
-		p->y = n_pos[1];
+	if (!wall_at(new[0] + 1, p->y + 1) && !wall_at(new[0] - 1, p->y - 1)
+		&& !wall_at(new[0], p->y))
+		p->x = new[0];
+	if (!wall_at(p->x + 1, new[1] + 1) && !wall_at(p->x - 1, new[1] - 1)
+		&& !wall_at(p->x, new[1]))
+		p->y = new[1];
 }

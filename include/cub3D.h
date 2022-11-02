@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 11:38:40 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 13:39:17 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,7 +225,7 @@ void		trigger_minimap(void);
 void		toggle_mode_dell(void);
 int			key_press(int key, void *param);
 int			key_release(int key, void *param);
-void		move_player(void);
+void		move_player(t_player *t);
 
 // mlx_render_utils.c
 void		ft_pixel_put(t_img *img, int x, int y, int color);
