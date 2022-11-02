@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mlx_move_setup.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:11 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:46:12 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:57:03 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,22 @@ void	trigger_minimap(void)
 	}
 }
 
+void	toggle_mode_dell(void)
+{
+	if (_map()->plyr.mode_dell == 0)
+	{
+		_map()->plyr.move_speed = 3;
+		_map()->plyr.rot_speed = 0.031;
+		_map()->plyr.mode_dell = 1;
+	}
+	else
+	{
+		_map()->plyr.move_speed = 5;
+		_map()->plyr.rot_speed = 0.09;
+		_map()->plyr.mode_dell = 0;
+	}
+}
+
 /* Sets the actions corresponding to each key press. */
 int	key_press(int key, void *param)
 {
@@ -58,6 +74,8 @@ int	key_press(int key, void *param)
 		exit_game();
 	else if (key == KEY_M)
 		trigger_minimap();
+	else if (key == KEY_F)
+		toggle_mode_dell();
 	return (0);
 }
 
@@ -88,25 +106,25 @@ void	move_player(void)
 	t_player	*p;
 
 	p = &_map()->plyr;
-	p->rot_angle += p->rot * 0.09;
-	if (_map()->plyr.side == -1 && _map()->plyr.move == 0)
-		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + (PI / 2)) * 5,
-			_map()->plyr.y + sin(p->rot_angle + (PI / 2)) * 5);
-	else if (_map()->plyr.side == 1 && _map()->plyr.move == 0)
-		update_pos(new_pos, _map()->plyr.x + -cos(p->rot_angle + (PI / 2)) * 5,
-			_map()->plyr.y + -sin(p->rot_angle + (PI / 2)) * 5);
-	else if (_map()->plyr.side == 1 && _map()->plyr.move == 1)
-		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 81) * 5,
-			_map()->plyr.y + sin(p->rot_angle + 81) * 5);
-	else if (_map()->plyr.side == -1 && _map()->plyr.move == 1)
-		update_pos(new_pos, _map()->plyr.x + cos(p->rot_angle + 82.4) * 5,
-			_map()->plyr.y + sin(p->rot_angle + 82.4) * 5);
+	p->rot_angle += p->rot * p->rot_speed;
+	if (p->side == -1 && p->move == 0)
+		update_pos(new_pos, p->x + cos(p->rot_angle + (PI / 2)) * p->move_speed,
+			p->y + sin(p->rot_angle + (PI / 2)) * p->move_speed);
+	else if (p->side == 1 && p->move == 0)
+		update_pos(new_pos, p->x + -cos(p->rot_angle + (PI / 2)) * p->move_speed,
+			p->y + -sin(p->rot_angle + (PI / 2)) * p->move_speed);
+	else if (p->side == 1 && p->move == 1)
+		update_pos(new_pos, p->x + cos(p->rot_angle + 81) * p->move_speed,
+			p->y + sin(p->rot_angle + 81) * p->move_speed);
+	else if (p->side == -1 && p->move == 1)
+		update_pos(new_pos, p->x + cos(p->rot_angle + 82.4) * p->move_speed,
+			p->y + sin(p->rot_angle + 82.4) * p->move_speed);
 	else
 		update_pos(new_pos,
-			_map()->plyr.x + (cos(p->rot_angle) * _map()->plyr.move) * 5,
-			_map()->plyr.y + (sin(p->rot_angle) * _map()->plyr.move) * 5);
-	if (!map_has_wall_at(new_pos[0], p->y))
+			p->x + (cos(p->rot_angle) * p->move) * p->move_speed,
+			p->y + (sin(p->rot_angle) * p->move) * p->move_speed);
+	if (!map_has_wall_at(new_pos[0] + 1, p->y + 1) && !map_has_wall_at(new_pos[0] - 1, p->y - 1))
 		p->x = new_pos[0];
-	if (!map_has_wall_at(p->x, new_pos[1]))
+	if (!map_has_wall_at(p->x + 1 , new_pos[1] + 1) && !map_has_wall_at(p->x - 1 , new_pos[1] - 1))
 		p->y = new_pos[1];
 }

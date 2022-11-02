@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:46:26 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 10:47:45 by ngobert          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@
 # define ESC 65307
 # define KEY_M 109
 # define KEY_Q 113
+# define KEY_F 102
 
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 800
@@ -60,6 +61,9 @@ typedef struct s_player
 	double				rot_angle;
 	double				x;
 	double				y;
+	int					mode_dell;
+	double				rot_speed;
+	int					move_speed;
 }						t_player;
 
 typedef struct s_ray {
