@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:21:13 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 10:47:45 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:09:29 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_player
 	double				y;
 	int					mode_dell;
 	double				rot_speed;
-	int					move_speed;
+	int					mv_speed;
 }						t_player;
 
 typedef struct s_ray {
@@ -222,6 +222,7 @@ void		graphics_struct_init(t_map *map);
 
 // mlx_move_setup.c
 void		trigger_minimap(void);
+void		toggle_mode_dell(void);
 int			key_press(int key, void *param);
 int			key_release(int key, void *param);
 void		move_player(void);
@@ -254,8 +255,9 @@ void		init_raycasting_values(t_raycasting *r, float ray_angle);
 // raycasting_utils.c
 float		normalize_angle(float angle);
 float		distance_between_points(float x1, float y1, float x2, float y2);
-int			map_has_wall_at(float x, float y);
+int			wall_at(float x, float y);
 void		coords_init(int x0, int y0, int x1, int y1);
+void		update_pos(float new_pos[2], float new_x, float new_y);
 
 // render_drawing.c
 t_img		*pick_texture(int i);

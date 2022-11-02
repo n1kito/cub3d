@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:02 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:43:54 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:09:35 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ float	distance_between_points(float x1, float y1, float x2, float y2)
 }
 
 /* Checks if the coordinates correspond to a wall on the map. */
-int	map_has_wall_at(float x, float y)
+int	wall_at(float x, float y)
 {
 	int	map_grid_index_x;
 	int	map_grid_index_y;
@@ -52,4 +52,10 @@ void	coords_init(int x0, int y0, int x1, int y1)
 	_map()->coord.y0 = y0;
 	_map()->coord.x1 = x1;
 	_map()->coord.y1 = y1;
+}
+
+void	update_pos(float new_pos[2], float new_x, float new_y)
+{
+	new_pos[0] = new_x;
+	new_pos[1] = new_y;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_structure.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ngobert <ngobert@student.42.fr>            +#+  +:+       +#+        */
+/*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:12 by mjallada          #+#    #+#             */
-/*   Updated: 2022/11/02 10:44:29 by ngobert          ###   ########.fr       */
+/*   Updated: 2022/11/02 11:04:11 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	map_struct_init(t_map *map)
 	map->plyr.side = 0;
 	map->plyr.mode_dell = 0;
 	map->plyr.rot_speed = 0.09;
-	map->plyr.move_speed = 5;
+	map->plyr.mv_speed = 5;
 	map->is_minimap_open = 0;
 	map->dist_proj_plane = (WINDOW_WIDTH / 2) / tan(fov / 2);
 	coords_init(0, 0, 0, 0);

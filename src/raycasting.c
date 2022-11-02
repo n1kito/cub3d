@@ -6,7 +6,7 @@
 /*   By: mjallada <mjallada@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/25 09:22:00 by mjallada          #+#    #+#             */
-/*   Updated: 2022/10/25 17:41:39 by mjallada         ###   ########.fr       */
+/*   Updated: 2022/11/02 11:04:49 by mjallada         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	find_horz_grid_intersection(t_raycasting *r)
 			r->y_to_check -= 1;
 		else
 			r->y_to_check = r->next_horz_touch_y;
-		if (map_has_wall_at(r->x_to_check, r->y_to_check))
+		if (wall_at(r->x_to_check, r->y_to_check))
 		{
 			r->horz_wall_hit_x = r->next_horz_touch_x;
 			r->horz_wall_hit_y = r->next_horz_touch_y;
@@ -68,7 +68,7 @@ void	find_vert_grid_intersection(t_raycasting *r)
 		if (r->ray_is_facing_left)
 			r->x_to_check -= 1;
 		r->y_to_check = r->next_vert_touch_y;
-		if (map_has_wall_at(r->x_to_check, r->y_to_check))
+		if (wall_at(r->x_to_check, r->y_to_check))
 		{
 			r->vert_wall_hit_x = r->next_vert_touch_x;
 			r->vert_wall_hit_y = r->next_vert_touch_y;
