@@ -6,6 +6,10 @@ Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 
 >  This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
 
+<p align="center">
+<br /><img src="img/wolfenstein.gif" width="200px" alt="wolfenstein gif"><br />
+</p>
+
 # Research
 
 ## Raycasting theory
