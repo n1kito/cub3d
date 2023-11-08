@@ -1,39 +1,10 @@
 <h1 align="center">cub3d 🧟🔫</h1>
 <p align="center">
-<img src="img/wolfenstein.gif" width="200px" alt="wolfenstein gif"><br />
+<img src="img/cub3D.gif" width="200px" alt="wolfenstein gif"><br />
 Our work on the 42Born2Code <b>cub3d</b> project.<br /><br />
 </p>
 
 >  This project is inspired by the world-famous Wolfenstein 3D game, which was the first FPS ever. It will enable you to explore ray-casting. Your goal will be to make a dynamic view inside a maze, in which you’ll have to find your way.
-
-[![mjallada's 42 minishell Score](https://badge42.vercel.app/api/v2/cl4dwkra3004009maahzpjn6g/project/2635687)](https://github.com/JaeSeoKim/badge42)
-
-# TODO
-
-- [x] Minimap blinks on some opens ?
-  - Cannot replicate
-- [x] Window opens before parsing checks
-  - Move texture open to after parsing -> not possible 
-- [x] Huge texures not working (see `render_wall_projection.c` ratio in `texture->bpp / 8`)
-  - Probably an issue with how we calculate either the x-offset or the `texel` value.
-  - Decided to only handle 64x64 textures
-- [x] Distortion effet to fix
-- [x] Implement correct ceiling + floor colors
-  - [ ] Gradient does not work on all colors
-- [ ] Setup bonus rule in Makefile
-  - [ ] Move minimap + gradients to bonus rule ?
-- [x] W + D goes diagonal (better movement)
-- [ ] Norm
-- [ ] Memory management
-- [ ] Testing
-- [x] Segfault on tiny map
-- check sprite size 
-- [x] Map needs error when no starting position
-- [x] Map file should only accept one map
-- [x] Sefault when map file has no map
-- [X] Segfault when map has no starting position
-- [x] Segfault when color param is too short
-- [x] Segfault when map is not last in file
 
 # Research
 
